@@ -10,7 +10,11 @@ const Header = () => {
   return (
     <div className="bg-white px-4 py-3 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] flex justify-between items-center">
       <div className="flex gap-2 items-center">
-        <h1 className="text-main_color">logo</h1>
+        <img
+          alt="logo"
+          src="https://images.pexels.com/photos/3689532/pexels-photo-3689532.jpeg"
+          className="w-[30px] h-[30px] rounded-full"
+        />
         <div className="flex">
           <input
             type="text"
