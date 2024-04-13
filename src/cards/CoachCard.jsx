@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const CoachCard = ({ full_name, description, profilePhoto, domaine, id }) => {
   const [showMore, setShowMore] = useState(false);
 
-  const hide = "overflow-hidden line-clamp-3";
+  const hide = "overflow-hidden line-clamp-2";
   return (
     <div className="bg-white flex p-2 gap-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
       <img

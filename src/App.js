@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Header />
+        <div className="mb-[60px]"><Header /></div>
         <div className="flex gap-4">
           <div className="flex-1">
             <Routes>
