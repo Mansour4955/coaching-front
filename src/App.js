@@ -5,22 +5,24 @@ import Home from "./pages/Home";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import NotFound from "./pages/NotFound";
+import CoachCards from "./pages/CoachCards";
+import CoachProfile from "./pages/CoachProfile";
 function App() {
   return (
     <div>
       <BrowserRouter>
-        <div className="mb-[60px]"><Header /></div>
-        <div className="flex gap-4">
-          <div className="flex-1">
-            <Routes>
-              <Route index element={<Home />} />
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-          <Footer />
+        <div className="mb-[60px]">
+          <Header />
         </div>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="coachCards" element={<CoachCards />} />
+          <Route path="coachCards/:coachProfileId" element={<CoachProfile />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        {/* <Footer /> */}
       </BrowserRouter>
     </div>
   );

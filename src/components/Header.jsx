@@ -4,7 +4,7 @@ import { MdHome } from "react-icons/md";
 import { IoMdVideocam } from "react-icons/io";
 import { HiMiniChatBubbleLeftRight } from "react-icons/hi2";
 import { BiSolidBell } from "react-icons/bi";
-import { FaCalendarAlt } from "react-icons/fa";
+import { FaCalendarAlt,FaChalkboardTeacher  } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 const Header = () => {
   return (
@@ -35,6 +35,14 @@ const Header = () => {
             }
           >
             <MdHome size={19} />
+          </NavLink>
+          <NavLink
+            to="/coachCards"
+            className={({ isActive }) =>
+              isActive ? "text-main_color" : "text-gray-500"
+            }
+          >
+            <FaChalkboardTeacher size={19} />
           </NavLink>
           <NavLink
             to="/streaming"

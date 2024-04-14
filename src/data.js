@@ -213,3 +213,135 @@ export const domaines = [
   { typeOfWork: "writer", id: 5 },
   { typeOfWork: "chef", id: 6 },
 ];
+export const coachCardInfo = [
+  {
+    id: 1,
+    name: "Amira Benali",
+    city: "Tangier",
+    method: "face to face & webcam",
+    profession: "super professeur",
+    course: "Physics",
+    diplomas:
+      "1. Bachelor's in Physics\n2. Master's in Education\n3. Teaching License\n4. Research Paper on Quantum Mechanics\n5. Award for Academic Excellence",
+    price: 60,
+    imageUrl:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+  },
+  {
+    id: 2,
+    name: "Youssef Chakir",
+    city: "Fez",
+    method: "face to face & webcam",
+    profession: "teacher",
+    course: "French",
+    diplomas:
+      "1. DELF Certification\n2. Bachelor's in Education\n3. Teaching Practicum\n4. Linguistics Coursework\n5. Award for Language Proficiency",
+    price: 45,
+    imageUrl:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+  },
+  {
+    id: 3,
+    name: "Laila Mansouri",
+    city: "Marrakech",
+    method: "face to face & webcam",
+    profession: "super professeur",
+    course: "Chemistry",
+    diplomas:
+      "1. Master's in Chemistry\n2. Teaching Certificate\n3. Research Project on Biochemistry\n4. Laboratory Management Course\n5. Award for Scientific Innovation",
+    price: 55,
+    imageUrl:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+  },
+  {
+    id: 4,
+    name: "Karim Rami",
+    city: "Agadir",
+    method: "face to face & webcam",
+    profession: "teacher",
+    course: "Math",
+    diplomas:
+      "1. Bachelor's in Mathematics\n2. Teaching Credential\n3. Mathematics Symposium Participation\n4. Pedagogy Workshop\n5. Award for Mathematics Education",
+    price: 50,
+    imageUrl:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+  },
+  {
+    id: 5,
+    name: "Fatima Zohra",
+    city: "Casablanca",
+    method: "face to face & webcam",
+    profession: "super professeur",
+    course: "Biology",
+    diplomas:
+      "1. PhD in Biology\n2. Teaching Fellowship\n3. Research on Genetics\n4. Biology Curriculum Development\n5. Award for Scientific Research",
+    price: 65,
+    imageUrl:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+  },
+  {
+    id: 6,
+    name: "Mohammed Amine",
+    city: "Rabat",
+    method: "face to face & webcam",
+    profession: "teacher",
+    course: "Arabic",
+    diplomas:
+      "1. Arabic Linguistics Degree\n2. Teaching Experience\n3. Language Acquisition Research\n4. Arabic Literature Review\n5. Award for Linguistic Studies",
+    price: 40,
+    imageUrl:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+  },
+  {
+    id: 7,
+    name: "Sara El Khattabi",
+    city: "Tetouan",
+    method: "face to face & webcam",
+    profession: "super professeur",
+    course: "History",
+    diplomas:
+      "1. Master's in History\n2. Teaching Certificate\n3. Historical Research Project\n4. History Curriculum Design\n5. Award for Historical Scholarship",
+    price: 55,
+    imageUrl:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+  },
+  {
+    id: 8,
+    name: "Abdelali El Fakir",
+    city: "Fes",
+    method: "face to face & webcam",
+    profession: "teacher",
+    course: "Geography",
+    diplomas:
+      "1. Geography Degree\n2. Teaching Practicum\n3. Geographic Information Systems Training\n4. Environmental Research\n5. Award for Geographic Education",
+    price: 45,
+    imageUrl:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+  },
+  {
+    id: 9,
+    name: "Nora Laarabi",
+    city: "Meknes",
+    method: "face to face & webcam",
+    profession: "super professeur",
+    course: "Literature",
+    diplomas:
+      "1. PhD in Literature\n2. Teaching Fellowship\n3. Literary Criticism Publications\n4. Creative Writing Workshops\n5. Award for Literary Excellence",
+    price: 60,
+    imageUrl:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+  },
+  {
+    id: 10,
+    name: "Ahmed Essam",
+    city: "Tangier",
+    method: "face to face & webcam",
+    profession: "teacher",
+    course: "Music",
+    diplomas:
+      "1. Music Education Degree\n2. Teaching Experience\n3. Musical Performance Training\n4. Music Composition Portfolio\n5. Award for Musical Achievement",
+    price: 50,
+    imageUrl:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+  },
+];
