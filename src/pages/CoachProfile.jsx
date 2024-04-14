@@ -1,3 +1,4 @@
+import PublishedPost from "../cards/PublishedPost";
 import Footer from "../components/Footer";
 import { coachCardInfo, postInfo } from "../data";
 import { useParams } from "react-router-dom";
@@ -55,9 +56,17 @@ const CoachProfile = () => {
             </div>
             <div className="flex flex-col items-center gap-2">
     
-              <p>{coachProfilePosts[0]?.id} <span>{coachProfilePosts[0]?.description}</span></p>
-              <p>POSTS</p>
-              <p>POSTS</p>
+            {coachProfilePosts.map((card) => (
+            <PublishedPost
+              key={card.id}
+              full_name={card.full_name}
+              description={card.description}
+              profilePhoto={card.profilePhoto}
+              id={card.id}
+              postPhoto={card.postPhoto}
+              date_of_publish={card.date_of_publish}
+            />
+          ))}
             </div>
           </div>
         </div>

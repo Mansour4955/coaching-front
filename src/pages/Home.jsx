@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <div className="flex gap-x-10 pt-5 px-4 bg-white_color">
-      <div className="w-[20%]  rounded-lg p-4 bg-white gap-y-3 h-fit">
+      <div className="w-[25%]  rounded-lg p-4 bg-white gap-y-3 h-fit max-xl:hidden">
         <CoachStatisticsCard
           key={coachStatic[0].id}
           full_name={coachStatic[0].full_name}
@@ -24,7 +24,7 @@ const Home = () => {
           id={coachStatic[0].id}
         />
       </div>
-      <div className="w-[60%] flex flex-col gap-10">
+      <div className="w-[50%] flex flex-col gap-10 max-xl:w-[70%] max-lg:w-[100%]">
         <div className="bg-white p-4 gap-4">
           <div className="flex gap-4">
             <img
@@ -96,7 +96,7 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <div className="w-[20%] flex flex-col items-center gap-10">
+      <div className="w-[25%] flex flex-col items-center gap-10 max-xl:w-[30%] max-lg:hidden">
         <div className=" flex flex-col rounded-lg p-4 bg-white h-fit">
           <div className="flex flex-col gap-2 items-center">
             {showMoreCoachCards
@@ -130,7 +130,7 @@ const Home = () => {
             </button>
           </div>
         </div>
-        <div className="w-full p-4 h-fit bg-white max-md:hidden"> 
+        <div className="w-full p-4 h-fit bg-white "> 
         <div className="shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg w-full">
 
           <Footer />
