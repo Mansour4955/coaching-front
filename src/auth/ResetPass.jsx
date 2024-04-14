@@ -1,5 +1,5 @@
-import React from 'react'
 import { Link } from 'react-router-dom';
+import React from 'react'
 import {
   Card,
   Input,
@@ -9,11 +9,14 @@ import {
 
 import { useForm, Controller } from "react-hook-form";
 
-const Login = () => {
+const ResetPass = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
+    
+
+    
     reset,
   } = useForm({
     mode: "onTouched",
@@ -29,18 +32,18 @@ const Login = () => {
     <div className="h-screen grid place-items-center bg-gray-50">
       <Card color="transparent" shadow={true} className="p-7 bg-white">
         <Typography variant="h4" color="blue-gray">
-          Créer Votre Compte
+        Réinitialiser votre mot de passe
         </Typography>
         <Typography color="gray" className="mt-1 font-normal">
-          Saisie vos informations..
+          Veuiller saisir votre e-mail...
         </Typography>
         <br />
         <form
-          className="mb-4 w-[500px] grid grid-cols-2 gap-6"
+          className="mb-4 w-[500px] grid grid-cols-1 gap-6"
           onSubmit={handleSubmit(onSubmit)}
         >
           
-          <div>
+          <div >
             <Controller
               name="email"
               control={control}
@@ -66,38 +69,14 @@ const Login = () => {
             )}
           </div>
           
-          <div>
-            <Controller
-              name="password"
-              control={control}
-              rules={{
-                required: "Veuillez entrer votre mot de passe",
-                
-              }}
-              render={({ field }) => (
-                <Input
-                  type="password"
-                  {...field}
-                  size="lg"
-                  label="Password"
-                  error={Boolean(errors?.password?.message)}
-                />
-              )}
-            />
-            {errors?.password?.message && (
-              <span className="error-text">{errors?.password?.message}</span>
-            )}
-          </div>
+         
           
-          <Link to="/resetpass" className="col-span-2 grid grid-cols-2 gap-3">
-          
+          <Link to="/login" className="col-span-2 grid grid-cols-2 gap-3">
             <Button type="reset" variant="outlined" onClick={() => reset()}>
-              mot de passe oublié
+              se connecter
             </Button>
-            <Button type="submit">Se connecter</Button>
-            
+            <Button type="submit">Envoyer mail de Réinitialisation</Button>
           </Link>
-          
         </form>
       </Card>
     </div>
@@ -105,4 +84,4 @@ const Login = () => {
 };
 
 
-export default Login
+export default ResetPass

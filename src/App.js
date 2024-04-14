@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import NotFound from "./pages/NotFound";
+import ResetPass from "./auth/ResetPass";
 function App() {
   return (
     <div>
@@ -15,6 +16,7 @@ function App() {
             <Routes>
               <Route index element={<Home />} />
               <Route path="login" element={<Login />} />
+              <Route path="resetpass" element={<ResetPass />} />
               <Route path="register" element={<Register />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
