@@ -1,3 +1,22 @@
+export const models = [
+  { id: 1, model: "English" },
+  { id: 2, model: "French" },
+  { id: 3, model: "Spanish" },
+  { id: 4, model: "Maths" },
+];
+export const cities = [
+  { id: 1, city: "Rabat" },
+  { id: 2, city: "Sale" },
+  { id: 3, city: "Casablanca" },
+  { id: 4, city: "Tanger" },
+  { id: 5, city: "Marakech" },
+];
+export const methods = [
+  { id: 1, meetingType: "Face to face" },
+  { id: 2, meetingType: "Webcam" },
+  { id: 3, meetingType: "Face to face & webcam" },
+];
+
 export const coachStatic = [
   {
     full_name: "John Doe",
@@ -131,6 +150,104 @@ export const coachCard = [
 ];
 export const postInfo = [
   {
+    theComments: {
+      name: "Amine Mansour",
+      date: "2024/03/15",
+      likes: [1, 2],
+      comments: [
+        {
+          commentId: 1,
+          name: "Mansour Amine",
+          comment:
+            "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+          commentDate: "2024/07/11",
+          imageProfile:
+            "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+          level1: [
+            {
+              commentChildId: 1,
+              name: "Mansour Amine",
+              comment:
+                "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+              commentDate: "2024/07/11",
+              imageProfile:
+                "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+              level2: [
+                {
+                  commentSmallChildId: 1,
+                  name: "Mansour Amine",
+                  comment:
+                    "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                  commentDate: "2024/07/11",
+                  imageProfile:
+                    "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                  level3: [],
+                },
+              ],
+            },
+            {
+              commentChildId: 2,
+              name: "Mansour Amine",
+              comment:
+                "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+              commentDate: "2024/07/11",
+              imageProfile:
+                "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+              level2: [
+                {
+                  commentSmallChildId: 1,
+                  name: "Mansour Amine",
+                  comment:
+                    "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                  commentDate: "2024/07/11",
+                  imageProfile:
+                    "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                  level3: [
+                    {
+                      commentSmallChildId: 1,
+                      name: "Mansour Amine",
+                      comment:
+                        "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                      commentDate: "2024/07/11",
+                      imageProfile:
+                        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                    },
+                    {
+                      commentSmallChildId: 2,
+                      name: "Mansour Amine",
+                      comment:
+                        "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                      commentDate: "2024/07/11",
+                      imageProfile:
+                        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              commentChildId: 3,
+              name: "Mansour Amine",
+              comment:
+                "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+              commentDate: "2024/07/11",
+              imageProfile:
+                "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+              level2: [],
+            },
+          ],
+        },
+        {
+          commentId: 2,
+          name: "Mansour Amine",
+          comment:
+            "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+          commentDate: "2024/07/11",
+          imageProfile:
+            "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+          level1: []},
+      ],
+    },
     full_name: "John Doe",
     postPhoto:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
@@ -140,61 +257,6 @@ export const postInfo = [
     profilePhoto:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     id: 1,
-  },
-  {
-    full_name: "Jane Smith",
-    postPhoto:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-    date_of_publish: "2024-04-12",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    profilePhoto:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-    id: 2,
-  },
-  {
-    full_name: "Michael Johnson",
-    postPhoto:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-    date_of_publish: "2024-04-11",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    profilePhoto:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-    id: 3,
-  },
-  {
-    full_name: "Emily Davis",
-    postPhoto:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-    date_of_publish: "2024-04-10",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    profilePhoto:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-    id: 4,
-  },
-  {
-    full_name: "David Brown",
-    postPhoto:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-    date_of_publish: "2024-04-09",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    profilePhoto:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-    id: 5,
-  },
-  {
-    full_name: "Sarah Wilson",
-    postPhoto:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-    date_of_publish: "2024-04-08",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    profilePhoto:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-    id: 6,
   },
 ];
 export const people = [

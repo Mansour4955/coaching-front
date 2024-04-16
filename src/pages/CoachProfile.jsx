@@ -65,6 +65,10 @@ const CoachProfile = () => {
               id={card.id}
               postPhoto={card.postPhoto}
               date_of_publish={card.date_of_publish}
+              name={card.theComments.name}
+              date={card.theComments.date}
+              likes={card.theComments.likes}
+              comments={card.theComments.comments}
             />
           ))}
             </div>
