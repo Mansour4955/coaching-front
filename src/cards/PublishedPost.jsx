@@ -19,10 +19,10 @@ const PublishedPost = ({
   const [showAllComments, setShowAllComments] = useState(false);
   const [writeComment, setWriteComment] = useState("");
 
-  const handleSendComment = ()=> {
-    console.log(writeComment, {postid: id});
-    setWriteComment("")
-  }
+  const handleSendComment = () => {
+    console.log(writeComment, { postid: id });
+    setWriteComment("");
+  };
 
   const hide = "overflow-hidden line-clamp-2";
   return (
@@ -87,29 +87,34 @@ const PublishedPost = ({
           </p>
         </div>
         <div className="flex mb-2">
-          <img alt="" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" className="rounded-full w-[40px] h-[40px] mr-2"/>
-        <input
-              type="text"
-              className="caret-main_color flex-1 border text-gray-500 font-medium  border-r-0 border-main_color rounded-l-xl px-2 outline-none py-1"
-              placeholder="Write a comment"
-              value={writeComment}
-              onChange={(e) => setWriteComment(e.target.value)}
-            />
-            <div
-              onClick={handleSendComment}
-              className="flex items-center justify-center rounded-r-xl border border-main_color border-l-0 px-2 py-1 text-main_color font-bold cursor-pointer hover:bg-white_color duration-300"
-            >
-              <IoIosSend size={20} />
-            </div>
+          <img
+            alt=""
+            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+            className="rounded-full w-[40px] h-[40px] mr-2"
+          />
+          <input
+            type="text"
+            className="caret-main_color flex-1 border text-gray-500 font-medium  border-r-0 border-main_color rounded-l-xl px-2 outline-none py-1"
+            placeholder="Write a comment"
+            value={writeComment}
+            onChange={(e) => setWriteComment(e.target.value)}
+          />
+          <div
+            onClick={handleSendComment}
+            className="flex items-center justify-center rounded-r-xl border border-main_color border-l-0 px-2 py-1 text-main_color font-bold cursor-pointer hover:bg-white_color duration-300"
+          >
+            <IoIosSend size={20} />
+          </div>
         </div>
         {showComments && (
           <div className="flex flex-col">
-            <div className="flex flex-col border border-main_color relative">
+            <div className="flex flex-col p-2 border border-main_color relative">
               {showAllComments
                 ? comments?.map((comment) => (
                     <div key={comment.commentId}>
                       <CommentCard
-                      iconsSize="18"
+                        parentDevStyle="ml-0"
+                        iconsSize="18"
                         imageStyle="w-[60px] h-[60px]"
                         nameStyle="text-base"
                         descAndDateStyle="text-base"
@@ -126,7 +131,8 @@ const PublishedPost = ({
                             key={level1Item.commentChildId}
                           >
                             <CommentCard
-                            iconsSize="16"
+                              parentDevStyle="ml-2.5"
+                              iconsSize="16"
                               imageStyle="w-[50px] h-[50px]"
                               nameStyle="text-sm"
                               descAndDateStyle="text-sm"
@@ -143,7 +149,8 @@ const PublishedPost = ({
                                   key={level2Item.commentSmallChildId}
                                 >
                                   <CommentCard
-                                  iconsSize="14"
+                                    parentDevStyle="ml-2.5"
+                                    iconsSize="14"
                                     imageStyle="w-[40px] h-[40px]"
                                     nameStyle="text-sm"
                                     descAndDateStyle="text-xs"
@@ -156,7 +163,8 @@ const PublishedPost = ({
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
                                       <CommentCard
-                                      iconsSize="14"
+                                        parentDevStyle="ml-2.5"
+                                        iconsSize="14"
                                         imageStyle="w-[40px] h-[40px]"
                                         nameStyle="text-sm"
                                         descAndDateStyle="text-xs"
@@ -182,7 +190,8 @@ const PublishedPost = ({
                 ? comments?.slice(0, 2).map((comment) => (
                     <div key={comment.commentId}>
                       <CommentCard
-                      iconsSize="18"
+                        parentDevStyle="ml-0"
+                        iconsSize="18"
                         imageStyle="w-[60px] h-[60px]"
                         nameStyle="text-base"
                         descAndDateStyle="text-base"
@@ -199,7 +208,8 @@ const PublishedPost = ({
                             key={level1Item.commentChildId}
                           >
                             <CommentCard
-                            iconsSize="16"
+                              parentDevStyle="ml-2.5"
+                              iconsSize="16"
                               imageStyle="w-[50px] h-[50px]"
                               nameStyle="text-sm"
                               descAndDateStyle="text-sm"
@@ -216,7 +226,8 @@ const PublishedPost = ({
                                   key={level2Item.commentSmallChildId}
                                 >
                                   <CommentCard
-                                  iconsSize="14"
+                                    parentDevStyle="ml-2.5"
+                                    iconsSize="14"
                                     imageStyle="w-[40px] h-[40px]"
                                     nameStyle="text-sm"
                                     descAndDateStyle="text-xs"
@@ -229,7 +240,8 @@ const PublishedPost = ({
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
                                       <CommentCard
-                                      iconsSize="14"
+                                        parentDevStyle="ml-2.5"
+                                        iconsSize="14"
                                         imageStyle="w-[40px] h-[40px]"
                                         nameStyle="text-sm"
                                         descAndDateStyle="text-xs"
@@ -254,7 +266,8 @@ const PublishedPost = ({
                 : comments?.map((comment) => (
                     <div key={comment.commentId}>
                       <CommentCard
-                      iconsSize="18"
+                        parentDevStyle="ml-0"
+                        iconsSize="18"
                         imageStyle="w-[60px] h-[60px]"
                         nameStyle="text-base"
                         descAndDateStyle="text-base"
@@ -271,7 +284,8 @@ const PublishedPost = ({
                             key={level1Item.commentChildId}
                           >
                             <CommentCard
-                            iconsSize="16"
+                              parentDevStyle="ml-2.5"
+                              iconsSize="16"
                               imageStyle="w-[50px] h-[50px]"
                               nameStyle="text-sm"
                               descAndDateStyle="text-sm"
@@ -288,7 +302,8 @@ const PublishedPost = ({
                                   key={level2Item.commentSmallChildId}
                                 >
                                   <CommentCard
-                                  iconsSize="14"
+                                    parentDevStyle="ml-2.5"
+                                    iconsSize="14"
                                     imageStyle="w-[40px] h-[40px]"
                                     nameStyle="text-sm"
                                     descAndDateStyle="text-xs"
@@ -301,7 +316,8 @@ const PublishedPost = ({
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
                                       <CommentCard
-                                      iconsSize="14"
+                                        parentDevStyle="ml-2.5"
+                                        iconsSize="14"
                                         imageStyle="w-[40px] h-[40px]"
                                         nameStyle="text-sm"
                                         descAndDateStyle="text-xs"
@@ -334,7 +350,6 @@ const PublishedPost = ({
             )}
           </div>
         )}
-        
       </div>
     </div>
   );

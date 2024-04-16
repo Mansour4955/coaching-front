@@ -12,6 +12,7 @@ const CommentCard = ({
   nameStyle,
   descAndDateStyle,
   iconsSize,
+  parentDevStyle
 }) => {
   const [reply, setReply] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -28,7 +29,7 @@ const CommentCard = ({
     setEdit(false);
   };
   return (
-    <div className="bg-white p-2 flex-col flex">
+    <div className={`${parentDevStyle} bg-gray-100 rounded-lg mb-2 p-2 flex-col flex`}>
       <div className="flex gap-2 ">
         <img
           alt={name}
@@ -62,7 +63,7 @@ const CommentCard = ({
       </div>
       {reply && (
         <div className="flex mt-2">
-           <img alt="" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" className="rounded-full w-[30px] h-[30px] mr-2"/>
+           <img alt="" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" className="border-2 border-white rounded-full w-[32px] h-[32px] mr-2"/>
           <input
             type="text"
             className="caret-main_color flex-1 border text-gray-500 font-medium  border-r-0 border-main_color rounded-l-xl px-2 outline-none py-1"
@@ -72,7 +73,7 @@ const CommentCard = ({
           />
           <div
             onClick={handleSendComment}
-            className="flex items-center justify-center rounded-r-xl border border-main_color border-l-0 px-2 py-1 text-main_color font-bold cursor-pointer hover:bg-white_color duration-300"
+            className="bg-white flex items-center justify-center rounded-r-xl border border-main_color border-l-0 px-2 py-1 text-main_color font-bold cursor-pointer hover:bg-white_color duration-300"
           >
             <IoIosSend size={20} />
           </div>
@@ -80,7 +81,7 @@ const CommentCard = ({
       )}
       {edit && (
         <div className="flex mt-2">
-           <img alt="" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" className="rounded-full w-[30px] h-[30px] mr-2"/>
+           <img alt="" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" className="border-2 border-white rounded-full w-[32px] h-[32px] mr-2"/>
           <input
             type="text"
             className="caret-main_color flex-1 border text-gray-500 font-medium  border-r-0 border-main_color rounded-l-xl px-2 outline-none py-1"
@@ -90,7 +91,7 @@ const CommentCard = ({
           />
           <div
             onClick={handleEditComment}
-            className="flex items-center justify-center rounded-r-xl border border-main_color border-l-0 px-2 py-1 text-main_color font-bold cursor-pointer hover:bg-white_color duration-300"
+            className="bg-white flex items-center justify-center rounded-r-xl border border-main_color border-l-0 px-2 py-1 text-main_color font-bold cursor-pointer hover:bg-white_color duration-300"
           >
             <IoIosSend size={20} />
           </div>
