@@ -16,9 +16,7 @@ const PublishedPost = ({
   const [toggleLike, setToggleLike] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [showAllComments, setShowAllComments] = useState(false);
-  const [showAllNestedComments, setShowAllNestedComments] = useState(false);
-  const [showAllNestedBestedComments, setShowAllNestedNestedComments] = useState(false);
-
+  
 
   const hide = "overflow-hidden line-clamp-2";
   return (
@@ -100,7 +98,6 @@ const PublishedPost = ({
                         imageProfile={comment.imageProfile}
                       />
                       {comment?.level1?.length > 0 &&
-
                         comment?.level1?.map((level1Item) => (
                           <div
                             className="ml-5 border-l border-l-main_color"
@@ -157,7 +154,6 @@ const PublishedPost = ({
                               ))}
                           </div>
                         ))}
-                        
                     </div>
                   ))
                 : comments?.length > 3

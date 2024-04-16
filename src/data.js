@@ -184,6 +184,9 @@ export const postInfo = [
                   level3: [],
                 },
               ],
+
+
+
             },
             {
               commentChildId: 2,
@@ -223,6 +226,64 @@ export const postInfo = [
                     },
                   ],
                 },
+                {
+                  commentSmallChildId: 2,
+                  name: "Mansour Amine",
+                  comment:
+                    "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                  commentDate: "2024/07/11",
+                  imageProfile:
+                    "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                  level3: [
+                    {
+                      commentSmallChildId: 1,
+                      name: "Mansour Amine",
+                      comment:
+                        "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                      commentDate: "2024/07/11",
+                      imageProfile:
+                        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                    },
+                    {
+                      commentSmallChildId: 2,
+                      name: "Mansour Amine",
+                      comment:
+                        "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                      commentDate: "2024/07/11",
+                      imageProfile:
+                        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                    },
+                  ],
+                },
+                {
+                  commentSmallChildId: 3,
+                  name: "Mansour Amine",
+                  comment:
+                    "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                  commentDate: "2024/07/11",
+                  imageProfile:
+                    "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                  level3: [
+                    {
+                      commentSmallChildId: 1,
+                      name: "Mansour Amine",
+                      comment:
+                        "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                      commentDate: "2024/07/11",
+                      imageProfile:
+                        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                    },
+                    {
+                      commentSmallChildId: 2,
+                      name: "Mansour Amine",
+                      comment:
+                        "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                      commentDate: "2024/07/11",
+                      imageProfile:
+                        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                    },
+                  ],
+                },
               ],
             },
             {
@@ -235,6 +296,7 @@ export const postInfo = [
                 "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
               level2: [],
             },
+           
           ],
         },
         {
