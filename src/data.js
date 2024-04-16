@@ -1,7 +1,7 @@
 export const models = [
-  { id: 1, model: "English" },
-  { id: 2, model: "French" },
-  { id: 3, model: "Spanish" },
+  { id: 1, model: "Domaine Sportif" },
+  { id: 2, model: "Psychologie" },
+  { id: 3, model: "Sante et nutrition" },
   { id: 4, model: "Maths" },
 ];
 export const cities = [
@@ -151,13 +151,13 @@ export const coachCard = [
 export const postInfo = [
   {
     theComments: {
-      name: "Amine Mansour",
+      name: "Imane Nouha",
       date: "2024/03/15",
       likes: [1, 2],
       comments: [
         {
           commentId: 1,
-          name: "Mansour Amine",
+          name: "Fati Nouha",
           comment:
             "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
           commentDate: "2024/07/11",
@@ -166,7 +166,7 @@ export const postInfo = [
           level1: [
             {
               commentChildId: 1,
-              name: "Mansour Amine",
+              name: "Fati Nouha",
               comment:
                 "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
               commentDate: "2024/07/11",
@@ -175,7 +175,7 @@ export const postInfo = [
               level2: [
                 {
                   commentSmallChildId: 1,
-                  name: "Mansour Amine",
+                  name: "Fati Nouha",
                   comment:
                     "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
                   commentDate: "2024/07/11",
@@ -190,7 +190,7 @@ export const postInfo = [
             },
             {
               commentChildId: 2,
-              name: "Mansour Amine",
+              name: "Fati Nouha",
               comment:
                 "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
               commentDate: "2024/07/11",
@@ -199,7 +199,7 @@ export const postInfo = [
               level2: [
                 {
                   commentSmallChildId: 1,
-                  name: "Mansour Amine",
+                  name: "Fati Nouha",
                   comment:
                     "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
                   commentDate: "2024/07/11",
@@ -208,7 +208,7 @@ export const postInfo = [
                   level3: [
                     {
                       commentSmallChildId: 1,
-                      name: "Mansour Amine",
+                      name: "Fati Nouha",
                       comment:
                         "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
                       commentDate: "2024/07/11",
@@ -217,7 +217,7 @@ export const postInfo = [
                     },
                     {
                       commentSmallChildId: 2,
-                      name: "Mansour Amine",
+                      name: "Fati Nouha",
                       comment:
                         "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
                       commentDate: "2024/07/11",
@@ -226,69 +226,12 @@ export const postInfo = [
                     },
                   ],
                 },
-                {
-                  commentSmallChildId: 2,
-                  name: "Mansour Amine",
-                  comment:
-                    "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
-                  commentDate: "2024/07/11",
-                  imageProfile:
-                    "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-                  level3: [
-                    {
-                      commentSmallChildId: 1,
-                      name: "Mansour Amine",
-                      comment:
-                        "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
-                      commentDate: "2024/07/11",
-                      imageProfile:
-                        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-                    },
-                    {
-                      commentSmallChildId: 2,
-                      name: "Mansour Amine",
-                      comment:
-                        "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
-                      commentDate: "2024/07/11",
-                      imageProfile:
-                        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-                    },
-                  ],
-                },
-                {
-                  commentSmallChildId: 3,
-                  name: "Mansour Amine",
-                  comment:
-                    "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
-                  commentDate: "2024/07/11",
-                  imageProfile:
-                    "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-                  level3: [
-                    {
-                      commentSmallChildId: 1,
-                      name: "Mansour Amine",
-                      comment:
-                        "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
-                      commentDate: "2024/07/11",
-                      imageProfile:
-                        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-                    },
-                    {
-                      commentSmallChildId: 2,
-                      name: "Mansour Amine",
-                      comment:
-                        "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
-                      commentDate: "2024/07/11",
-                      imageProfile:
-                        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-                    },
-                  ],
-                },
+               
               ],
             },
             {
               commentChildId: 3,
-              name: "Mansour Amine",
+              name: "Fati Nouha",
               comment:
                 "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
               commentDate: "2024/07/11",
@@ -301,21 +244,159 @@ export const postInfo = [
         },
         {
           commentId: 2,
-          name: "Mansour Amine",
+          name: "Fati Nouha",
           comment:
             "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
           commentDate: "2024/07/11",
           imageProfile:
             "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-          level1: []},
+          level1: []
+        },
+        {
+          commentId: 2,
+          name: "Fati Nouha",
+          comment:
+            "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+          commentDate: "2024/07/11",
+          imageProfile:
+            "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+          level1: []
+        },
+
       ],
     },
     full_name: "John Doe",
     postPhoto:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+      "https://images.pexels.com/photos/248547/pexels-photo-248547.jpeg",
     date_of_publish: "2024-04-13",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Embracing the Freedom of Bicycles! Hey there, Cycling Enthusiasts!, Let's pedal our way into the world of bicycles and embrace the freedom, joy, and adventure they offer! ,Bicycles aren't just a mode of transportation; they're a lifestyle, a symbol of independence, and a source of endless fun. Whether you're cruising through city streets, exploring scenic trails, or embarking on epic adventures, there's something truly magical about the simple act of riding a bike.",
+    profilePhoto:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    id: 1,
+  },
+  {
+    theComments: {
+      name: "Imane Nouha",
+      date: "2024/03/15",
+      likes: [1, 2],
+      comments: [
+        {
+          commentId: 1,
+          name: "Fati Nouha",
+          comment:
+            "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+          commentDate: "2024/07/11",
+          imageProfile:
+            "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+          level1: [
+            {
+              commentChildId: 1,
+              name: "Fati Nouha",
+              comment:
+                "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+              commentDate: "2024/07/11",
+              imageProfile:
+                "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+              level2: [
+                {
+                  commentSmallChildId: 1,
+                  name: "Fati Nouha",
+                  comment:
+                    "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                  commentDate: "2024/07/11",
+                  imageProfile:
+                    "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                  level3: [],
+                },
+              ],
+
+
+
+            },
+            {
+              commentChildId: 2,
+              name: "Fati Nouha",
+              comment:
+                "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+              commentDate: "2024/07/11",
+              imageProfile:
+                "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+              level2: [
+                {
+                  commentSmallChildId: 1,
+                  name: "Fati Nouha",
+                  comment:
+                    "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                  commentDate: "2024/07/11",
+                  imageProfile:
+                    "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                  level3: [
+                    {
+                      commentSmallChildId: 1,
+                      name: "Fati Nouha",
+                      comment:
+                        "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                      commentDate: "2024/07/11",
+                      imageProfile:
+                        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                    },
+                    {
+                      commentSmallChildId: 2,
+                      name: "Fati Nouha",
+                      comment:
+                        "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+                      commentDate: "2024/07/11",
+                      imageProfile:
+                        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+                    },
+                  ],
+                },
+               
+              ],
+            },
+            {
+              commentChildId: 3,
+              name: "Fati Nouha",
+              comment:
+                "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+              commentDate: "2024/07/11",
+              imageProfile:
+                "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+              level2: [],
+            },
+           
+          ],
+        },
+        {
+          commentId: 2,
+          name: "Fati Nouha",
+          comment:
+            "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+          commentDate: "2024/07/11",
+          imageProfile:
+            "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+          level1: []
+        },
+        {
+          commentId: 2,
+          name: "Fati Nouha",
+          comment:
+            "Hi my name is amine and I study in the development with some friends in jobintech and I work hard",
+          commentDate: "2024/07/11",
+          imageProfile:
+            "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+          level1: []
+        },
+
+      ],
+    },
+    full_name: "John Doe",
+    postPhoto:
+      "https://images.pexels.com/photos/3768126/pexels-photo-3768126.jpeg",
+    date_of_publish: "2024-04-13",
+    description:
+      "Hello Math Lovers!, Let's take a moment to appreciate the beauty and wonder of mathematics! From the elegant simplicity of arithmetic to the mind-bending complexities of calculus, mathematics is the language of patterns, relationships, and logic that permeates every aspect of our world,At its core, mathematics is not just about numbers and equations it's about problem-solving, critical thinking, and creativity. It challenges us to think outside the box, to explore new possibilities, and to unlock the mysteries of the universe.",
     profilePhoto:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     id: 1,

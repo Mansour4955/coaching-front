@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { PiDotsThreeCircle } from "react-icons/pi";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import CommentCard from "./CommentCard";
+import { IoIosSend } from "react-icons/io";
 const PublishedPost = ({
   full_name,
   postPhoto,
@@ -16,7 +17,12 @@ const PublishedPost = ({
   const [toggleLike, setToggleLike] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [showAllComments, setShowAllComments] = useState(false);
-  
+  const [writeComment, setWriteComment] = useState("");
+
+  const handleSendComment = ()=> {
+    console.log(writeComment, {postid: id});
+    setWriteComment("")
+  }
 
   const hide = "overflow-hidden line-clamp-2";
   return (
@@ -79,6 +85,22 @@ const PublishedPost = ({
               {comments?.length == 1 || 0 ? "Comment" : "Comments"}
             </span>
           </p>
+        </div>
+        <div className="flex mb-2">
+          <img alt="" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" className="rounded-full w-[40px] h-[40px] mr-2"/>
+        <input
+              type="text"
+              className="caret-main_color flex-1 border text-gray-500 font-medium  border-r-0 border-main_color rounded-l-xl px-2 outline-none py-1"
+              placeholder="Write a comment"
+              value={writeComment}
+              onChange={(e) => setWriteComment(e.target.value)}
+            />
+            <div
+              onClick={handleSendComment}
+              className="flex items-center justify-center rounded-r-xl border border-main_color border-l-0 px-2 py-1 text-main_color font-bold cursor-pointer hover:bg-white_color duration-300"
+            >
+              <IoIosSend size={20} />
+            </div>
         </div>
         {showComments && (
           <div className="flex flex-col">
@@ -156,8 +178,8 @@ const PublishedPost = ({
                         ))}
                     </div>
                   ))
-                : comments?.length > 3
-                ? comments?.slice(0, 3).map((comment) => (
+                : comments?.length > 2
+                ? comments?.slice(0, 2).map((comment) => (
                     <div key={comment.commentId}>
                       <CommentCard
                       iconsSize="18"
@@ -302,7 +324,7 @@ const PublishedPost = ({
                     </div>
                   ))}
             </div>
-            {comments.length > 3 && (
+            {comments.length > 2 && (
               <button
                 onClick={() => setShowAllComments(!showAllComments)}
                 className="text-main_color text-sm mt-1"
@@ -312,6 +334,7 @@ const PublishedPost = ({
             )}
           </div>
         )}
+        
       </div>
     </div>
   );

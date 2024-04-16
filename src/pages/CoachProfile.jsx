@@ -24,8 +24,8 @@ const CoachProfile = () => {
   } = coachProfileInfo;
 
   return (
-    <div className="flex gap-x-10 pt-5 px-4 bg-white_color">
-      <div className="w-[80%]  bg-white p-4  max-lg:w-[100%]">
+    <div className="flex gap-x-10 pt-5 px-4 bg-white_color justify-center">
+      <div className="w-[60%]  bg-white p-4">
         <div className="bg-white flex p-2 gap-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
           <div className="flex flex-col gap-20">
             <div className="flex gap-3">
@@ -75,11 +75,7 @@ const CoachProfile = () => {
           </div>
         </div>
       </div>
-      <div className="w-[20%] p-4 bg-white h-fit max-lg:hidden">
-        <div className="shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg w-full">
-          <Footer />
-        </div>
-      </div>
+    
     </div>
   );
 };

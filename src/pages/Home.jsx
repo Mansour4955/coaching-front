@@ -24,7 +24,7 @@ const Home = () => {
           id={coachStatic[0].id}
         />
       </div>
-      <div className="w-[50%] flex flex-col gap-10 max-xl:w-[70%] max-lg:w-[100%]">
+      <div className="w-[50%] flex flex-col gap-6 max-xl:w-[70%] max-lg:w-[100%]">
         <div className="bg-white p-4 gap-4">
           <div className="flex gap-4">
             <img
