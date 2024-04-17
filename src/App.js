@@ -9,7 +9,7 @@ import CoachCards from "./pages/CoachCards";
 import CoachProfile from "./pages/CoachProfile";
 function App() {
   return (
-    <div>
+    <div className="">
       <BrowserRouter>
         <div className="mb-[60px]">
           <Header />

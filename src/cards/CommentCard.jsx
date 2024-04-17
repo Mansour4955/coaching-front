@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import { MdDelete, MdModeEdit, MdOutlineReply } from "react-icons/md";
+import DeleteComment from "../popups/DeleteComment";
 
 const CommentCard = ({
   commentId,
@@ -12,10 +13,11 @@ const CommentCard = ({
   nameStyle,
   descAndDateStyle,
   iconsSize,
-  parentDevStyle
+  parentDevStyle,
 }) => {
   const [reply, setReply] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [showDeleteCommentPopup, setShowDeleteCommentPopup] = useState(false);
 
   const [writeComment, setWriteComment] = useState("");
   const [editComment, setEditComment] = useState(comment);
@@ -29,7 +31,9 @@ const CommentCard = ({
     setEdit(false);
   };
   return (
-    <div className={`${parentDevStyle} bg-gray-100 rounded-lg mb-2 p-2 flex-col flex`}>
+    <div
+      className={`${parentDevStyle} bg-gray-100 rounded-lg mb-2 p-2 flex-col flex `}
+    >
       <div className="flex gap-2 ">
         <img
           alt={name}
@@ -45,7 +49,10 @@ const CommentCard = ({
       </div>
       <p className={`${descAndDateStyle} text-gray-700 `}>{comment}</p>
       <div className="flex items-center gap-2 mt-1">
-        <p className="text-red-600 cursor-pointer">
+        <p
+          onClick={() => setShowDeleteCommentPopup(!showDeleteCommentPopup)}
+          className="text-red-600 cursor-pointer"
+        >
           <MdDelete size={`${iconsSize}`} />
         </p>
         <p
@@ -63,7 +70,11 @@ const CommentCard = ({
       </div>
       {reply && (
         <div className="flex mt-2">
-           <img alt="" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" className="border-2 border-white rounded-full w-[32px] h-[32px] mr-2"/>
+          <img
+            alt=""
+            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+            className="border-2 border-white rounded-full w-[32px] h-[32px] mr-2"
+          />
           <input
             type="text"
             className="caret-main_color flex-1 border text-gray-500 font-medium  border-r-0 border-main_color rounded-l-xl px-2 outline-none py-1"
@@ -81,7 +92,11 @@ const CommentCard = ({
       )}
       {edit && (
         <div className="flex mt-2">
-           <img alt="" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" className="border-2 border-white rounded-full w-[32px] h-[32px] mr-2"/>
+          <img
+            alt=""
+            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+            className="border-2 border-white rounded-full w-[32px] h-[32px] mr-2"
+          />
           <input
             type="text"
             className="caret-main_color flex-1 border text-gray-500 font-medium  border-r-0 border-main_color rounded-l-xl px-2 outline-none py-1"
@@ -95,6 +110,11 @@ const CommentCard = ({
           >
             <IoIosSend size={20} />
           </div>
+        </div>
+      )}
+      {showDeleteCommentPopup && (
+        <div className="absolute  left-0 min-h-[140px] right-0 flex items-center justify-center ">
+          <DeleteComment setShowDeleteCommentPopup={setShowDeleteCommentPopup} commentId={commentId}/>
         </div>
       )}
     </div>

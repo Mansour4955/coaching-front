@@ -25,7 +25,7 @@ const CoachProfile = () => {
 
   return (
     <div className="bg-white_color pt-5 flex justify-center">
-      <div className="w-[60%]  flex-col flex ">
+      <div className="w-[60%] max-sm:w-[95%] max-md:w-[90%] max-lg:w-[80%] max-xl:w-[70%]  flex-col flex ">
         <div className="flex flex-col gap-6">
           <div className="bg-white p-4">
             <div className="bg-white p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
