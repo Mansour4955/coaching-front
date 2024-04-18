@@ -5,8 +5,10 @@ import { coachCardInfo, postInfo } from "../data";
 import { MdOutlineStarPurple500, MdOutlineStarOutline } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import StarRating from "../StarRating";
+import Appointment from "../popups/Appointment";
 const CoachProfile = () => {
   const [reviewText, setReviewText] = useState("");
+  const [showAppointment, setShowAppointment] = useState(false);
   const [rating, setRating] = useState(0);
   const [counter, setCounter] = useState(0);
   const { coachProfileId } = useParams();
@@ -26,9 +28,7 @@ const CoachProfile = () => {
   const handleFollow = () => {
     console.log("Follow");
   };
-  const handleappointment = () => {
-    console.log("Rendez-vous");
-  };
+
   const handleReviewData = (e) => {
     e.preventDefault();
     console.log(reviewText);
@@ -51,7 +51,7 @@ const CoachProfile = () => {
   return (
     <div className="bg-white_color pt-5 flex justify-center">
       <div className="w-[60%] max-sm:w-[95%] max-md:w-[90%] max-lg:w-[80%] max-xl:w-[70%]  flex-col flex ">
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-10 relative">
           <div className="bg-white p-4">
             <div className="bg-white flex flex-col gap-6 p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
               <div className="flex flex-col gap-3">
@@ -60,7 +60,7 @@ const CoachProfile = () => {
                   alt={imageUrl}
                   src={imageUrl}
                 />
-                <div className=" flex flex-col gap-3">
+                <div className=" flex flex-col gap-3 ">
                   <div className="mx-auto flex flex-col justify-center items-center">
                     <div className="flex flex-col gap-2 items-center justify-center">
                       <p className="font-semibold text-lg max-md:text-base">
@@ -104,12 +104,15 @@ const CoachProfile = () => {
                           Follow
                         </p>
                         <p
-                          onClick={handleappointment}
+                          onClick={()=>setShowAppointment(!showAppointment)}
                           className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
                         >
                           Appointment
                         </p>
                       </div>
+                      {showAppointment && <div>
+                        <Appointment/>
+                        </div>}
                     </div>
                   </div>
                   <p className="font-medium">

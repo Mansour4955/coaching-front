@@ -7,6 +7,7 @@ import Register from "./auth/Register";
 import NotFound from "./pages/NotFound";
 import CoachCards from "./pages/CoachCards";
 import CoachProfile from "./pages/CoachProfile";
+import ChatPage from "./pages/ChatPage";
 function App() {
   return (
     <div className="">
@@ -18,6 +19,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="chat" element={<ChatPage />} />
           <Route path="coachCards" element={<CoachCards />} />
           <Route path="coachCards/:coachProfileId" element={<CoachProfile />} />
           <Route path="*" element={<NotFound />} />
