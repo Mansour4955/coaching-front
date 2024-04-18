@@ -184,9 +184,6 @@ export const postInfo = [
                   level3: [],
                 },
               ],
-
-
-
             },
             {
               commentChildId: 2,
@@ -226,7 +223,6 @@ export const postInfo = [
                     },
                   ],
                 },
-               
               ],
             },
             {
@@ -239,7 +235,6 @@ export const postInfo = [
                 "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
               level2: [],
             },
-           
           ],
         },
         {
@@ -250,7 +245,7 @@ export const postInfo = [
           commentDate: "2024/07/11",
           imageProfile:
             "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-          level1: []
+          level1: [],
         },
         {
           commentId: 2,
@@ -260,9 +255,8 @@ export const postInfo = [
           commentDate: "2024/07/11",
           imageProfile:
             "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-          level1: []
+          level1: [],
         },
-
       ],
     },
     full_name: "John Doe",
@@ -310,9 +304,6 @@ export const postInfo = [
                   level3: [],
                 },
               ],
-
-
-
             },
             {
               commentChildId: 2,
@@ -352,7 +343,6 @@ export const postInfo = [
                     },
                   ],
                 },
-               
               ],
             },
             {
@@ -365,7 +355,6 @@ export const postInfo = [
                 "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
               level2: [],
             },
-           
           ],
         },
         {
@@ -376,7 +365,7 @@ export const postInfo = [
           commentDate: "2024/07/11",
           imageProfile:
             "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-          level1: []
+          level1: [],
         },
         {
           commentId: 2,
@@ -386,9 +375,8 @@ export const postInfo = [
           commentDate: "2024/07/11",
           imageProfile:
             "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-          level1: []
+          level1: [],
         },
-
       ],
     },
     full_name: "John Doe",
@@ -420,6 +408,15 @@ export const domaines = [
 ];
 export const coachCardInfo = [
   {
+    reviews: [
+      { name: "amine mansour", stars: 3, description: "you are good" },
+      { name: "nouha fati", stars: 5, description: "keep it up" },
+      { name: "imane", stars: 2, description: "you are good" },
+      { name: "fatimazahra", stars: 4, description: "keep it up" },
+    ],
+    triningItems: ["Jobintech", "wimtech", "devoteam", "labelVie"],
+    softSkillsItems: ["Communication", "intelegent", "team leader", "helping"],
+    experienceItems: ["developer", "tester", "Frontend", "backend"],
     id: 1,
     name: "Amira Benali",
     city: "Tangier",
@@ -433,6 +430,15 @@ export const coachCardInfo = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
   },
   {
+    reviews: [
+      { name: "amine mansour", stars: 3, description: "you are good" },
+      { name: "nouha fati", stars: 5, description: "keep it up" },
+      { name: "imane", stars: 2, description: "you are good" },
+      { name: "fatimazahra", stars: 4, description: "keep it up" },
+    ],
+    triningItems: ["Jobintech", "wimtech", "devoteam", "labelVie"],
+    softSkillsItems: ["Communication", "intelegent", "team leader", "helping"],
+    experienceItems: ["developer", "tester", "Frontend", "backend"],
     id: 2,
     name: "Youssef Chakir",
     city: "Fez",
@@ -446,6 +452,15 @@ export const coachCardInfo = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
   },
   {
+    reviews: [
+      { name: "amine mansour", stars: 3, description: "you are good" },
+      { name: "nouha fati", stars: 5, description: "keep it up" },
+      { name: "imane", stars: 2, description: "you are good" },
+      { name: "fatimazahra", stars: 4, description: "keep it up" },
+    ],
+    triningItems: ["Jobintech", "wimtech", "devoteam", "labelVie"],
+    softSkillsItems: ["Communication", "intelegent", "team leader", "helping"],
+    experienceItems: ["developer", "tester", "Frontend", "backend"],
     id: 3,
     name: "Laila Mansouri",
     city: "Marrakech",
@@ -459,6 +474,15 @@ export const coachCardInfo = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
   },
   {
+    reviews: [
+      { name: "amine mansour", stars: 3, description: "you are good" },
+      { name: "nouha fati", stars: 5, description: "keep it up" },
+      { name: "imane", stars: 2, description: "you are good" },
+      { name: "fatimazahra", stars: 4, description: "keep it up" },
+    ],
+    triningItems: ["Jobintech", "wimtech", "devoteam", "labelVie"],
+    softSkillsItems: ["Communication", "intelegent", "team leader", "helping"],
+    experienceItems: ["developer", "tester", "Frontend", "backend"],
     id: 4,
     name: "Karim Rami",
     city: "Agadir",
@@ -472,6 +496,15 @@ export const coachCardInfo = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
   },
   {
+    reviews: [
+      { name: "amine mansour", stars: 3, description: "you are good" },
+      { name: "nouha fati", stars: 5, description: "keep it up" },
+      { name: "imane", stars: 2, description: "you are good" },
+      { name: "fatimazahra", stars: 4, description: "keep it up" },
+    ],
+    triningItems: ["Jobintech", "wimtech", "devoteam", "labelVie"],
+    softSkillsItems: ["Communication", "intelegent", "team leader", "helping"],
+    experienceItems: ["developer", "tester", "Frontend", "backend"],
     id: 5,
     name: "Fatima Zohra",
     city: "Casablanca",
@@ -485,6 +518,15 @@ export const coachCardInfo = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
   },
   {
+    reviews: [
+      { name: "amine mansour", stars: 3, description: "you are good" },
+      { name: "nouha fati", stars: 5, description: "keep it up" },
+      { name: "imane", stars: 2, description: "you are good" },
+      { name: "fatimazahra", stars: 4, description: "keep it up" },
+    ],
+    triningItems: ["Jobintech", "wimtech", "devoteam", "labelVie"],
+    softSkillsItems: ["Communication", "intelegent", "team leader", "helping"],
+    experienceItems: ["developer", "tester", "Frontend", "backend"],
     id: 6,
     name: "Mohammed Amine",
     city: "Rabat",
@@ -498,6 +540,15 @@ export const coachCardInfo = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
   },
   {
+    reviews: [
+      { name: "amine mansour", stars: 3, description: "you are good" },
+      { name: "nouha fati", stars: 5, description: "keep it up" },
+      { name: "imane", stars: 2, description: "you are good" },
+      { name: "fatimazahra", stars: 4, description: "keep it up" },
+    ],
+    triningItems: ["Jobintech", "wimtech", "devoteam", "labelVie"],
+    softSkillsItems: ["Communication", "intelegent", "team leader", "helping"],
+    experienceItems: ["developer", "tester", "Frontend", "backend"],
     id: 7,
     name: "Sara El Khattabi",
     city: "Tetouan",
@@ -511,6 +562,15 @@ export const coachCardInfo = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
   },
   {
+    reviews: [
+      { name: "amine mansour", stars: 3, description: "you are good" },
+      { name: "nouha fati", stars: 5, description: "keep it up" },
+      { name: "imane", stars: 2, description: "you are good" },
+      { name: "fatimazahra", stars: 4, description: "keep it up" },
+    ],
+    triningItems: ["Jobintech", "wimtech", "devoteam", "labelVie"],
+    softSkillsItems: ["Communication", "intelegent", "team leader", "helping"],
+    experienceItems: ["developer", "tester", "Frontend", "backend"],
     id: 8,
     name: "Abdelali El Fakir",
     city: "Fes",
@@ -524,6 +584,15 @@ export const coachCardInfo = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
   },
   {
+    reviews: [
+      { name: "amine mansour", stars: 3, description: "you are good" },
+      { name: "nouha fati", stars: 5, description: "keep it up" },
+      { name: "imane", stars: 2, description: "you are good" },
+      { name: "fatimazahra", stars: 4, description: "keep it up" },
+    ],
+    triningItems: ["Jobintech", "wimtech", "devoteam", "labelVie"],
+    softSkillsItems: ["Communication", "intelegent", "team leader", "helping"],
+    experienceItems: ["developer", "tester", "Frontend", "backend"],
     id: 9,
     name: "Nora Laarabi",
     city: "Meknes",
@@ -537,6 +606,15 @@ export const coachCardInfo = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
   },
   {
+    reviews: [
+      { name: "amine mansour", stars: 3, description: "you are good" },
+      { name: "nouha fati", stars: 5, description: "keep it up" },
+      { name: "imane", stars: 2, description: "you are good" },
+      { name: "fatimazahra", stars: 4, description: "keep it up" },
+    ],
+    triningItems: ["Jobintech", "wimtech", "devoteam", "labelVie"],
+    softSkillsItems: ["Communication", "intelegent", "team leader", "helping"],
+    experienceItems: ["developer", "tester", "Frontend", "backend"],
     id: 10,
     name: "Ahmed Essam",
     city: "Tangier",

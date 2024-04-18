@@ -1,8 +1,8 @@
 import PublishedPost from "../cards/PublishedPost";
 import Footer from "../components/Footer";
 import { coachCardInfo, postInfo } from "../data";
+import { MdOutlineStarPurple500, MdOutlineStarOutline } from "react-icons/md";
 import { useParams } from "react-router-dom";
-
 const CoachProfile = () => {
   const { coachProfileId } = useParams();
   const coachProfileInfo = coachCardInfo.find(
@@ -11,6 +11,19 @@ const CoachProfile = () => {
   const coachProfilePosts = postInfo.filter(
     (coachPosts) => coachPosts.id === parseInt(coachProfileId)
   );
+  let numberOfReviewers = coachProfileInfo.reviews.length;
+  let totalStars = 0;
+  coachProfileInfo.reviews.forEach((review) => {
+    totalStars += review.stars;
+  });
+  const averageStars = totalStars / numberOfReviewers;
+  const resultStars = Math.round(averageStars);
+  const handleFollow = () => {
+    console.log("Follow");
+  };
+  const handleappointment = () => {
+    console.log("Rendez-vous");
+  };
   const {
     id,
     name,
@@ -26,22 +39,67 @@ const CoachProfile = () => {
   return (
     <div className="bg-white_color pt-5 flex justify-center">
       <div className="w-[60%] max-sm:w-[95%] max-md:w-[90%] max-lg:w-[80%] max-xl:w-[70%]  flex-col flex ">
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-10">
           <div className="bg-white p-4">
-            <div className="bg-white p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
+            <div className="bg-white flex flex-col gap-6 p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
               <div className="flex flex-col gap-3">
                 <img
-                  className="w-[200px] h-[200px] rounded-full mx-auto"
+                  className="w-[160px] h-[160px] rounded-full mx-auto max-md:w-[140px] max-md:h-[140px]"
                   alt={imageUrl}
                   src={imageUrl}
                 />
-                <div className="mt-3 flex flex-col gap-3">
-                  <p className="font-semibold text-lg">
-                    {name}{" "}
-                    <span className="text-main_color font-medium text-sm">
-                      {profession}
-                    </span>
-                  </p>
+                <div className=" flex flex-col gap-3">
+                  <div className="mx-auto flex flex-col justify-center items-center">
+                    <div className="flex flex-col gap-2 items-center justify-center">
+                      <p className="font-semibold text-lg max-md:text-base">
+                        {name}{" "}
+                        <span className="text-main_color font-medium text-sm max-md:text-xs">
+                          {profession}
+                        </span>
+                      </p>
+                      <div className="text-yellow-500 flex items-center gap-[2px] text-xl max-md:text-lg">
+                        {Array.from({ length: resultStars }).map(
+                          (star, index) => (
+                            <p
+                              key={index}
+                              className="flex gap-[2px] items-center"
+                            >
+                              <span>
+                                <MdOutlineStarPurple500 />
+                              </span>
+                            </p>
+                          )
+                        )}
+                        {5 - resultStars > 0 &&
+                          Array.from({ length: 5 - resultStars }).map(
+                            (addedStar, index) => (
+                              <span
+                                className="flex items-center gap-0.5"
+                                key={index}
+                              >
+                                <p>
+                                  <MdOutlineStarOutline />
+                                </p>
+                              </span>
+                            )
+                          )}
+                      </div>
+                      <div className="flex gap-10">
+                        <p
+                          onClick={handleFollow}
+                          className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
+                        >
+                          Follow
+                        </p>
+                        <p
+                          onClick={handleappointment}
+                          className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
+                        >
+                          Appointment
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                   <p className="font-medium">
                     {city}{" "}
                     <span className="text-main_color font-medium text-sm">
@@ -53,6 +111,92 @@ const CoachProfile = () => {
                     <span className="text-sm text-gray-500">{diplomas}</span>
                   </p>
                   <p className="text-gray-600 font-semibold">{price}MAD/h</p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-semibold text-lg">About Me:</h3>
+                  <p className=" text-sm text-gray-700 font-medium">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Adipisci dicta, iste soluta et vitae suscipit provident ea
+                    neque, illum similique possimus. Natus facilis accusantium
+                    architecto vel cum sunt quod aspernatur!
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-semibold text-lg">Training:</h3>
+                  <ul className="flex flex-col gap-1 text-sm text-gray-700 font-medium list-disc ml-4 capitalize">
+                    {coachProfileInfo.triningItems.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-semibold text-lg ">Soft skills:</h3>
+                  <div className="flex gap-2 flex-wrap">
+                    {coachProfileInfo.softSkillsItems.map((item, index) => (
+                      <span
+                        className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize max-md:text-xs"
+                        key={index}
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-semibold text-lg">Experience:</h3>
+                  <ul className="flex flex-col gap-1 text-sm text-gray-700 font-medium list-disc ml-4 capitalize">
+                    {coachProfileInfo.experienceItems.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-semibold ">Reviews:</h3>
+                  <div className="flex flex-col gap-2">
+                    {coachProfileInfo.reviews.map((review, index) => (
+                      <div key={index} className="flex flex-col gap-1">
+                        <div className="flex gap-2">
+                          <h3 className="font-semibold text-sm capitalize">
+                            {review.name}
+                          </h3>
+                          <p className="text-yellow-500 flex items-center gap-[2px]">
+                            {Array.from({ length: review.stars }).map(
+                              (star, index) => (
+                                <p
+                                  key={index}
+                                  className="flex gap-[2px] items-center"
+                                >
+                                  <span>
+                                    <MdOutlineStarPurple500 />
+                                  </span>
+                                </p>
+                              )
+                            )}
+                            {5 - review.stars > 0 &&
+                              Array.from({ length: 5 - review.stars }).map(
+                                (addedStar, index) => (
+                                  <span
+                                    className="flex items-center gap-0.5"
+                                    key={index}
+                                  >
+                                    <p>
+                                      <MdOutlineStarOutline />
+                                    </p>
+                                  </span>
+                                )
+                              )}
+                          </p>
+                        </div>
+                        {review?.description && (
+                          <p className="text-sm text-gray-700">
+                            {review.description}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
