@@ -1,9 +1,14 @@
+import { useState } from "react";
 import PublishedPost from "../cards/PublishedPost";
 import Footer from "../components/Footer";
 import { coachCardInfo, postInfo } from "../data";
 import { MdOutlineStarPurple500, MdOutlineStarOutline } from "react-icons/md";
 import { useParams } from "react-router-dom";
+import StarRating from "../StarRating";
 const CoachProfile = () => {
+  const [reviewText, setReviewText] = useState("");
+  const [rating, setRating] = useState(0);
+  const [counter, setCounter] = useState(0);
   const { coachProfileId } = useParams();
   const coachProfileInfo = coachCardInfo.find(
     (coachInfo) => coachInfo.id === parseInt(coachProfileId)
@@ -23,6 +28,13 @@ const CoachProfile = () => {
   };
   const handleappointment = () => {
     console.log("Rendez-vous");
+  };
+  const handleReviewData = (e) => {
+    e.preventDefault();
+    console.log(reviewText);
+    console.log(rating);
+    setCounter(counter + 1)
+    setReviewText("");
   };
   const {
     id,
@@ -155,47 +167,71 @@ const CoachProfile = () => {
                 <div className="flex flex-col gap-2">
                   <h3 className="font-semibold ">Reviews:</h3>
                   <div className="flex flex-col gap-2">
-                    {coachProfileInfo.reviews.map((review, index) => (
-                      <div key={index} className="flex flex-col gap-1">
-                        <div className="flex gap-2">
-                          <h3 className="font-semibold text-sm capitalize">
-                            {review.name}
-                          </h3>
-                          <p className="text-yellow-500 flex items-center gap-[2px]">
-                            {Array.from({ length: review.stars }).map(
-                              (star, index) => (
-                                <p
-                                  key={index}
-                                  className="flex gap-[2px] items-center"
-                                >
-                                  <span>
-                                    <MdOutlineStarPurple500 />
-                                  </span>
-                                </p>
-                              )
-                            )}
-                            {5 - review.stars > 0 &&
-                              Array.from({ length: 5 - review.stars }).map(
-                                (addedStar, index) => (
-                                  <span
-                                    className="flex items-center gap-0.5"
+                    {coachProfileInfo.reviews.length > 0 &&
+                      coachProfileInfo.reviews.map((review, index) => (
+                        <div key={index} className="flex flex-col gap-1">
+                          <div className="flex gap-2">
+                            <h3 className="font-semibold text-sm capitalize">
+                              {review.name}
+                            </h3>
+                            <p className="text-yellow-500 flex items-center gap-[2px]">
+                              {Array.from({ length: review.stars }).map(
+                                (star, index) => (
+                                  <p
                                     key={index}
+                                    className="flex gap-[2px] items-center"
                                   >
-                                    <p>
-                                      <MdOutlineStarOutline />
-                                    </p>
-                                  </span>
+                                    <span>
+                                      <MdOutlineStarPurple500 />
+                                    </span>
+                                  </p>
                                 )
                               )}
-                          </p>
+                              {5 - review.stars > 0 &&
+                                Array.from({ length: 5 - review.stars }).map(
+                                  (addedStar, index) => (
+                                    <span
+                                      className="flex items-center gap-0.5"
+                                      key={index}
+                                    >
+                                      <p>
+                                        <MdOutlineStarOutline />
+                                      </p>
+                                    </span>
+                                  )
+                                )}
+                            </p>
+                          </div>
+                          {review?.description && (
+                            <p className="text-sm text-gray-700">
+                              {review.description}
+                            </p>
+                          )}
                         </div>
-                        {review?.description && (
-                          <p className="text-sm text-gray-700">
-                            {review.description}
-                          </p>
-                        )}
+                      ))}
+                  </div>
+                  <div className="">
+                    <p className="text-main_color font-semibold text-lg max-md:text-base">
+                      Let a review:
+                    </p>
+                    <div className="flex flex-col gap-1 items-start">
+                      <div class="">
+                      <StarRating onRate={setRating} counter={counter}/>
                       </div>
-                    ))}
+                      <textarea
+                        value={reviewText}
+                        onChange={(e) => setReviewText(e.target.value)}
+                        className="w-full outline-none border border-main_color rounded-lg px-2 py-1 caret-main_color"
+                        rows="2"
+                        placeholder="Write something"
+                      />
+                      <button
+                        onClick={handleReviewData}
+                        className="border bg-main_color hover:bg-white hover:text-main_color font-semibold text-white active:bg-main_color active:text-white duration-150 rounded-lg px-2 py-1"
+                      >
+                        Send
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
