@@ -24,7 +24,7 @@ const Appointment = ({ setShowAppointment }) => {
 
       setTimeout(() => {
         setShowAppointment(false);
-      }, 3000);
+      }, 2000);
     } else if (!appointmentDate) {
       setDateError(true);
     } else if (!appointmentMessage) {
@@ -59,7 +59,7 @@ const Appointment = ({ setShowAppointment }) => {
           <div className="w-full">
             <div className="flex flex-col gap-1">
               <h5 className="font-medium text-lg flex-1">Write description:</h5>
-              <input
+              <textarea rows={3}
                 type="text"
                 className="caret-main_color flex-1 cursor-pointer outline-none px-2 py-1 border border-main_color rounded-lg text-gray-600"
                 placeholder="Write a description"
