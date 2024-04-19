@@ -32,7 +32,7 @@ const CoachProfile = () => {
   const handleReviewData = (e) => {
     e.preventDefault();
     console.log(reviewText);
-    console.log(rating);
+    console.log(rating);  
     setCounter(counter + 1)
     setReviewText("");
   };
@@ -111,8 +111,9 @@ const CoachProfile = () => {
                         </p>
                       </div>
                       {showAppointment && <div>
-                        <Appointment/>
+                        <Appointment setShowAppointment={setShowAppointment}/>
                         </div>}
+                        
                     </div>
                   </div>
                   <p className="font-medium">
