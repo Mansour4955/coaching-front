@@ -8,24 +8,31 @@ import NotFound from "./pages/NotFound";
 import CoachCards from "./pages/CoachCards";
 import CoachProfile from "./pages/CoachProfile";
 import ChatPage from "./pages/ChatPage";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 function App() {
   return (
     <div className="">
-      <BrowserRouter>
-        <div className="mb-[60px]">
-          <Header />
-        </div>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="chat" element={<ChatPage />} />
-          <Route path="coachCards" element={<CoachCards />} />
-          <Route path="coachCards/:coachProfileId" element={<CoachProfile />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        {/* <Footer /> */}
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div className="mb-[60px]">
+            <Header />
+          </div>
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="chat" element={<ChatPage />} />
+            <Route path="coachCards" element={<CoachCards />} />
+            <Route
+              path="coachCards/:coachProfileId"
+              element={<CoachProfile />}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          {/* <Footer /> */}
+        </BrowserRouter>
+      </Provider>
     </div>
   );
 }

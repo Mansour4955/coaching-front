@@ -91,7 +91,312 @@ export const coachStatic = [
     id: 6,
   },
 ];
-
+export const conversations = [
+  {
+    username: "amine mansour",
+    profilePhoto:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    id: 1,
+    messages: [
+      {
+        id: 3,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+      },
+      {
+        id: 2,
+        date: "10 minutes ago",
+        username: "nouha nouha",
+        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+      },
+      {
+        id: 1,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "I'm fine I'm fine I'm fine v I'm fine",
+      },
+    ],
+  },
+  {
+    username: "nouha nouha",
+    profilePhoto:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    id: 2,
+    messages: [
+      {
+        id: 1,
+        date: "10 minutes ago",
+        username: "nouha nouha",
+        message: "Hey nouha Hey nouha Hey nouha Hey nouha",
+      },
+      {
+        id: 3,
+        date: "10 minutes ago",
+        username: "nouha nouhar",
+        message: "how are you",
+      },
+      {
+        id: 2,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message:
+          "fine bro and you fine bro and you fine bro and you fine bro and you",
+      },
+    ],
+  },
+  {
+    username: "imane imane",
+    profilePhoto:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    id: 3,
+    messages: [
+      {
+        id: 1,
+        date: "10 minutes ago",
+        username: "imane imane",
+        message: "Hey imane",
+      },
+      {
+        id: 2,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "how are you",
+      },
+      {
+        id: 3,
+        date: "10 minutes ago",
+        username: "imane imane",
+        message: "what are you doing today what are you doing today",
+      },
+    ],
+  },
+  {
+    username: "fati fati",
+    profilePhoto:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    id: 4,
+    messages: [
+      {
+        id: 1,
+        date: "10 minutes ago",
+        username: "fati fati",
+        message: "Hey fati",
+      },
+      {
+        id: 2,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "how are you",
+      },
+      {
+        id: 3,
+        date: "10 minutes ago",
+        username: "fati fati",
+        message:
+          "what did you do yesterday what did you do yesterday what did you do yesterday",
+      },
+      {
+        id: 4,
+        date: "10 minutes ago",
+        username: "fati fati",
+        message:
+          "what did you do yesterday what did you do yesterday what did you do yesterday",
+      },
+      {
+        id: 5,
+        date: "10 minutes ago",
+        username: "fati fati",
+        message:
+          "what did you do yesterday what did you do yesterday what did you do yesterday",
+      },
+      {
+        id: 6,
+        date: "10 minutes ago",
+        username: "fati fati",
+        message:
+          "what did you do yesterday what did you do yesterday what did you do yesterday",
+      },
+      {
+        id: 7,
+        date: "10 minutes ago",
+        username: "fati fati",
+        message:
+          "what did you do yesterday what did you do yesterday what did you do yesterday",
+      },
+      {
+        id: 8,
+        date: "10 minutes ago",
+        username: "fati fati",
+        message:
+          "what did you do yesterday what did you do yesterday what did you do yesterday",
+      },
+      {
+        id: 9,
+        date: "10 minutes ago",
+        username: "fati fati",
+        message:
+          "what did you do yesterday what did you do yesterday what did you do yesterday",
+      },
+    ],
+  },
+  {
+    username: "amine mansour",
+    profilePhoto:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    id: 5,
+    messages: [
+      {
+        id: 3,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+      },
+      {
+        id: 2,
+        date: "10 minutes ago",
+        username: "nouha nouha",
+        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+      },
+      {
+        id: 1,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "I'm fine I'm fine I'm fine v I'm fine",
+      },
+    ],
+  },
+  {
+    username: "amine mansour",
+    profilePhoto:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    id: 2,
+    messages: [
+      {
+        id: 3,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+      },
+      {
+        id: 2,
+        date: "10 minutes ago",
+        username: "nouha nouha",
+        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+      },
+      {
+        id: 1,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "I'm fine I'm fine I'm fine v I'm fine",
+      },
+    ],
+  },
+  {
+    username: "amine mansour",
+    profilePhoto:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    id: 7,
+    messages: [
+      {
+        id: 3,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+      },
+      {
+        id: 2,
+        date: "10 minutes ago",
+        username: "nouha nouha",
+        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+      },
+      {
+        id: 1,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "I'm fine I'm fine I'm fine v I'm fine",
+      },
+    ],
+  },
+  {
+    username: "amine mansour",
+    profilePhoto:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    id: 8,
+    messages: [
+      {
+        id: 3,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+      },
+      {
+        id: 2,
+        date: "10 minutes ago",
+        username: "nouha nouha",
+        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+      },
+      {
+        id: 1,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "I'm fine I'm fine I'm fine v I'm fine",
+      },
+    ],
+  },
+  {
+    username: "amine mansour",
+    profilePhoto:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    id: 9,
+    messages: [
+      {
+        id: 3,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+      },
+      {
+        id: 2,
+        date: "10 minutes ago",
+        username: "nouha nouha",
+        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+      },
+      {
+        id: 1,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "I'm fine I'm fine I'm fine v I'm fine",
+      },
+    ],
+  },
+  {
+    username: "amine mansour",
+    profilePhoto:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    id: 10,
+    messages: [
+      {
+        id: 3,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+      },
+      {
+        id: 2,
+        date: "10 minutes ago",
+        username: "nouha nouha",
+        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+      },
+      {
+        id: 1,
+        date: "10 minutes ago",
+        username: "amine mansour",
+        message: "I'm fine I'm fine I'm fine v I'm fine",
+      },
+    ],
+  },
+];
 export const coachCard = [
   {
     full_name: "John Doe",
