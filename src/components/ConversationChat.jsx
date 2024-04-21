@@ -20,7 +20,7 @@ const ConversationChat = () => {
   }, [theCurrentChat]);
 
   return (
-    <div className=" flex-[2] h-[70vh]">
+    <div className=" flex-[2] h-[70vh] relative">
       <div className="flex flex-col pb-2 ">
         <div className="flex gap-2 py-2 px-1 bg-main_color mb-2">
           <img
@@ -39,7 +39,7 @@ const ConversationChat = () => {
             )}
           </div>
         </div>
-        <div className="h-[56vh] px-2 flex flex-col gap-1 overflow-y-auto">
+        <div className="h-[56vh] px-2 flex flex-col gap-1 overflow-y-auto pb-2">
           {currentChat ? (
             currentChat?.messages?.map((message, index) => (
               <div key={index}>
@@ -57,7 +57,7 @@ const ConversationChat = () => {
             </div>
           )}
         </div>
-        <div className="flex pt-1">
+        <div className="flex absolute bottom-0 right-0 left-0">
           <img
             alt=""
             src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
