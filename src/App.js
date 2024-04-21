@@ -10,6 +10,7 @@ import CoachProfile from "./pages/CoachProfile";
 import ChatPage from "./pages/ChatPage";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import MyProfile from "./pages/MyProfile";
 function App() {
   return (
     <div className="">
@@ -24,6 +25,7 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="chat" element={<ChatPage />} />
             <Route path="coachCards" element={<CoachCards />} />
+            <Route path="myprofile" element={<MyProfile />} />
             <Route
               path="coachCards/:coachProfileId"
               element={<CoachProfile />}

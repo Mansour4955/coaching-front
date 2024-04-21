@@ -160,14 +160,7 @@ const Header = () => {
           >
             <FaChalkboardTeacher size={19} />
           </NavLink>
-          <NavLink
-            to="/streaming"
-            className={({ isActive }) =>
-              isActive ? "text-main_color" : "text-gray-500"
-            }
-          >
-            <IoMdVideocam size={19} />
-          </NavLink>
+
           <NavLink
             to="/chat"
             className={({ isActive }) =>
@@ -175,14 +168,6 @@ const Header = () => {
             }
           >
             <HiMiniChatBubbleLeftRight size={19} />
-          </NavLink>
-          <NavLink
-            to="/notification"
-            className={({ isActive }) =>
-              isActive ? "text-main_color" : "text-gray-500"
-            }
-          >
-            <BiSolidBell size={19} />
           </NavLink>
           <NavLink
             to="/rendez-vous"
@@ -193,14 +178,14 @@ const Header = () => {
             <FaCalendarAlt size={18} />
           </NavLink>
         </div>
-        <div className="flex gap-2 items-center">
+        <Link to="/myprofile" className="flex gap-2 items-center">
           <img
             alt=""
             src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
             className="w-8 h-8 rounded-[100%]"
           />
           <p className="font-bold text-gray-500">John</p>
-        </div>
+        </Link>
       </div>
     </div>
   );

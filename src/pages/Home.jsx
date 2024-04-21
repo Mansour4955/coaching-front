@@ -82,6 +82,7 @@ const Home = () => {
             </button>
           </div>
         </div>
+        
         <div className="flex flex-col p-4 bg-white gap-y-3">
           {postInfo.map((card) => (
             <PublishedPost
@@ -98,6 +99,11 @@ const Home = () => {
               comments={card.theComments.comments}
             />
           ))}
+        </div>
+        <div className="max-lg:flex justify-center p-4 bg-white hidden ">
+          <div className="w-full p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
+           <Footer/>
+          </div>
         </div>
       </div>
       <div className="w-[25%] flex flex-col items-center gap-10 max-xl:w-[30%] max-lg:hidden">

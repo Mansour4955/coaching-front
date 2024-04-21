@@ -3,21 +3,16 @@ import PublishedPost from "../cards/PublishedPost";
 import Footer from "../components/Footer";
 import { coachCardInfo, postInfo } from "../data";
 import { MdOutlineStarPurple500, MdOutlineStarOutline } from "react-icons/md";
-import { useParams } from "react-router-dom";
-import StarRating from "../StarRating";
-import Appointment from "../popups/Appointment";
-const CoachProfile = () => {
-  const [reviewText, setReviewText] = useState("");
-  const [showAppointment, setShowAppointment] = useState(false);
-  const [rating, setRating] = useState(0);
-  const [counter, setCounter] = useState(0);
-  const { coachProfileId } = useParams();
-  const coachProfileInfo = coachCardInfo.find(
-    (coachInfo) => coachInfo.id === parseInt(coachProfileId)
-  );
-  const coachProfilePosts = postInfo.filter(
-    (coachPosts) => coachPosts.id === parseInt(coachProfileId)
-  );
+// import { useParams } from "react-router-dom";
+// import Appointment from "../popups/Appointment";
+const MyProfile = () => {
+//   const [reviewText, setReviewText] = useState("");
+//   const [showAppointment, setShowAppointment] = useState(false);
+//   const [rating, setRating] = useState(0);
+//   const [counter, setCounter] = useState(0);
+//   const { coachProfileId } = useParams();
+  const coachProfileInfo = coachCardInfo[0]
+  const coachProfilePosts = postInfo.slice(0,1)
   let numberOfReviewers = coachProfileInfo.reviews.length;
   let totalStars = 0;
   coachProfileInfo.reviews.forEach((review) => {
@@ -25,17 +20,17 @@ const CoachProfile = () => {
   });
   const averageStars = totalStars / numberOfReviewers;
   const resultStars = Math.round(averageStars);
-  const handleFollow = () => {
-    console.log("Follow");
-  };
+//   const handleFollow = () => {
+//     console.log("Follow");
+//   };
 
-  const handleReviewData = (e) => {
-    e.preventDefault();
-    console.log(reviewText);
-    console.log(rating);  
-    setCounter(counter + 1)
-    setReviewText("");
-  };
+//   const handleReviewData = (e) => {
+//     e.preventDefault();
+//     console.log(reviewText);
+//     console.log(rating);  
+//     setCounter(counter + 1)
+//     setReviewText("");
+//   };
   const {
     id,
     name,
@@ -96,23 +91,6 @@ const CoachProfile = () => {
                             )
                           )}
                       </div>
-                      <div className="flex gap-10">
-                        <p
-                          onClick={handleFollow}
-                          className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
-                        >
-                          Follow
-                        </p>
-                        <p
-                          onClick={()=>setShowAppointment(!showAppointment)}
-                          className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
-                        >
-                          Appointment
-                        </p>
-                      </div>
-                      {showAppointment && <div>
-                        <Appointment setShowAppointment={setShowAppointment}/>
-                        </div>}
                         
                     </div>
                   </div>
@@ -214,29 +192,7 @@ const CoachProfile = () => {
                         </div>
                       ))}
                   </div>
-                  <div className="">
-                    <p className="text-main_color font-semibold text-lg max-md:text-base">
-                      Let a review:
-                    </p>
-                    <div className="flex flex-col gap-1 items-start">
-                      <div class="">
-                      <StarRating onRate={setRating} counter={counter}/>
-                      </div>
-                      <textarea
-                        value={reviewText}
-                        onChange={(e) => setReviewText(e.target.value)}
-                        className="w-full outline-none border border-main_color rounded-lg px-2 py-1 caret-main_color"
-                        rows="2"
-                        placeholder="Write something"
-                      />
-                      <button
-                        onClick={handleReviewData}
-                        className="border bg-main_color hover:bg-white hover:text-main_color font-semibold text-white active:bg-main_color active:text-white duration-150 rounded-lg px-2 py-1"
-                      >
-                        Send
-                      </button>
-                    </div>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -271,4 +227,4 @@ const CoachProfile = () => {
   );
 };
 
-export default CoachProfile;
+export default MyProfile;
