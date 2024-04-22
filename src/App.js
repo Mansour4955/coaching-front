@@ -11,6 +11,7 @@ import ChatPage from "./pages/ChatPage";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import MyProfile from "./pages/MyProfile";
+import AppointmentPage from "./pages/AppointmentPage";
 function App() {
   return (
     <div className="">
@@ -21,13 +22,14 @@ function App() {
           </div>
           <Routes>
             <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="chat" element={<ChatPage />} />
-            <Route path="coachCards" element={<CoachCards />} />
-            <Route path="myprofile" element={<MyProfile />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/chat" element={<ChatPage />} />
+            <Route path="/coachCards" element={<CoachCards />} />
+            <Route path="/myprofile" element={<MyProfile />} />
+            <Route path="/rendez-vous" element={<AppointmentPage />} />
             <Route
-              path="coachCards/:coachProfileId"
+              path="/coachCards/:coachProfileId"
               element={<CoachProfile />}
             />
             <Route path="*" element={<NotFound />} />
