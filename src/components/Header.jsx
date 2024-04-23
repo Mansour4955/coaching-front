@@ -8,11 +8,11 @@ import { FaCalendarAlt, FaChalkboardTeacher } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { IoFilterCircleOutline, IoFilterCircle } from "react-icons/io5";
-import { models, cities, methods } from "../data";
+import { courses, cities, methods } from "../data";
 const Header = () => {
   const navigate = useNavigate();
   const [showFilter, setShowFilter] = useState(false);
-  const [selectedModel, setSelectedModel] = useState("");
+  const [selectedcourse, setSelectedcourse] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedMethod, setSelectedMethod] = useState("");
   const [filterByName, setFilterByName] = useState("");
@@ -21,7 +21,7 @@ const Header = () => {
     e.preventDefault();
     navigate("/coachCards");
     setShowFilter(false);
-    console.log(selectedModel);
+    console.log(selectedcourse);
     console.log(selectedCity);
     console.log(selectedMethod);
     console.log(filterByName);
@@ -75,15 +75,15 @@ const Header = () => {
                 <div className="flex flex-col gap-2 p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
                   <div className="flex flex-col">
                     <label className="text-main_color text-xs ml-1">
-                      Filter by model
+                      Filter by course
                     </label>
                     <select
-                      onChange={(e) => setSelectedModel(e.target.value)}
+                      onChange={(e) => setSelectedcourse(e.target.value)}
                       className="outline-none"
                     >
-                      {models.map((model) => (
-                        <option className="outline-none" key={model.id}>
-                          {model.model}
+                      {courses.map((course) => (
+                        <option className="outline-none" key={course.id}>
+                          {course.course}
                         </option>
                       ))}
                     </select>

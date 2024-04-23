@@ -1,16 +1,37 @@
-export const models = [
-  { id: 1, model: "Domaine Sportif" },
-  { id: 2, model: "Psychologie" },
-  { id: 3, model: "Sante et nutrition" },
-  { id: 4, model: "Maths" },
+export const courses = [
+  { id: 1, course: "Domaine sportif" },
+  { id: 2, course: "Psychologie" },
+  { id: 3, course: "Santé et nutrition" },
+  { id: 4, course: "Relations familiale" },
+  { id: 5, course: "Éducation et formation" },
+  { id: 6, course: "Spiritualité" },
+  { id: 7, course: "Motivation et productivité" },
+  { id: 8, course: "Finance et investissement" },
+  { id: 9, course: "Développement personnel" },
 ];
 export const cities = [
-  { id: 1, city: "Rabat" },
-  { id: 2, city: "Sale" },
-  { id: 3, city: "Casablanca" },
-  { id: 4, city: "Tanger" },
-  { id: 5, city: "Marakech" },
+  { id: 1, city: "Casablanca" },
+  { id: 2, city: "Tanger" },
+  { id: 3, city: "Fès" },
+  { id: 4, city: "Marrakech" },
+  { id: 5, city: "Meknès" },
+  { id: 6, city: "Agadir" },
+  { id: 7, city: "Rabat" },
+  { id: 8, city: "Oujda" },
+  { id: 9, city: "Kénitra" },
+  { id: 10, city: "Tétouan" },
+  { id: 11, city: "Laayoune" },
+  { id: 12, city: "Mohammédia" },
+  { id: 13, city: "El Jadida" },
+  { id: 14, city: "Khouribga" },
+  { id: 15, city: "Béni Mellal" },
+  { id: 16, city: "Khémisset" },
+  { id: 17, city: "Nador" },
+  { id: 18, city: "Taza" },
+  { id: 19, city: "Berkane" },
+  { id: 20, city: "Safi" },
 ];
+
 export const methods = [
   { id: 1, meetingType: "Face to face" },
   { id: 2, meetingType: "Webcam" },
@@ -102,13 +123,15 @@ export const conversations = [
         id: 3,
         date: "10 minutes ago",
         username: "amine mansour",
-        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+        message:
+          "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
       },
       {
         id: 2,
         date: "10 minutes ago",
         username: "nouha nouha",
-        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+        message:
+          "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
       },
       {
         id: 1,
@@ -250,13 +273,15 @@ export const conversations = [
         id: 3,
         date: "10 minutes ago",
         username: "amine mansour",
-        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+        message:
+          "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
       },
       {
         id: 2,
         date: "10 minutes ago",
         username: "nouha nouha",
-        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+        message:
+          "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
       },
       {
         id: 1,
@@ -276,13 +301,15 @@ export const conversations = [
         id: 3,
         date: "10 minutes ago",
         username: "amine mansour",
-        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+        message:
+          "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
       },
       {
         id: 2,
         date: "10 minutes ago",
         username: "nouha nouha",
-        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+        message:
+          "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
       },
       {
         id: 1,
@@ -302,13 +329,15 @@ export const conversations = [
         id: 3,
         date: "10 minutes ago",
         username: "amine mansour",
-        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+        message:
+          "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
       },
       {
         id: 2,
         date: "10 minutes ago",
         username: "nouha nouha",
-        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+        message:
+          "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
       },
       {
         id: 1,
@@ -328,13 +357,15 @@ export const conversations = [
         id: 3,
         date: "10 minutes ago",
         username: "amine mansour",
-        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+        message:
+          "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
       },
       {
         id: 2,
         date: "10 minutes ago",
         username: "nouha nouha",
-        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+        message:
+          "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
       },
       {
         id: 1,
@@ -354,13 +385,15 @@ export const conversations = [
         id: 3,
         date: "10 minutes ago",
         username: "amine mansour",
-        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+        message:
+          "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
       },
       {
         id: 2,
         date: "10 minutes ago",
         username: "nouha nouha",
-        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+        message:
+          "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
       },
       {
         id: 1,
@@ -380,13 +413,15 @@ export const conversations = [
         id: 3,
         date: "10 minutes ago",
         username: "amine mansour",
-        message: "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
+        message:
+          "Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine Hey Amine ",
       },
       {
         id: 2,
         date: "10 minutes ago",
         username: "nouha nouha",
-        message: "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
+        message:
+          "how are you how are you how are you how are you how are you how are you how are you how are you how are you",
       },
       {
         id: 1,
