@@ -115,8 +115,8 @@ const Register = () => {
         setProfession("");
         setUsername("");
         setEmail("");
-        setPassword();
-        setCPassword();
+        setPassword("");
+        setCPassword("");
         setFillTheTrinings([]);
         setExperience("");
         setFillTheExperiences([]);
@@ -200,7 +200,7 @@ const Register = () => {
           setErrorCPassword("Confirm password does not match");
         }
       }
-    } else  {
+    } else {
       if (
         username &&
         username.length >= 3 &&
@@ -209,14 +209,16 @@ const Register = () => {
         password &&
         password.length >= 8 &&
         cPassword &&
-        cPassword === password
+        cPassword === password &&
+        role &&
+        role === "student"
       ) {
         console.log("send student data");
         ///////////////////////////////
         setUsername("");
         setEmail("");
-        setPassword();
-        setCPassword();
+        setPassword("");
+        setCPassword("");
         setShowCoachInputs(false);
       } else {
         //username
@@ -248,7 +250,7 @@ const Register = () => {
           setErrorRole("Role is required");
         }
       }
-    } 
+    }
   };
   return (
     <div className="flex justify-center mb-10  gap-x-10 pt-5 px-4 bg-white_color">
@@ -267,34 +269,49 @@ const Register = () => {
                   <span className="font-semibold ml-1">Your username</span>
                   <input
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                      setErrorUsername("");
+                    }}
                     type="text"
                     placeholder="Write username"
                     className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                   />
-                  {errorUsername && <p className="text-red-600 text-sm ml-1">{errorUsername}</p>}
+                  {errorUsername && (
+                    <p className="text-red-600 text-sm ml-1">{errorUsername}</p>
+                  )}
                 </label>
                 <label className="flex flex-col w-full">
                   <span className="font-semibold ml-1">Your email</span>
                   <input
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setErrorEmail("");
+                    }}
                     type="email"
                     placeholder="Write Email"
                     className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                   />
-                  {errorEmail && <p className="text-red-600 text-sm ml-1">{errorEmail}</p>}
+                  {errorEmail && (
+                    <p className="text-red-600 text-sm ml-1">{errorEmail}</p>
+                  )}
                 </label>
                 <label className="flex flex-col w-full">
                   <span className="font-semibold ml-1">Your password</span>
                   <input
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      setErrorPassword("");
+                    }}
                     type="password"
                     placeholder="Write password"
                     className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                   />
-                  {errorPassword && <p className="text-red-600 text-sm ml-1">{errorPassword}</p>}
+                  {errorPassword && (
+                    <p className="text-red-600 text-sm ml-1">{errorPassword}</p>
+                  )}
                 </label>
                 <label className="flex flex-col w-full">
                   <span className="font-semibold ml-1">
@@ -302,19 +319,29 @@ const Register = () => {
                   </span>
                   <input
                     value={cPassword}
-                    onChange={(e) => setCPassword(e.target.value)}
+                    onChange={(e) => {
+                      setCPassword(e.target.value);
+                      setErrorCPassword("");
+                    }}
                     type="password"
                     placeholder="Write confirm password"
                     className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                   />
-                  {errorCPassword && <p className="text-red-600 text-sm ml-1">{errorCPassword}</p>}
+                  {errorCPassword && (
+                    <p className="text-red-600 text-sm ml-1">
+                      {errorCPassword}
+                    </p>
+                  )}
                 </label>
                 <div className="flex flex-col w-full">
                   <label className="font-semibold ml-1">
                     Are you a coach or a student?
                   </label>
                   <select
-                    onChange={(e) => setRole(e.target.value)}
+                    onChange={(e) => {
+                      setRole(e.target.value);
+                      setErrorRole("");
+                    }}
                     className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                   >
                     <option className="outline-none" disabled selected>
@@ -326,7 +353,9 @@ const Register = () => {
                       </option>
                     ))}
                   </select>
-                  {errorRole && <p className="text-red-600 text-sm ml-1">{errorRole}</p>}
+                  {errorRole && (
+                    <p className="text-red-600 text-sm ml-1">{errorRole}</p>
+                  )}
                 </div>
                 {showCoachInputs && (
                   <div className="flex flex-col gap-2">
@@ -336,17 +365,27 @@ const Register = () => {
                       </span>
                       <input
                         value={profession}
-                        onChange={(e) => setProfession(e.target.value)}
+                        onChange={(e) => {
+                          setProfession(e.target.value);
+                          setErrorProfession("");
+                        }}
                         type="text"
                         placeholder="Write your profession"
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       />
-                      {errorProfession && <p className="text-red-600 text-sm ml-1">{errorProfession}</p>}
+                      {errorProfession && (
+                        <p className="text-red-600 text-sm ml-1">
+                          {errorProfession}
+                        </p>
+                      )}
                     </label>
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">Your course</label>
                       <select
-                        onChange={(e) => setCourse(e.target.value)}
+                        onChange={(e) => {
+                          setCourse(e.target.value);
+                          setErrorCourse("");
+                        }}
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       >
                         <option className="outline-none" disabled selected>
@@ -358,12 +397,19 @@ const Register = () => {
                           </option>
                         ))}
                       </select>
-                      {errorCourse && <p className="text-red-600 text-sm ml-1">{errorCourse}</p>}
+                      {errorCourse && (
+                        <p className="text-red-600 text-sm ml-1">
+                          {errorCourse}
+                        </p>
+                      )}
                     </div>
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">Your city</label>
                       <select
-                        onChange={(e) => setCity(e.target.value)}
+                        onChange={(e) => {
+                          setCity(e.target.value);
+                          setErrorCity("");
+                        }}
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       >
                         <option className="outline-none" disabled selected>
@@ -375,12 +421,17 @@ const Register = () => {
                           </option>
                         ))}
                       </select>
-                      {errorCity && <p className="text-red-600 text-sm ml-1">{errorCity}</p>}
+                      {errorCity && (
+                        <p className="text-red-600 text-sm ml-1">{errorCity}</p>
+                      )}
                     </div>
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">Your method</label>
                       <select
-                        onChange={(e) => setMethod(e.target.value)}
+                        onChange={(e) => {
+                          setMethod(e.target.value);
+                          setErrorMethod("");
+                        }}
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       >
                         <option className="outline-none" disabled selected>
@@ -392,7 +443,11 @@ const Register = () => {
                           </option>
                         ))}
                       </select>
-                      {errorMethod && <p className="text-red-600 text-sm ml-1">{errorMethod}</p>}
+                      {errorMethod && (
+                        <p className="text-red-600 text-sm ml-1">
+                          {errorMethod}
+                        </p>
+                      )}
                     </div>
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">
@@ -400,12 +455,19 @@ const Register = () => {
                       </label>
                       <input
                         value={price}
-                        onChange={(e) => setPrice(e.target.value)}
+                        onChange={(e) => {
+                          setPrice(e.target.value);
+                          setErrorPrice("");
+                        }}
                         type="number"
                         placeholder="Your price per hour"
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       />
-                      {errorPrice && <p className="text-red-600 text-sm ml-1">{errorPrice}</p>}
+                      {errorPrice && (
+                        <p className="text-red-600 text-sm ml-1">
+                          {errorPrice}
+                        </p>
+                      )}
                     </div>
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">
@@ -414,11 +476,18 @@ const Register = () => {
                       <textarea
                         rows={2}
                         value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        onChange={(e) => {
+                          setDescription(e.target.value);
+                          setErrorDescription("");
+                        }}
                         placeholder="Description about your diplomas in this course"
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       />
-                      {errorDescription && <p className="text-red-600 text-sm ml-1">{errorDescription}</p>}
+                      {errorDescription && (
+                        <p className="text-red-600 text-sm ml-1">
+                          {errorDescription}
+                        </p>
+                      )}
                     </div>
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">
@@ -427,11 +496,18 @@ const Register = () => {
                       <textarea
                         rows={2}
                         value={about}
-                        onChange={(e) => setAbout(e.target.value)}
+                        onChange={(e) => {
+                          setAbout(e.target.value);
+                          setErrorAbout("");
+                        }}
                         placeholder="Tell us about you"
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       />
-                      {errorAbout && <p className="text-red-600 text-sm ml-1">{errorAbout}</p>}
+                      {errorAbout && (
+                        <p className="text-red-600 text-sm ml-1">
+                          {errorAbout}
+                        </p>
+                      )}
                     </div>
                     <div className="flex flex-col gap-1">
                       <label className="flex flex-col  w-full">
@@ -444,7 +520,10 @@ const Register = () => {
                             className="caret-main_color px-2 py-2 flex items-center justify-center rounded-l-xl outline-none border w-full border-main_color border-r-0"
                             placeholder="Write trainings"
                             value={training}
-                            onChange={(e) => setTraining(e.target.value)}
+                            onChange={(e) => {
+                              setTraining(e.target.value);
+                              setErrorTraining("");
+                            }}
                           />
                           <div
                             onClick={fillTrainingArray}
@@ -453,7 +532,11 @@ const Register = () => {
                             <IoIosSend size={20} />
                           </div>
                         </div>
-                        {errorTraining && <p className="text-red-600 text-sm ml-1">{errorTraining}</p>}
+                        {errorTraining && (
+                          <p className="text-red-600 text-sm ml-1">
+                            {errorTraining}
+                          </p>
+                        )}
                       </label>
                       <ul className="flex flex-col gap-1 text-sm text-gray-700 font-medium list-disc ml-4 capitalize">
                         {fillTheTrinings.length > 0 &&
@@ -474,7 +557,10 @@ const Register = () => {
                             className="caret-main_color px-2 py-2 flex items-center justify-center rounded-l-xl outline-none border w-full border-main_color border-r-0"
                             placeholder="Write soft skills"
                             value={softSkill}
-                            onChange={(e) => setSoftSkill(e.target.value)}
+                            onChange={(e) => {
+                              setSoftSkill(e.target.value);
+                              setErrorSoftSkill("");
+                            }}
                           />
                           <div
                             onClick={fillSoftSkillsArray}
@@ -483,7 +569,11 @@ const Register = () => {
                             <IoIosSend size={20} />
                           </div>
                         </div>
-                        {errorSoftSkill && <p className="text-red-600 text-sm ml-1">{errorSoftSkill}</p>}
+                        {errorSoftSkill && (
+                          <p className="text-red-600 text-sm ml-1">
+                            {errorSoftSkill}
+                          </p>
+                        )}
                       </label>
                       <div className="flex gap-2 flex-wrap">
                         {fillTheSoftSkills.length > 0 &&
@@ -509,7 +599,10 @@ const Register = () => {
                             className="caret-main_color px-2 py-2 flex items-center justify-center rounded-l-xl outline-none border w-full border-main_color border-r-0"
                             placeholder="Write experiences"
                             value={experience}
-                            onChange={(e) => setExperience(e.target.value)}
+                            onChange={(e) => {
+                              setExperience(e.target.value);
+                              setErrorExperience("");
+                            }}
                           />
                           <div
                             onClick={fillExperienceArray}
@@ -518,7 +611,11 @@ const Register = () => {
                             <IoIosSend size={20} />
                           </div>
                         </div>
-                        {errorExperience && <p className="text-red-600 text-sm ml-1">{errorExperience}</p>}
+                        {errorExperience && (
+                          <p className="text-red-600 text-sm ml-1">
+                            {errorExperience}
+                          </p>
+                        )}
                       </label>
                       <ul className="flex flex-col gap-1 text-sm text-gray-700 font-medium list-disc ml-4 capitalize">
                         {fillTheExperiences.length > 0 &&
@@ -549,7 +646,6 @@ const Register = () => {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
