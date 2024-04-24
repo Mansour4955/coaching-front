@@ -45,8 +45,8 @@ const Home = () => {
                   <MdPeopleAlt size={18} />
                 </span>
                 <select className="text-black outline-none flex flex-col gap-1 justify-center cursor-pointer">
-                  <option className="text-main_color font-semibold">
-                    People
+                  <option className="text-main_color font-semibold" disabled selected>
+                    Choose a persone
                   </option>
                   {people.map((person) => (
                     <option className="text-gray-500" key={person.id}>
@@ -66,8 +66,8 @@ const Home = () => {
                   <MdDomainVerification size={18} />
                 </span>
                 <select className="text-black outline-none flex flex-col gap-1 justify-center cursor-pointer">
-                  <option className="text-main_color font-semibold">
-                    Domain
+                  <option className="text-main_color font-semibold" disabled selected>
+                    Choose a domain
                   </option>
                   {domaines.map((domaine) => (
                     <option className="text-gray-500" key={domaine.id}>

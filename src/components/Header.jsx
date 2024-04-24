@@ -81,6 +81,9 @@ const Header = () => {
                       onChange={(e) => setSelectedcourse(e.target.value)}
                       className="outline-none"
                     >
+                      <option className="outline-none" selected disabled>
+                          Choose a course
+                        </option>
                       {courses.map((course) => (
                         <option className="outline-none" key={course.id}>
                           {course.course}
@@ -96,6 +99,9 @@ const Header = () => {
                       onChange={(e) => setSelectedCity(e.target.value)}
                       className="outline-none"
                     >
+                      <option className="outline-none" selected disabled>
+                          Choose a city
+                        </option>
                       {cities.map((city) => (
                         <option className="outline-none" key={city.id}>
                           {city.city}
@@ -111,6 +117,9 @@ const Header = () => {
                       onChange={(e) => setSelectedMethod(e.target.value)}
                       className="outline-none"
                     >
+                      <option className="outline-none" selected disabled>
+                          Choose a method
+                        </option>
                       {methods.map((method) => (
                         <option className="outline-none" key={method.id}>
                           {method.meetingType}

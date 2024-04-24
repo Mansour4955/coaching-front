@@ -4,28 +4,59 @@ import { courses, cities, methods } from "../data";
 import { IoIosSend } from "react-icons/io";
 import { Link } from "react-router-dom";
 const Register = () => {
-  const [showCoachInputs, setShowCoachInputs] = useState(false);
-  const [training, setTraining] = useState("");
-  const [price, setPrice] = useState();
-  const [about, setAbout] = useState("");
-  const [description, setDescription] = useState("");
+  // Set data
+  const [showCoachInputs, setShowCoachInputs] = useState(false); 
+  const [price, setPrice] = useState(); //
+  const [about, setAbout] = useState(""); //
+  const [description, setDescription] = useState(""); //
+  const [role, setRole] = useState(""); //
+  const [course, setCourse] = useState(""); //
+  const [city, setCity] = useState(""); //
+  const [method, setMethod] = useState(""); //
+  const [profession, setProfession] = useState(""); //
+  const [username, setUsername] = useState(""); //
+  const [email, setEmail] = useState(""); //
+  const [password, setPassword] = useState(); //
+  const [cPassword, setCPassword] = useState(); //
+  const [training, setTraining] = useState(""); 
+  const [fillTheTrinings, setFillTheTrinings] = useState([]); 
+  const [experience, setExperience] = useState(""); 
+  const [fillTheExperiences, setFillTheExperiences] = useState([]); 
+  const [softSkill, setSoftSkill] = useState(""); 
+  const [fillTheSoftSkills, setFillTheSoftSkills] = useState([]); 
+  // Set errors
+const [errorPrice,setErrorPrice]=useState("");
+const [errorAbout,setErrorAbout]=useState("");
+const [errorDescription,setErrorDescription]=useState("");
+const [errorRole,setErrorRole]=useState("");
+const [errorCourse,setErrorCourse]=useState("");
+const [errorCity,setErrorCity]=useState("");
+const [errorMethod,setErrorMethod]=useState("");
+const [errorProfession,setErrorProfession]=useState("");
+const [errorUsername,setErrorUsername]=useState("");
+const [errorEmail,setErrorEmail]=useState("");
+const [errorPassword,setErrorPassword]=useState("");
+const [errorCPassword,setErrorCPassword]=useState("");
+const [errorTraining,setErrorTraining]=useState("");
+const [errorExperience,setErrorExperience]=useState("");
+const [errorSoftSkill,setErrorSoftSkill]=useState("");
 
-  const [course, setCourse] = useState("");
-  const [city, setCity] = useState("");
-  const [method, setMethod] = useState("");
-  const [profession, setProfession] = useState("");
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState();
-  const [cPassword, setCPassword] = useState();
 
-  const [fillTheTrinings, setFillTheTrinings] = useState([]);
-  const [experience, setExperience] = useState("");
-  const [fillTheExperiences, setFillTheExperiences] = useState([]);
-  const [softSkill, setSoftSkill] = useState("");
-  const [fillTheSoftSkills, setFillTheSoftSkills] = useState([]);
 
+
+
+
+
+
+  // hide and show coach inputs
+  useEffect(() => {
+    if (role === "coach") {
+      setShowCoachInputs(true);
+    } else {
+      setShowCoachInputs(false);
+    }
+  }, [role]);
   const fillTrainingArray = () => {
     if (training.trim()) {
       setFillTheTrinings((prevTrainings) => [...prevTrainings, training]);
@@ -49,25 +80,63 @@ const Register = () => {
   };
   const handleSubmitForm = (e) => {
     e.preventDefault();
-
-    //////////////////
-    setTraining("");
-    setPrice();
-    setAbout("");
-    setDescription("");
-    setCourse("");
-    setCity("");
-    setMethod("");
-    setProfession("");
-    setUsername("");
-    setEmail("");
-    setPassword();
-    setCPassword();
-    setFillTheTrinings([]);
-    setExperience("");
-    setFillTheExperiences([]);
-    setSoftSkill("");
-    setFillTheSoftSkills([]);
+    console.log("clicked");
+    if (role === "coach") {
+      if (
+        fillTheTrinings.length >= 1 &&
+        fillTheExperiences.length >= 1 &&
+        fillTheSoftSkills.length >= 1 &&
+        price &&
+        price >= 0 &&
+        about &&
+        about.length >= 10 &&
+        description &&
+        description.length >= 10 &&
+        role &&
+        role === "coach" &&
+        course &&
+        course.trim() !== "" &&
+        city &&
+        city.trim() !== "" &&
+        method &&
+        method.trim() !== "" &&
+        profession &&
+        profession.trim() !== "" &&
+        username &&
+        username.length >= 3 &&
+        email &&
+        email.length >= 8 &&
+        password &&
+        password.length >= 8 &&
+        cPassword &&
+        cPassword === password
+      ) {
+        console.log("send coach data");
+        ///////////////////////////////
+        setTraining("");
+        setPrice();
+        setAbout("");
+        setDescription("");
+        setCourse("");
+        setCity("");
+        setMethod("");
+        setProfession("");
+        setUsername("");
+        setEmail("");
+        setPassword();
+        setCPassword();
+        setFillTheTrinings([]);
+        setExperience("");
+        setFillTheExperiences([]);
+        setSoftSkill("");
+        setFillTheSoftSkills([]);
+        setRole("");
+        setShowCoachInputs(false);
+      }
+      // else{
+      //   if(){}
+      // }
+    }
   };
   return (
     <div className="flex justify-center  gap-x-10 pt-5 px-4 bg-white_color">
@@ -78,7 +147,10 @@ const Register = () => {
               <h2 className="text-2xl text-main_color font-semibold">
                 Register:
               </h2>
-              <form className="flex flex-col gap-2 w-[500px] max-md:w-[450px] max-sm:w-[350px]">
+              <form
+                onSubmit={handleSubmitForm}
+                className="flex flex-col gap-2 w-[500px] max-md:w-[450px] max-sm:w-[350px]"
+              >
                 <label className="flex flex-col  w-full">
                   <span className="font-semibold ml-1">Your username</span>
                   <input
@@ -121,6 +193,24 @@ const Register = () => {
                     className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                   />
                 </label>
+                <div className="flex flex-col w-full">
+                  <label className="font-semibold ml-1">
+                    Are you a coach or a student?
+                  </label>
+                  <select
+                    onChange={(e) => setRole(e.target.value)}
+                    className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
+                  >
+                    <option className="outline-none" disabled selected>
+                      Choose a role
+                    </option>
+                    {["student", "coach"].map((role, index) => (
+                      <option className="outline-none" key={index}>
+                        {role}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 {showCoachInputs && (
                   <div className="flex flex-col gap-2">
                     <label className="flex flex-col  w-full">
@@ -141,6 +231,9 @@ const Register = () => {
                         onChange={(e) => setCourse(e.target.value)}
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       >
+                        <option className="outline-none" disabled selected>
+                          Choose a course
+                        </option>
                         {courses.map((course) => (
                           <option className="outline-none" key={course.id}>
                             {course.course}
@@ -154,6 +247,9 @@ const Register = () => {
                         onChange={(e) => setCity(e.target.value)}
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       >
+                        <option className="outline-none" disabled selected>
+                          Choose a city
+                        </option>
                         {cities.map((city) => (
                           <option className="outline-none" key={city.id}>
                             {city.city}
@@ -167,6 +263,9 @@ const Register = () => {
                         onChange={(e) => setMethod(e.target.value)}
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       >
+                        <option className="outline-none" disabled selected>
+                          Choose a method
+                        </option>
                         {methods.map((method) => (
                           <option className="outline-none" key={method.id}>
                             {method.meetingType}
@@ -303,29 +402,6 @@ const Register = () => {
                     </div>
                   </div>
                 )}
-                {!showCoachInputs ? (
-                  <p className="text-sm ml-1 text-gray-700">
-                    if you are a coach{" "}
-                    <span
-                      onClick={() => setShowCoachInputs(true)}
-                      className="font-semibold cursor-pointer text-main_color underline-offset-2 underline"
-                    >
-                      click here
-                    </span>{" "}
-                    because we need more info about you
-                  </p>
-                ) : (
-                  <p className="text-sm ml-1 text-gray-700">
-                    if you are a student{" "}
-                    <span
-                      onClick={() => setShowCoachInputs(false)}
-                      className="font-semibold cursor-pointer text-main_color underline-offset-2 underline"
-                    >
-                      click here
-                    </span>{" "}
-                    because these info required only from coaches
-                  </p>
-                )}
                 <p className="text-sm ml-1 text-gray-700">
                   if you are registered already {""}
                   <Link
@@ -337,7 +413,7 @@ const Register = () => {
                   to login
                 </p>
                 <button
-                  onClick={handleSubmitForm}
+                  type="submit"
                   className="px-2 py-2 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
                 >
                   Register
