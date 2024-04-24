@@ -10,7 +10,7 @@ const Home = () => {
   const [showMoreCoachCards, setShowMoreCoachCards] = useState(false);
 
   return (
-    <div className="flex gap-x-10 pt-5 px-4 bg-white_color">
+    <div className="flex mb-10 gap-x-10 pt-5 px-4 bg-white_color">
       <div className="w-[25%]  rounded-lg p-4 bg-white gap-y-3 h-fit max-xl:hidden">
         <CoachStatisticsCard
           key={coachStatic[0].id}
@@ -100,11 +100,7 @@ const Home = () => {
             />
           ))}
         </div>
-        <div className="max-lg:flex justify-center p-4 bg-white hidden ">
-          <div className="w-full p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
-           <Footer/>
-          </div>
-        </div>
+       
       </div>
       <div className="w-[25%] flex flex-col items-center gap-10 max-xl:w-[30%] max-lg:hidden">
         <div className=" flex flex-col rounded-lg p-4 bg-white h-fit">

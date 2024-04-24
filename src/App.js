@@ -14,7 +14,7 @@ import MyProfile from "./pages/MyProfile";
 import AppointmentPage from "./pages/AppointmentPage";
 function App() {
   return (
-    <div className="">
+    <div className="bg-white_color">
       <Provider store={store}>
         <BrowserRouter>
           <div className="mb-[60px]">
@@ -34,7 +34,7 @@ function App() {
             />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          {/* <Footer /> */}
+          <Footer />
         </BrowserRouter>
       </Provider>
     </div>

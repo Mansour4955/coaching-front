@@ -5,7 +5,7 @@ import { IoIosSend } from "react-icons/io";
 import { Link } from "react-router-dom";
 const Register = () => {
   // Set data
-  const [showCoachInputs, setShowCoachInputs] = useState(false); 
+  const [showCoachInputs, setShowCoachInputs] = useState(false);
   const [price, setPrice] = useState(); //
   const [about, setAbout] = useState(""); //
   const [description, setDescription] = useState(""); //
@@ -18,36 +18,28 @@ const Register = () => {
   const [email, setEmail] = useState(""); //
   const [password, setPassword] = useState(); //
   const [cPassword, setCPassword] = useState(); //
-  const [training, setTraining] = useState(""); 
-  const [fillTheTrinings, setFillTheTrinings] = useState([]); 
-  const [experience, setExperience] = useState(""); 
-  const [fillTheExperiences, setFillTheExperiences] = useState([]); 
-  const [softSkill, setSoftSkill] = useState(""); 
-  const [fillTheSoftSkills, setFillTheSoftSkills] = useState([]); 
+  const [training, setTraining] = useState("");
+  const [fillTheTrinings, setFillTheTrinings] = useState([]);
+  const [experience, setExperience] = useState("");
+  const [fillTheExperiences, setFillTheExperiences] = useState([]);
+  const [softSkill, setSoftSkill] = useState("");
+  const [fillTheSoftSkills, setFillTheSoftSkills] = useState([]);
   // Set errors
-const [errorPrice,setErrorPrice]=useState("");
-const [errorAbout,setErrorAbout]=useState("");
-const [errorDescription,setErrorDescription]=useState("");
-const [errorRole,setErrorRole]=useState("");
-const [errorCourse,setErrorCourse]=useState("");
-const [errorCity,setErrorCity]=useState("");
-const [errorMethod,setErrorMethod]=useState("");
-const [errorProfession,setErrorProfession]=useState("");
-const [errorUsername,setErrorUsername]=useState("");
-const [errorEmail,setErrorEmail]=useState("");
-const [errorPassword,setErrorPassword]=useState("");
-const [errorCPassword,setErrorCPassword]=useState("");
-const [errorTraining,setErrorTraining]=useState("");
-const [errorExperience,setErrorExperience]=useState("");
-const [errorSoftSkill,setErrorSoftSkill]=useState("");
-
-
-
-
-
-
-
-
+  const [errorPrice, setErrorPrice] = useState("");
+  const [errorAbout, setErrorAbout] = useState("");
+  const [errorDescription, setErrorDescription] = useState("");
+  const [errorRole, setErrorRole] = useState("");
+  const [errorCourse, setErrorCourse] = useState("");
+  const [errorCity, setErrorCity] = useState("");
+  const [errorMethod, setErrorMethod] = useState("");
+  const [errorProfession, setErrorProfession] = useState("");
+  const [errorUsername, setErrorUsername] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [errorCPassword, setErrorCPassword] = useState("");
+  const [errorTraining, setErrorTraining] = useState("");
+  const [errorExperience, setErrorExperience] = useState("");
+  const [errorSoftSkill, setErrorSoftSkill] = useState("");
 
   // hide and show coach inputs
   useEffect(() => {
@@ -132,14 +124,134 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
         setFillTheSoftSkills([]);
         setRole("");
         setShowCoachInputs(false);
+      } else {
+        //training
+        if (fillTheTrinings.length < 1) {
+          setErrorTraining("You have to add one training at least");
+        }
+        //experience
+        if (fillTheExperiences.length < 1) {
+          setErrorExperience("You have to add one experience at least");
+        }
+        //skills
+        if (fillTheSoftSkills.length < 1) {
+          setErrorSoftSkill("You have to add one soft skill at least");
+        }
+        //price
+        if (!price) {
+          setErrorPrice("Price is required");
+        } else if (price < 0) {
+          setErrorPrice("Price must be 0 or bigger");
+        }
+        //about
+        if (!about) {
+          setErrorAbout("About is required");
+        } else if (about.length < 10) {
+          setErrorAbout("About must be at least 10 characters");
+        }
+        //description
+        if (!description) {
+          setErrorDescription("Description is required");
+        } else if (description.length < 10) {
+          setErrorDescription("Description must be at least 10 characters");
+        }
+        //role
+        if (!role) {
+          setErrorRole("Role is required");
+        }
+        //course
+        if (!course) {
+          setErrorCourse("Course is required");
+        }
+        //city
+        if (!city) {
+          setErrorCity("City is required");
+        }
+        //method
+        if (!method) {
+          setErrorMethod("Method is required");
+        }
+        //profession
+        if (!profession || profession.trim() === "") {
+          setErrorProfession("Profession is required");
+        }
+        //username
+        if (!username) {
+          setErrorUsername("Username is required");
+        } else if (username.length < 3) {
+          setErrorUsername("Username must be at least 3 characters");
+        }
+        //email
+        if (!email) {
+          setErrorEmail("Email is required");
+        } else if (email.length < 8) {
+          setErrorEmail("Email must be at least 8 characters");
+        }
+        //password
+        if (!password) {
+          setErrorPassword("Password is required");
+        } else if (password.length < 8) {
+          setErrorPassword("Password must be at least 8 characters");
+        }
+        //cPassword
+        if (!cPassword) {
+          setErrorCPassword("Confirm password is required");
+        } else if (cPassword !== password) {
+          setErrorCPassword("Confirm password does not match");
+        }
       }
-      // else{
-      //   if(){}
-      // }
-    }
+    } else  {
+      if (
+        username &&
+        username.length >= 3 &&
+        email &&
+        email.length >= 8 &&
+        password &&
+        password.length >= 8 &&
+        cPassword &&
+        cPassword === password
+      ) {
+        console.log("send student data");
+        ///////////////////////////////
+        setUsername("");
+        setEmail("");
+        setPassword();
+        setCPassword();
+        setShowCoachInputs(false);
+      } else {
+        //username
+        if (!username) {
+          setErrorUsername("Username is required");
+        } else if (username.length < 3) {
+          setErrorUsername("Username must be at least 3 characters");
+        }
+        //email
+        if (!email) {
+          setErrorEmail("Email is required");
+        } else if (email.length < 8) {
+          setErrorEmail("Email must be at least 8 characters");
+        }
+        //password
+        if (!password) {
+          setErrorPassword("Password is required");
+        } else if (password.length < 8) {
+          setErrorPassword("Password must be at least 8 characters");
+        }
+        //cPassword
+        if (!cPassword) {
+          setErrorCPassword("Confirm password is required");
+        } else if (cPassword !== password) {
+          setErrorCPassword("Confirm password does not match");
+        }
+        //role
+        if (!role) {
+          setErrorRole("Role is required");
+        }
+      }
+    } 
   };
   return (
-    <div className="flex justify-center  gap-x-10 pt-5 px-4 bg-white_color">
+    <div className="flex justify-center mb-10  gap-x-10 pt-5 px-4 bg-white_color">
       <div className="w-[70%] flex flex-col gap-10 max-lg:w-[80%] max-md:w-[90%] max-sm:w-[95%]">
         <div className="flex justify-center p-4 bg-white">
           <div className="w-full flex flex-col gap-10 items-center justify-center p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
@@ -160,6 +272,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                     placeholder="Write username"
                     className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                   />
+                  {errorUsername && <p className="text-red-600 text-sm ml-1">{errorUsername}</p>}
                 </label>
                 <label className="flex flex-col w-full">
                   <span className="font-semibold ml-1">Your email</span>
@@ -170,6 +283,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                     placeholder="Write Email"
                     className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                   />
+                  {errorEmail && <p className="text-red-600 text-sm ml-1">{errorEmail}</p>}
                 </label>
                 <label className="flex flex-col w-full">
                   <span className="font-semibold ml-1">Your password</span>
@@ -180,6 +294,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                     placeholder="Write password"
                     className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                   />
+                  {errorPassword && <p className="text-red-600 text-sm ml-1">{errorPassword}</p>}
                 </label>
                 <label className="flex flex-col w-full">
                   <span className="font-semibold ml-1">
@@ -192,6 +307,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                     placeholder="Write confirm password"
                     className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                   />
+                  {errorCPassword && <p className="text-red-600 text-sm ml-1">{errorCPassword}</p>}
                 </label>
                 <div className="flex flex-col w-full">
                   <label className="font-semibold ml-1">
@@ -210,6 +326,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                       </option>
                     ))}
                   </select>
+                  {errorRole && <p className="text-red-600 text-sm ml-1">{errorRole}</p>}
                 </div>
                 {showCoachInputs && (
                   <div className="flex flex-col gap-2">
@@ -224,6 +341,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                         placeholder="Write your profession"
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       />
+                      {errorProfession && <p className="text-red-600 text-sm ml-1">{errorProfession}</p>}
                     </label>
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">Your course</label>
@@ -240,6 +358,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                           </option>
                         ))}
                       </select>
+                      {errorCourse && <p className="text-red-600 text-sm ml-1">{errorCourse}</p>}
                     </div>
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">Your city</label>
@@ -256,6 +375,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                           </option>
                         ))}
                       </select>
+                      {errorCity && <p className="text-red-600 text-sm ml-1">{errorCity}</p>}
                     </div>
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">Your method</label>
@@ -272,6 +392,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                           </option>
                         ))}
                       </select>
+                      {errorMethod && <p className="text-red-600 text-sm ml-1">{errorMethod}</p>}
                     </div>
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">
@@ -284,6 +405,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                         placeholder="Your price per hour"
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       />
+                      {errorPrice && <p className="text-red-600 text-sm ml-1">{errorPrice}</p>}
                     </div>
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">
@@ -296,6 +418,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                         placeholder="Description about your diplomas in this course"
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       />
+                      {errorDescription && <p className="text-red-600 text-sm ml-1">{errorDescription}</p>}
                     </div>
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">
@@ -308,6 +431,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                         placeholder="Tell us about you"
                         className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color"
                       />
+                      {errorAbout && <p className="text-red-600 text-sm ml-1">{errorAbout}</p>}
                     </div>
                     <div className="flex flex-col gap-1">
                       <label className="flex flex-col  w-full">
@@ -329,6 +453,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                             <IoIosSend size={20} />
                           </div>
                         </div>
+                        {errorTraining && <p className="text-red-600 text-sm ml-1">{errorTraining}</p>}
                       </label>
                       <ul className="flex flex-col gap-1 text-sm text-gray-700 font-medium list-disc ml-4 capitalize">
                         {fillTheTrinings.length > 0 &&
@@ -358,6 +483,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                             <IoIosSend size={20} />
                           </div>
                         </div>
+                        {errorSoftSkill && <p className="text-red-600 text-sm ml-1">{errorSoftSkill}</p>}
                       </label>
                       <div className="flex gap-2 flex-wrap">
                         {fillTheSoftSkills.length > 0 &&
@@ -392,6 +518,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
                             <IoIosSend size={20} />
                           </div>
                         </div>
+                        {errorExperience && <p className="text-red-600 text-sm ml-1">{errorExperience}</p>}
                       </label>
                       <ul className="flex flex-col gap-1 text-sm text-gray-700 font-medium list-disc ml-4 capitalize">
                         {fillTheExperiences.length > 0 &&
@@ -422,11 +549,7 @@ const [errorSoftSkill,setErrorSoftSkill]=useState("");
             </div>
           </div>
         </div>
-        <div className="flex justify-center p-4 bg-white">
-          <div className="w-full p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
-            <Footer />
-          </div>
-        </div>
+
       </div>
     </div>
   );
