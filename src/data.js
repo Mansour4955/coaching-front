@@ -31,6 +31,82 @@ export const cities = [
   { id: 19, city: "Berkane" },
   { id: 20, city: "Safi" },
 ];
+export const appointmentOnWait= [
+  {
+    date:"25/04/2024",
+    hour:"09:00",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "John Doe",
+    profession: "Software Engineer",
+    education: "Bachelor's in Computer Science",
+  },
+  {
+    date:"26/04/2024",
+    hour:"10:00",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "Jane Smith",
+    profession: "Marketing Manager",
+    education: "Master's in Business Administration",
+  },
+  {
+    date:"27/04/2024",
+    hour:"11:00",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "Alex Johnson",
+    profession: "Graphic Designer",
+    education: "Bachelor's in Fine Arts",
+  },
+  {
+    date:"28/04/2024",
+    hour:"12:00",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "Sarah Lee",
+    profession: "Doctor",
+    education: "Doctor of Medicine",
+  },
+]
+export const appointmentOrders = [
+  {
+    date:"25/04/2024",
+    hour:"09:00",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "John Doe",
+    profession: "Software Engineer",
+    education: "Bachelor's in Computer Science",
+  },
+  {
+    date:"26/04/2024",
+    hour:"10:00",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "Jane Smith",
+    profession: "Marketing Manager",
+    education: "Master's in Business Administration",
+  },
+  {
+    date:"27/04/2024",
+    hour:"11:00",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "Alex Johnson",
+    profession: "Graphic Designer",
+    education: "Bachelor's in Fine Arts",
+  },
+  {
+    date:"28/04/2024",
+    hour:"12:00",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "Sarah Lee",
+    profession: "Doctor",
+    education: "Doctor of Medicine",
+  },
+];
 
 export const methods = [
   { id: 1, meetingType: "Face to face" },

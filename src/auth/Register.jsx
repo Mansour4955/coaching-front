@@ -211,9 +211,9 @@ const Register = () => {
         cPassword &&
         cPassword === password &&
         role &&
-        role === "student"
+        role === "client"
       ) {
-        console.log("send student data");
+        console.log("send client data");
         ///////////////////////////////
         setUsername("");
         setEmail("");
@@ -335,7 +335,7 @@ const Register = () => {
                 </label>
                 <div className="flex flex-col w-full">
                   <label className="font-semibold ml-1">
-                    Are you a coach or a student?
+                    Are you a coach or a client?
                   </label>
                   <select
                     onChange={(e) => {
@@ -347,7 +347,7 @@ const Register = () => {
                     <option className="outline-none" disabled selected>
                       Choose a role
                     </option>
-                    {["student", "coach"].map((role, index) => (
+                    {["client", "coach"].map((role, index) => (
                       <option className="outline-none" key={index}>
                         {role}
                       </option>
