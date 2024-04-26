@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes,useLocation  } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -12,11 +12,24 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import MyProfile from "./pages/MyProfile";
 import AppointmentPage from "./pages/AppointmentPage";
+import { useEffect } from "react";
 function App() {
+
+  function ScrollToTopOnPageChange() {
+    const location = useLocation();
+  
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [location]);
+  
+    return null;
+  }
+  
   return (
     <div className="bg-white_color">
       <Provider store={store}>
         <BrowserRouter>
+            <ScrollToTopOnPageChange />
           <div className="mb-[60px]">
             <Header />
           </div>
