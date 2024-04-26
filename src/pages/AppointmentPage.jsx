@@ -54,6 +54,7 @@ const AppointmentPage = () => {
                           profession={order.profession}
                           name={order.name}
                           education={order.education}
+                          message={order.message}
                         />
                       ))
                     : appointmentOrders
@@ -68,6 +69,7 @@ const AppointmentPage = () => {
                             profession={order.profession}
                             name={order.name}
                             education={order.education}
+                            message={order.message}
                           />
                         ))}
                 </div>

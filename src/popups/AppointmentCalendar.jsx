@@ -1,42 +1,31 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-const AppointmentCalendar = () => {
-    const [selectedDate, setSelectedDate] = useState(null);
-  
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+const AppointmentCalendar = ({
+  setAppointmentDate,
+  appointmentDate,
+  setDateError,
+}) => {
+  return (
+    <div>
+      <h2>Choose Appointment Date and Time</h2>
+      <DatePicker
+        selected={appointmentDate}
+        onChange={(date) => {
+          setAppointmentDate(date);
+          setDateError("");
+        }}
+        showTimeSelect
+        timeFormat="HH:mm"
+        timeIntervals={15}
+        dateFormat="MMMM d, yyyy h:mm aa"
+        minDate={new Date()}
+        inline
+      />
+    </div>
+  );
+};
 
-    return (
-      <div>
-        <h2>Choose Appointment Date and Time</h2>
-        <DatePicker
-          selected={selectedDate}
-          onChange={(date)=>setSelectedDate(date)}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          dateFormat="MMMM d, yyyy h:mm aa"
-          minDate={new Date()}
-          inline
-        />
-      </div>
-    );
-  };
-  
-  export default AppointmentCalendar;
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default AppointmentCalendar;
 
 // import React, { useState, useEffect } from 'react';
 
@@ -100,7 +89,6 @@ const AppointmentCalendar = () => {
 //       }
 //     }
 //   };
-  
 
 //   const handleSubmitAvailability = () => {
 //     console.log("Selected Hours for Current Week:", selectedHoursCurrentWeek);

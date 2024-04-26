@@ -3,7 +3,7 @@ import AppointmentCalendar from "./AppointmentCalendar";
 
 const Appointment = ({ setShowAppointment }) => {
   const [appointmentMessage, setAppointmentMessage] = useState("");
-  const [appointmentDate, setAppointmentDate] = useState();
+  const [appointmentDate, setAppointmentDate] = useState(null);
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
 
   const [dateError, setDateError] = useState(false);
@@ -11,8 +11,8 @@ const Appointment = ({ setShowAppointment }) => {
 
   const handleSendAppointment = (e) => {
     e.preventDefault();
-    console.log(appointmentMessage);
-    console.log(appointmentDate);
+    // console.log(appointmentMessage);
+    // console.log(appointmentDate);
     if (
       appointmentDate &&
       appointmentMessage &&
@@ -22,6 +22,8 @@ const Appointment = ({ setShowAppointment }) => {
       appointmentMessage !== ""
     ) {
       setShowSuccessMsg(true);
+      console.log(appointmentDate);
+      console.log(appointmentMessage);
 
       setTimeout(() => {
         setShowAppointment(false);
@@ -50,7 +52,7 @@ const Appointment = ({ setShowAppointment }) => {
                 type="date"
                 className="caret-main_color flex-1 cursor-pointer outline-none px-2 py-1 border border-main_color rounded-lg text-gray-600"
               /> */}
-              <AppointmentCalendar/>
+              <AppointmentCalendar appointmentDate={appointmentDate} setAppointmentDate={setAppointmentDate} setDateError={setDateError}/>
             </div>
             {dateError && (
               <p className="text-red-600 text-sm px-2">
@@ -66,7 +68,8 @@ const Appointment = ({ setShowAppointment }) => {
                 className="caret-main_color flex-1 cursor-pointer outline-none px-2 py-1 border border-main_color rounded-lg text-gray-600"
                 placeholder="Write a description"
                 value={appointmentMessage}
-                onChange={(e) => setAppointmentMessage(e.target.value)}
+                onChange={(e) => {setAppointmentMessage(e.target.value)
+                setMsgError("")}}
               />
             </div>
             {msgError && (

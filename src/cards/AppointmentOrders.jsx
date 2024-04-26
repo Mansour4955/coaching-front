@@ -8,6 +8,7 @@ const AppointmentOrders = ({
   date,
   hour,
   id,
+  message,
 }) => {
   const handleAcceptAppointment = (e) => {
     e.preventDefault();
@@ -30,6 +31,10 @@ const AppointmentOrders = ({
           <p className="font-medium text-sm">{profession}</p>
           <p className="text-gray-500 text-sm overflow-hidden line-clamp-2">
             {education}
+          </p>
+          <p className="font-semibold text-main_color text-sm flex overflow-hidden line-clamp-2 gap-2">
+            Message:
+            <span className="text-gray-500 text-sm text-center">{message}</span>
           </p>
           <p className="text-sm text-gray-700">
             {date} <span className="text-base font-semibold">{hour}</span>
