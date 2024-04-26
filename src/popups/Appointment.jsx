@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AppointmentCalendar from "./AppointmentCalendar";
 
 const Appointment = ({ setShowAppointment }) => {
   const [appointmentMessage, setAppointmentMessage] = useState("");
@@ -43,12 +44,13 @@ const Appointment = ({ setShowAppointment }) => {
               <h5 className="font-medium text-lg flex-1">
                 Choose date of an appointment:
               </h5>
-              <input
+              {/* <input
                 value={appointmentDate}
                 onChange={(e) => setAppointmentDate(e.target.value)}
                 type="date"
                 className="caret-main_color flex-1 cursor-pointer outline-none px-2 py-1 border border-main_color rounded-lg text-gray-600"
-              />
+              /> */}
+              <AppointmentCalendar/>
             </div>
             {dateError && (
               <p className="text-red-600 text-sm px-2">

@@ -24,6 +24,9 @@ const Home = () => {
       descriptionPost.trim().length >= 3
     ) {
       console.log("Publish post!");
+      console.log(domainPost);
+      console.log(imagePost);
+      console.log(descriptionPost);
     } else {
       if (!domainPost) {
         setErrorDomainPost("Please choose a domain");
