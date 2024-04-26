@@ -7,7 +7,7 @@ const CoachCard = ({ full_name, description, profilePhoto, domaine, id }) => {
   return (
     <div className="bg-white flex p-2 gap-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
       <img
-        className="w-[50px] h-[50px] rounded-full"
+        className="w-[50px] h-[50px] min-w-[50px] min-h-[50px] rounded-full"
         alt={profilePhoto}
         src={profilePhoto}
       />

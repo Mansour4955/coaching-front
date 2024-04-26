@@ -11,6 +11,7 @@ import { IoFilterCircleOutline, IoFilterCircle } from "react-icons/io5";
 import { courses, cities, methods } from "../data";
 const Header = () => {
   const navigate = useNavigate();
+  const isLoggedIn = false;
   const [showFilter, setShowFilter] = useState(false);
   const [selectedcourse, setSelectedcourse] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -82,8 +83,8 @@ const Header = () => {
                       className="outline-none"
                     >
                       <option className="outline-none" selected disabled>
-                          Choose a course
-                        </option>
+                        Choose a course
+                      </option>
                       {courses.map((course) => (
                         <option className="outline-none" key={course.id}>
                           {course.course}
@@ -100,8 +101,8 @@ const Header = () => {
                       className="outline-none"
                     >
                       <option className="outline-none" selected disabled>
-                          Choose a city
-                        </option>
+                        Choose a city
+                      </option>
                       {cities.map((city) => (
                         <option className="outline-none" key={city.id}>
                           {city.city}
@@ -118,8 +119,8 @@ const Header = () => {
                       className="outline-none"
                     >
                       <option className="outline-none" selected disabled>
-                          Choose a method
-                        </option>
+                        Choose a method
+                      </option>
                       {methods.map((method) => (
                         <option className="outline-none" key={method.id}>
                           {method.meetingType}
@@ -187,14 +188,31 @@ const Header = () => {
             <FaCalendarAlt size={18} />
           </NavLink>
         </div>
-        <Link to="/myprofile" className="flex gap-2 items-center">
-          <img
-            alt=""
-            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
-            className="w-8 h-8 rounded-[100%]"
-          />
-          <p className="font-bold text-gray-500">John</p>
-        </Link>
+        {isLoggedIn ? (
+          <Link to="/myprofile" className="flex gap-2 items-center">
+            <img
+              alt=""
+              src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+              className="w-8 h-8 rounded-[100%]"
+            />
+            <p className="font-bold text-gray-500">John</p>
+          </Link>
+        ) : (
+          <div className="flex items-center gap-2">
+            <Link
+              to="/register"
+              className="px-2 py-[2px] duration-150 flex items-center justify-center bg-white active:bg-white text-main_color active:text-main_color hover:text-white hover:bg-main_color rounded-xl border border-main_color font-semibold"
+            >
+              Register
+            </Link>
+            <Link
+              to="/login"
+              className="px-2 py-[2px] duration-150 flex items-center justify-center bg-white active:bg-white text-main_color active:text-main_color hover:text-white hover:bg-main_color rounded-xl border border-main_color font-semibold"
+            >
+              Login
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
