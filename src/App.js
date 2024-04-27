@@ -13,6 +13,7 @@ import store from "./redux/store";
 import MyProfile from "./pages/MyProfile";
 import AppointmentPage from "./pages/AppointmentPage";
 import { useEffect } from "react";
+import NotificationPage from "./pages/NotificationPage";
 function App() {
 
   function ScrollToTopOnPageChange() {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/chat" element={<ChatPage />} />
+            <Route path="/notification" element={<NotificationPage />} />
             <Route path="/coachCards" element={<CoachCards />} />
             <Route path="/myprofile" element={<MyProfile />} />
             <Route path="/rendez-vous" element={<AppointmentPage />} />

@@ -6,7 +6,6 @@ const AppointmentOnWait = ({
   profession,
   education,
   date,
-  hour,
   id,
 }) => {
 
@@ -28,8 +27,8 @@ const AppointmentOnWait = ({
           <p className="text-gray-500 text-sm overflow-hidden line-clamp-2">
             {education}
           </p>
-          <p className="text-sm text-gray-700">
-            {date} <span className="text-base font-semibold">{hour}</span>
+          <p className=" text-base font-semibold text-gray-700">
+            {date} 
           </p>
         </div>
         <div className="flex gap-2 max-sm:gap-6 max-sm:mt-3">

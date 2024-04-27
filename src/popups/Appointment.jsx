@@ -2,10 +2,20 @@ import React, { useState } from "react";
 import AppointmentCalendar from "./AppointmentCalendar";
 
 const Appointment = ({ setShowAppointment }) => {
+  const availableTimes = [
+    "9:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "12:00 AM",
+    "13:00 AM",
+    "14:00 AM",
+    "15:00 AM",
+    // Add more time slots as needed
+  ];
+
   const [appointmentMessage, setAppointmentMessage] = useState("");
   const [appointmentDate, setAppointmentDate] = useState(null);
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
-
   const [dateError, setDateError] = useState(false);
   const [msgError, setMsgError] = useState(false);
 
@@ -52,7 +62,12 @@ const Appointment = ({ setShowAppointment }) => {
                 type="date"
                 className="caret-main_color flex-1 cursor-pointer outline-none px-2 py-1 border border-main_color rounded-lg text-gray-600"
               /> */}
-              <AppointmentCalendar appointmentDate={appointmentDate} setAppointmentDate={setAppointmentDate} setDateError={setDateError}/>
+              <AppointmentCalendar
+                availableTimes={availableTimes}
+                appointmentDate={appointmentDate}
+                setAppointmentDate={setAppointmentDate}
+                setDateError={setDateError}
+              />
             </div>
             {dateError && (
               <p className="text-red-600 text-sm px-2">
@@ -63,13 +78,16 @@ const Appointment = ({ setShowAppointment }) => {
           <div className="w-full">
             <div className="flex flex-col gap-1">
               <h5 className="font-medium text-lg flex-1">Write description:</h5>
-              <textarea rows={3}
+              <textarea
+                rows={3}
                 type="text"
                 className="caret-main_color flex-1 cursor-pointer outline-none px-2 py-1 border border-main_color rounded-lg text-gray-600"
                 placeholder="Write a description"
                 value={appointmentMessage}
-                onChange={(e) => {setAppointmentMessage(e.target.value)
-                setMsgError("")}}
+                onChange={(e) => {
+                  setAppointmentMessage(e.target.value);
+                  setMsgError("");
+                }}
               />
             </div>
             {msgError && (
@@ -95,8 +113,6 @@ const Appointment = ({ setShowAppointment }) => {
         </div>
       ) : (
         <div className=" rounded-lg px-2 py-6 flex items-center justify-center gap-4 flex-col  bg-white">
-         
-
           <h5 className="font-medium text-lg items-center flex-1 text-green-600">
             Your appointment has been recieved successfully
           </h5>

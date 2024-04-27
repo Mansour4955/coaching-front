@@ -47,7 +47,7 @@ const AppointmentPage = () => {
                     ? appointmentOrders.map((order, index) => (
                         <AppointmentOrders
                           date={order.date}
-                          hour={order.hour}
+                          
                           id={index}
                           key={index}
                           profileImage={order.profileImage}
@@ -62,7 +62,7 @@ const AppointmentPage = () => {
                         .map((order, index) => (
                           <AppointmentOrders
                             date={order.date}
-                            hour={order.hour}
+                      
                             id={index}
                             key={index}
                             profileImage={order.profileImage}
@@ -106,7 +106,7 @@ const AppointmentPage = () => {
                     ? appointmentOnWait.map((order, index) => (
                         <AppointmentOnWait
                           date={order.date}
-                          hour={order.hour}
+                    
                           id={index}
                           key={index}
                           profileImage={order.profileImage}
@@ -120,7 +120,7 @@ const AppointmentPage = () => {
                         .map((order, index) => (
                           <AppointmentOnWait
                             date={order.date}
-                            hour={order.hour}
+                        
                             id={index}
                             key={index}
                             profileImage={order.profileImage}
@@ -156,7 +156,7 @@ const AppointmentPage = () => {
                           name={acceptedOrder.name}
                           education={acceptedOrder.education}
                           date={acceptedOrder.date}
-                          hour={acceptedOrder.hour}
+                        
                         />
                       ))}
                     </div>
@@ -185,7 +185,7 @@ const AppointmentPage = () => {
                           name={acceptedOrder.name}
                           education={acceptedOrder.education}
                           date={acceptedOrder.date}
-                          hour={acceptedOrder.hour}
+                      
                         />
                       ))}
                     </div>

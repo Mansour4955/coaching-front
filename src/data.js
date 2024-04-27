@@ -31,10 +31,60 @@ export const cities = [
   { id: 19, city: "Berkane" },
   { id: 20, city: "Safi" },
 ];
+export const clientNotification = [
+  {
+    date: "26/04/2024 12:00PM",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "Jane Smith",
+    profession: "Marketing Manager",
+    action: "accept"
+  },
+  {
+    date: "27/04/2024 12:00PM",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "Alex Johnson",
+    profession: "Graphic Designer",
+    action: "cancel"
+  },
+  {
+    date: "28/04/2024 12:00PM",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "Sarah Lee",
+    profession: "Doctor",
+    action: "accept"
+  },
+]
+export const coachNotification = [
+  {
+    date: "26/04/2024 12:00PM",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "Jane Smith",
+    profession: "Marketing Manager",
+    action: "cancel"
+  },
+  {
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "Alex Johnson",
+    profession: "Graphic Designer",
+    action: ""
+  },
+  {
+    date: "28/04/2024 12:00PM",
+    profileImage:
+      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    name: "Sarah Lee",
+    profession: "Doctor",
+    action: "cancel"
+  },
+]
 export const appointmentOnWait = [
   {
-    date: "25/04/2024",
-    hour: "09:00",
+    date: "25/04/2024 12:00PM",
     profileImage:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     name: "John Doe",
@@ -42,8 +92,7 @@ export const appointmentOnWait = [
     education: "Bachelor's in Computer Science",
   },
   {
-    date: "26/04/2024",
-    hour: "10:00",
+    date: "26/04/2024 12:00PM",
     profileImage:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     name: "Jane Smith",
@@ -51,8 +100,7 @@ export const appointmentOnWait = [
     education: "Master's in Business Administration",
   },
   {
-    date: "27/04/2024",
-    hour: "11:00",
+    date: "27/04/2024 12:00PM",
     profileImage:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     name: "Alex Johnson",
@@ -60,8 +108,7 @@ export const appointmentOnWait = [
     education: "Bachelor's in Fine Arts",
   },
   {
-    date: "28/04/2024",
-    hour: "12:00",
+    date: "28/04/2024 12:00PM",
     profileImage:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     name: "Sarah Lee",
@@ -71,8 +118,7 @@ export const appointmentOnWait = [
 ];
 export const appointmentOrders = [
   {
-    date: "25/04/2024",
-    hour: "09:00",
+    date: "25/04/2024 12:00PM",
     message: "I want an appointment with you to teach me programming",
     profileImage:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
@@ -81,8 +127,7 @@ export const appointmentOrders = [
     education: "Bachelor's in Computer Science",
   },
   {
-    date: "26/04/2024",
-    hour: "10:00",
+    date: "26/04/2024 12:00PM",
     message: "I want an appointment with you to teach me english",
     profileImage:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
@@ -91,8 +136,7 @@ export const appointmentOrders = [
     education: "Master's in Business Administration",
   },
   {
-    date: "27/04/2024",
-    hour: "11:00",
+    date: "27/04/2024 12:00PM",
     message: "I want an appointment with you to teach me french",
     profileImage:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
@@ -101,8 +145,7 @@ export const appointmentOrders = [
     education: "Bachelor's in Fine Arts",
   },
   {
-    date: "28/04/2024",
-    hour: "12:00",
+    date: "28/04/2024 12:00PM",
     message: "I want an appointment with you to teach me spanish",
     profileImage:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",

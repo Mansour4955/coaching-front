@@ -7,7 +7,6 @@ const AcceptedAppointmentFromCoach = ({
   education,
   style,
   date,
-  hour,
   id,
 }) => {
   const handleSendMsgToAnAcceptedClient=(e)=>{
@@ -33,8 +32,8 @@ const AcceptedAppointmentFromCoach = ({
             {education}
           </span>
         </p>
-        <p className="text-gray-700 text-sm flex items-center justify-between">
-          {date} <span className="text-base font-semibold">{hour}</span>
+        <p className="text-gray-700 text-base font-semibold flex items-center justify-between">
+          {date} 
         </p>
       </div>
       <button onClick={handleSendMsgToAnAcceptedClient} className=" w-fit px-2 py-[2px] duration-150 flex items-center justify-center bg-white active:bg-white text-main_color active:text-main_color hover:text-white hover:bg-main_color rounded-xl border border-main_color font-semibold">

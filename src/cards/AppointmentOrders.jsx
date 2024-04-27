@@ -6,7 +6,6 @@ const AppointmentOrders = ({
   profession,
   education,
   date,
-  hour,
   id,
   message,
 }) => {
@@ -36,8 +35,8 @@ const AppointmentOrders = ({
             Message:
             <span className="text-gray-500 text-sm text-center">{message}</span>
           </p>
-          <p className="text-sm text-gray-700">
-            {date} <span className="text-base font-semibold">{hour}</span>
+          <p className="text-base font-semibold text-gray-700">
+            {date} 
           </p>
         </div>
         <div className="flex gap-2 max-sm:gap-6 max-sm:mt-3">

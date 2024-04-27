@@ -1,12 +1,12 @@
 import { useState } from "react";
 import PublishedPost from "../cards/PublishedPost";
-import Footer from "../components/Footer";
 import { coachCardInfo, postInfo } from "../data";
 import { MdOutlineStarPurple500, MdOutlineStarOutline } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import StarRating from "../StarRating";
 import Appointment from "../popups/Appointment";
 const CoachProfile = () => {
+  const isLoggedIn = true
   const [reviewText, setReviewText] = useState("");
   const [showAppointment, setShowAppointment] = useState(false);
   const [rating, setRating] = useState(0);
@@ -28,7 +28,6 @@ const CoachProfile = () => {
   const handleFollow = () => {
     console.log("Follow");
   };
-
   const handleReviewData = (e) => {
     e.preventDefault();
     console.log(reviewText);
@@ -47,7 +46,10 @@ const CoachProfile = () => {
     price,
     imageUrl,
   } = coachProfileInfo;
-
+  
+  const handleSendMessage = () => {
+    console.log("Send Message ",id);
+  };
   return (
     <div className="bg-white_color pt-5 flex justify-center mb-10">
       <div className="w-[60%] max-sm:w-[95%] max-md:w-[90%] max-lg:w-[80%] max-xl:w-[70%]  flex-col flex ">
@@ -96,7 +98,7 @@ const CoachProfile = () => {
                             )
                           )}
                       </div>
-                      <div className="flex gap-10">
+                     {isLoggedIn &&  <div className="flex gap-10 max-lg:gap-5">
                         <p
                           onClick={handleFollow}
                           className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
@@ -109,7 +111,13 @@ const CoachProfile = () => {
                         >
                           Appointment
                         </p>
-                      </div>
+                        <p
+                          onClick={handleSendMessage}
+                          className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
+                        >
+                          Message
+                        </p>
+                      </div>}
                       {showAppointment && <div>
                         <Appointment setShowAppointment={setShowAppointment}/>
                         </div>}
