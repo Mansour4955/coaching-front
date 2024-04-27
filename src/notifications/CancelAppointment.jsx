@@ -22,7 +22,7 @@ const CancelAppointment = ({
               ({profession})
             </span>
           </p>
-          <p className="text-base font-semibold text-gray-500">
+          <p className="text-base font-semibold text-red-500">
             has canceled the appointment which was on {date}
           </p>
         </div>

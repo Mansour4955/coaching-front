@@ -21,7 +21,7 @@ const FollowNotification = ({
               ({profession})
             </span>
           </p>
-          <p className="text-base font-semibold text-gray-500">
+          <p className="text-base font-semibold text-green-500">
             has followed you
           </p>
         </div>
