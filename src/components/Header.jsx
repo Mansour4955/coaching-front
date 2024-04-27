@@ -4,7 +4,12 @@ import { HiMiniChatBubbleLeftRight } from "react-icons/hi2";
 import { FaCalendarAlt, FaChalkboardTeacher } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { IoFilterCircleOutline, IoFilterCircle,IoNotifications, IoSearchOutline} from "react-icons/io5";
+import {
+  IoFilterCircleOutline,
+  IoFilterCircle,
+  IoNotifications,
+  IoSearchOutline,
+} from "react-icons/io5";
 import { courses, cities, methods } from "../data";
 const Header = () => {
   const navigate = useNavigate();
@@ -168,32 +173,34 @@ const Header = () => {
             <FaChalkboardTeacher size={19} />
           </NavLink>
 
-          {isLoggedIn && <div className="flex gap-5 items-center">
-          <NavLink
-            to="/chat"
-            className={({ isActive }) =>
-              isActive ? "text-main_color" : "text-gray-500"
-            }
-          >
-            <HiMiniChatBubbleLeftRight size={19} />
-          </NavLink>
-          <NavLink
-            to="/notification"
-            className={({ isActive }) =>
-              isActive ? "text-main_color" : "text-gray-500"
-            }
-          >
-            <IoNotifications size={19} />
-          </NavLink>
-          <NavLink
-            to="/rendez-vous"
-            className={({ isActive }) =>
-              isActive ? "text-main_color" : "text-gray-500"
-            }
-          >
-            <FaCalendarAlt size={18} />
-          </NavLink>
-            </div>}
+          {isLoggedIn && (
+            <div className="flex gap-5 items-center">
+              <NavLink
+                to="/chat"
+                className={({ isActive }) =>
+                  isActive ? "text-main_color" : "text-gray-500"
+                }
+              >
+                <HiMiniChatBubbleLeftRight size={19} />
+              </NavLink>
+              <NavLink
+                to="/notification"
+                className={({ isActive }) =>
+                  isActive ? "text-main_color" : "text-gray-500"
+                }
+              >
+                <IoNotifications size={19} />
+              </NavLink>
+              <NavLink
+                to="/rendez-vous"
+                className={({ isActive }) =>
+                  isActive ? "text-main_color" : "text-gray-500"
+                }
+              >
+                <FaCalendarAlt size={18} />
+              </NavLink>
+            </div>
+          )}
         </div>
         {isLoggedIn ? (
           <Link to="/myprofile" className="flex gap-2 items-center">

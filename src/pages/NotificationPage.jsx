@@ -3,7 +3,7 @@ import { coachNotification,clientNotification } from "../data";
 import FollowNotification from "../notifications/FollowNotification";
 import AcceptAppointment from "../notifications/AcceptAppointment";
 const NotificationPage = () => {
-  const isCoach = false;
+  const isCoach = true;
   return (
     <div className="flex justify-center mb-10  gap-x-10 pt-5 px-4 bg-white_color ">
       <div className="w-[70%] flex flex-col gap-10 max-lg:w-[80%] max-md:w-[90%] max-sm:w-[95%]">
