@@ -11,9 +11,11 @@ import {
   IoSearchOutline,
 } from "react-icons/io5";
 import { courses, cities, methods } from "../data";
+import { useSelector } from "react-redux";
 const Header = () => {
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const isLoggedIn = true;
+  const isLoggedIn = user ? true : false;
   const [showFilter, setShowFilter] = useState(false);
   const [selectedcourse, setSelectedcourse] = useState("");
   const [selectedCity, setSelectedCity] = useState("");

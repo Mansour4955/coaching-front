@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { courses, cities, methods } from "../data";
+import { courses, cities, methods, URL } from "../data";
 import { IoIosSend } from "react-icons/io";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logIn } from "../redux/authSlice";
 const Login = () => {
+  const dispach = useDispatch();
   const [email, setEmail] = useState(""); //
   const [password, setPassword] = useState(); //
 
@@ -11,11 +15,25 @@ const Login = () => {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    console.log("clicked");
     if (email && email.length >= 8 && password && password.length >= 8) {
-      console.log("login");
-      setEmail("");
-      setPassword("");
+      axios
+        .post(`${URL}/api/auth/login`, {
+          email,
+          password,
+        })
+        .then((response) => {
+          dispach(logIn(response.data));
+          navigate("/");
+        })
+        .catch((error) => {
+          if (error.response.data.message === "invalid email") {
+            setErrorEmail("invalid email");
+          } else if (error.response.data.message === "invalid password") {
+            setErrorPassword("invalid password");
+          }
+        });
+      // setEmail("");
+      // setPassword("");
     } else {
       //email
       if (!email) {

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const CoachStatisticsCard = ({
   full_name,
   email,
-  company,
+  course,
   description,
   followers,
   following,
@@ -22,7 +22,7 @@ const CoachStatisticsCard = ({
       />
       <p className="font-bold text-lg">{full_name}</p>
       <span className="text-gray-500 text-sm">{email}</span>
-      <span className="-mt-2 font-medium">{company}</span>
+      <span className="-mt-2 font-medium">{course}</span>
       <div className="px-2">
         <p className={`text-gray-500  ${!showMore ? hide : ""}`}>
           {description}

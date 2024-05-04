@@ -1,3 +1,4 @@
+export const URL = "http://localhost:5000";
 export const courses = [
   { id: 1, course: "Domaine sportif" },
   { id: 2, course: "Psychologie" },
@@ -38,7 +39,7 @@ export const clientNotification = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     name: "Jane Smith",
     profession: "Marketing Manager",
-    action: "accept"
+    action: "accept",
   },
   {
     date: "27/04/2024 12:00PM",
@@ -46,7 +47,7 @@ export const clientNotification = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     name: "Alex Johnson",
     profession: "Graphic Designer",
-    action: "cancel"
+    action: "cancel",
   },
   {
     date: "28/04/2024 12:00PM",
@@ -54,9 +55,9 @@ export const clientNotification = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     name: "Sarah Lee",
     profession: "Doctor",
-    action: "accept"
+    action: "accept",
   },
-]
+];
 export const coachNotification = [
   {
     date: "26/04/2024 12:00PM",
@@ -64,14 +65,14 @@ export const coachNotification = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     name: "Jane Smith",
     profession: "Marketing Manager",
-    action: "cancel"
+    action: "cancel",
   },
   {
     profileImage:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     name: "Alex Johnson",
     profession: "Graphic Designer",
-    action: "follow"
+    action: "follow",
   },
   {
     date: "28/04/2024 12:00PM",
@@ -79,9 +80,9 @@ export const coachNotification = [
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     name: "Sarah Lee",
     profession: "Doctor",
-    action: "cancel"
+    action: "cancel",
   },
-]
+];
 export const appointmentOnWait = [
   {
     date: "25/04/2024 12:00PM",
@@ -165,7 +166,7 @@ export const coachStatic = [
   {
     full_name: "John Doe",
     email: "johndoe@example.com",
-    company: "Fitness Empowerment Inc.",
+    course: "Fitness Empowerment Inc.",
     description:
       "Certified fitness coach with over 10 years of experience in personal training. Passionate about helping clients achieve their health and wellness goals through personalized workout plans and nutrition guidance.",
     followers: 1500,
@@ -177,7 +178,7 @@ export const coachStatic = [
   {
     full_name: "Emily Smith",
     email: "emilysmith@example.com",
-    company: "Healthy Habits LLC",
+    course: "Healthy Habits LLC",
     description:
       "Experienced nutritionist and wellness coach dedicated to empowering individuals to make positive lifestyle changes. Specializes in creating sustainable diet plans and promoting mindful eating habits.",
     followers: 1200,
@@ -189,7 +190,7 @@ export const coachStatic = [
   {
     full_name: "David Johnson",
     email: "davidjohnson@example.com",
-    company: "FitMind Gym",
+    course: "FitMind Gym",
     description:
       "Passionate mental health coach and fitness instructor committed to helping clients improve their overall well-being through exercise, meditation, and positive mindset techniques.",
     followers: 1800,
@@ -201,7 +202,7 @@ export const coachStatic = [
   {
     full_name: "Sarah Thompson",
     email: "sarahthompson@example.com",
-    company: "Active Living Co.",
+    course: "Active Living Co.",
     description:
       "Motivational speaker and personal development coach dedicated to inspiring individuals to unlock their full potential and live fulfilling lives. Believes in the power of mindset shifts and goal setting.",
     followers: 2200,
@@ -213,7 +214,7 @@ export const coachStatic = [
   {
     full_name: "John Doe",
     email: "johndoe@example.com",
-    company: "Fitness Empowerment Inc.",
+    course: "Fitness Empowerment Inc.",
     description:
       "Certified fitness coach with over 10 years of experience in personal training. Passionate about helping clients achieve their health and wellness goals through personalized workout plans and nutrition guidance.",
     followers: 1500,
@@ -225,7 +226,7 @@ export const coachStatic = [
   {
     full_name: "Emily Smith",
     email: "emilysmith@example.com",
-    company: "Healthy Habits LLC",
+    course: "Healthy Habits LLC",
     description:
       "Experienced nutritionist and wellness coach dedicated to empowering individuals to make positive lifestyle changes. Specializes in creating sustainable diet plans and promoting mindful eating habits.",
     followers: 1200,

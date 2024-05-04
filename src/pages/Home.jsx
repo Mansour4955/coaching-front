@@ -48,7 +48,7 @@ const Home = () => {
           key={coachStatic[0].id}
           full_name={coachStatic[0].full_name}
           email={coachStatic[0].email}
-          company={coachStatic[0].company}
+          course={coachStatic[0].course}
           description={coachStatic[0].description}
           followers={coachStatic[0].followers}
           following={coachStatic[0].following}

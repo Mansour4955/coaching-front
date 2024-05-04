@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Footer from "../components/Footer";
 import { courses, cities, methods } from "../data";
 import { IoIosSend } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { URL } from "../data";
 const Register = () => {
+  const navigate = useNavigate();
   // Set data
   const [showCoachInputs, setShowCoachInputs] = useState(false);
   const [price, setPrice] = useState(); //
@@ -72,7 +74,7 @@ const Register = () => {
   };
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    console.log("clicked");
+    // console.log("clicked");
     if (role === "coach") {
       if (
         fillTheTrinings.length >= 1 &&
@@ -103,27 +105,49 @@ const Register = () => {
         cPassword &&
         cPassword === password
       ) {
-        console.log("send coach data");
+        axios
+          .post(`${URL}/api/auth/register`, {
+            username,
+            email,
+            password,
+            role,
+            profession,
+            course,
+            city,
+            method,
+            price,
+            education: description,
+            about,
+            trainings: fillTheTrinings,
+            softSkills: fillTheSoftSkills,
+            experiences: fillTheExperiences,
+          })
+          .then((response) => {
+            navigate("/login");
+          })
+          .catch((error) => {
+            console.error("Error registering user:", error);
+          });
         ///////////////////////////////
-        setTraining("");
-        setPrice();
-        setAbout("");
-        setDescription("");
-        setCourse("");
-        setCity("");
-        setMethod("");
-        setProfession("");
-        setUsername("");
-        setEmail("");
-        setPassword("");
-        setCPassword("");
-        setFillTheTrinings([]);
-        setExperience("");
-        setFillTheExperiences([]);
-        setSoftSkill("");
-        setFillTheSoftSkills([]);
-        setRole("");
-        setShowCoachInputs(false);
+        // setTraining("");
+        // setPrice();
+        // setAbout("");
+        // setDescription("");
+        // setCourse("");
+        // setCity("");
+        // setMethod("");
+        // setProfession("");
+        // setUsername("");
+        // setEmail("");
+        // setPassword("");
+        // setCPassword("");
+        // setFillTheTrinings([]);
+        // setExperience("");
+        // setFillTheExperiences([]);
+        // setSoftSkill("");
+        // setFillTheSoftSkills([]);
+        // setRole("");
+        // setShowCoachInputs(false);
       } else {
         //training
         if (fillTheTrinings.length < 1) {
@@ -213,13 +237,24 @@ const Register = () => {
         role &&
         role === "client"
       ) {
-        console.log("send client data");
+        axios
+          .post(`${URL}/api/auth/register`, {
+            username,
+            email,
+            password,
+          })
+          .then((response) => {
+            navigate("/login");
+          })
+          .catch((error) => {
+            console.error("Error registering user:", error);
+          });
         ///////////////////////////////
-        setUsername("");
-        setEmail("");
-        setPassword("");
-        setCPassword("");
-        setShowCoachInputs(false);
+        // setUsername("");
+        // setEmail("");
+        // setPassword("");
+        // setCPassword("");
+        // setShowCoachInputs(false);
       } else {
         //username
         if (!username) {
@@ -338,6 +373,7 @@ const Register = () => {
                     Are you a coach or a client?
                   </label>
                   <select
+                    value={role}
                     onChange={(e) => {
                       setRole(e.target.value);
                       setErrorRole("");
@@ -382,6 +418,7 @@ const Register = () => {
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">Your course</label>
                       <select
+                        value={course}
                         onChange={(e) => {
                           setCourse(e.target.value);
                           setErrorCourse("");
@@ -406,6 +443,7 @@ const Register = () => {
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">Your city</label>
                       <select
+                        value={city}
                         onChange={(e) => {
                           setCity(e.target.value);
                           setErrorCity("");
@@ -428,6 +466,7 @@ const Register = () => {
                     <div className="flex flex-col w-full">
                       <label className="font-semibold ml-1">Your method</label>
                       <select
+                        value={method}
                         onChange={(e) => {
                           setMethod(e.target.value);
                           setErrorMethod("");
