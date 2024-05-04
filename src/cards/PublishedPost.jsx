@@ -3,6 +3,7 @@ import { PiDotsThreeCircle } from "react-icons/pi";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import CommentCard from "./CommentCard";
 import { IoIosSend } from "react-icons/io";
+import moment from "moment";
 const PublishedPost = ({
   full_name,
   postPhoto,
@@ -43,7 +44,9 @@ const PublishedPost = ({
                 a photo
               </span>
             </p>
-            <span className="text-gray-500 text-sm">{date_of_publish}</span>
+            <span className="text-gray-500 text-sm">
+              {moment(date_of_publish).fromNow()}
+            </span>
           </div>
         </div>
         <span className="font-bold text-gray-500 cursor-pointer">
@@ -63,7 +66,7 @@ const PublishedPost = ({
       </div>
       <img
         alt="post"
-        src={`../../../coaching-back/images/${postPhoto}`}
+        src={`E:\COACHING\coaching-back\images/${postPhoto}`}
         className="w-full h-full"
       />
       <div className="flex flex-col">
