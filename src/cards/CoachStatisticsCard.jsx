@@ -9,6 +9,7 @@ const CoachStatisticsCard = ({
   following,
   profilePhoto,
   id,
+  role,
 }) => {
   const [showMore, setShowMore] = useState(false);
 
@@ -22,29 +23,37 @@ const CoachStatisticsCard = ({
       />
       <p className="font-bold text-lg">{full_name}</p>
       <span className="text-gray-500 text-sm">{email}</span>
-      <span className="-mt-2 font-medium">{course}</span>
-      <div className="px-2">
-        <p className={`text-gray-500  ${!showMore ? hide : ""}`}>
-          {description}
-        </p>
-        <button
-          onClick={() => setShowMore(!showMore)}
-          className="text-main_color text-sm"
-        >
-          {showMore ? "See less" : "See more"}
-        </button>
-      </div>
-      <div className="flex border-t border-t-gray-300 w-full justify-center py-2 items-center gap-3">
-        <p className="text-gray-500">
-          <span className="font-semibold text-sm text-black">{followers}</span>{" "}
-          followers
-        </p>
-        <span className="h-[20px] w-[2px] bg-gray-300"></span>
-        <p className="text-gray-500">
-          <span className="font-semibold text-sm text-black">{following}</span>{" "}
-          following
-        </p>
-      </div>
+      {role === "coach" && <span className="-mt-2 font-medium">{course}</span>}
+      {role === "coach" && (
+        <div className="px-2">
+          <p className={`text-gray-500  ${!showMore ? hide : ""}`}>
+            {description}
+          </p>
+          <button
+            onClick={() => setShowMore(!showMore)}
+            className="text-main_color text-sm"
+          >
+            {showMore ? "See less" : "See more"}
+          </button>
+        </div>
+      )}
+      {role === "coach" && (
+        <div className="flex border-t border-t-gray-300 w-full justify-center py-2 items-center gap-3">
+          <p className="text-gray-500">
+            <span className="font-semibold text-sm text-black">
+              {followers?.length > 0 ? followers : 0}
+            </span>{" "}
+            followers
+          </p>
+          <span className="h-[20px] w-[2px] bg-gray-300"></span>
+          <p className="text-gray-500">
+            <span className="font-semibold text-sm text-black">
+              {following?.length > 0 ? following : 0}
+            </span>{" "}
+            following
+          </p>
+        </div>
+      )}
     </div>
   );
 };

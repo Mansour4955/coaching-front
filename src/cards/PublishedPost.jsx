@@ -12,6 +12,7 @@ const PublishedPost = ({
   id,
   likes,
   comments,
+  domaine,
 }) => {
   const [showMore, setShowMore] = useState(false);
   const [toggleLike, setToggleLike] = useState(false);
@@ -60,7 +61,11 @@ const PublishedPost = ({
           {showMore ? "See less" : "See more"}
         </button>
       </div>
-      <img alt="post" src={postPhoto} className="w-full h-full" />
+      <img
+        alt="post"
+        src={`../../../coaching-back/images/${postPhoto}`}
+        className="w-full h-full"
+      />
       <div className="flex flex-col">
         <div className="flex items-center gap-3 text-gray-600 mb-1">
           <p className="text-lg font-semibold flex items-center gap-1">

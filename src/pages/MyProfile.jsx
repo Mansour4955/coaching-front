@@ -182,6 +182,7 @@ const MyProfile = () => {
                     <PublishedPost
                       key={post._id}
                       id={post._id}
+                      domaine={post.domaine}
                       full_name={post.user.username}
                       description={post.description}
                       profilePhoto={post.user.profileImage}
