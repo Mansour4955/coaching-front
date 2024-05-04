@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { courses, cities, methods, URL } from "../data";
 import { IoIosSend } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logIn } from "../redux/authSlice";
+import { useLocalStorage } from "../hooks/useLocalStorege";
 const Login = () => {
+  const navigate = useNavigate();
   const dispach = useDispatch();
+  const [localStorageValue, setLocalStorageValue] = useLocalStorage('myKey', 'defaultValue');
   const [email, setEmail] = useState(""); //
   const [password, setPassword] = useState(); //
 
@@ -22,8 +25,10 @@ const Login = () => {
           password,
         })
         .then((response) => {
-          dispach(logIn(response.data));
-          navigate("/");
+          console.log(response.data.token);
+          // dispach(logIn(response.data));
+          // setLocalStorageValue("Authorization", response.data.token); 
+          // navigate("/");
         })
         .catch((error) => {
           if (error.response.data.message === "invalid email") {

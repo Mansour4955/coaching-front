@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const isLoggedIn = true;
+  const { user } = useSelector((state) => state.auth);
+  const isLoggedIn = user ? true : false;
   return (
     <div className="bg-white  px-4 pt-4 pb-8 items-center justify-center w-full flex flex-col gap-5">
       <p className="text-base font-semibold text-main_color text-center">
