@@ -12,10 +12,14 @@ import {
 } from "react-icons/io5";
 import { courses, cities, methods } from "../data";
 import { useSelector } from "react-redux";
+import LoggedOutUser from "../popups/LoggedOutUser";
+import { useLocalStorage } from "../hooks/useLocalStorege";
 const Header = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { getItem } = useLocalStorage("Authorization");
+  // const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const isLoggedIn = user ? true : false;
+  const token = getItem();
+  const isLoggedIn = token ? true : false;
   const [showFilter, setShowFilter] = useState(false);
   const [selectedcourse, setSelectedcourse] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -205,14 +209,19 @@ const Header = () => {
           )}
         </div>
         {isLoggedIn ? (
-          <Link to="/myprofile" className="flex gap-2 items-center">
-            <img
-              alt=""
-              src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
-              className="w-8 h-8 rounded-[100%]"
-            />
-            <p className="font-bold text-gray-500">John</p>
-          </Link>
+          <div className="relative group">
+            <Link to="/myprofile" className="flex gap-2 items-center">
+              <img
+                alt=""
+                src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+                className="w-8 h-8 rounded-[100%]"
+              />
+              <p className="font-bold text-gray-500">John</p>
+            </Link>
+            <div className="absolute top-[100%] right-0 hidden duration-200 group-hover:block">
+              <LoggedOutUser />
+            </div>
+          </div>
         ) : (
           <div className="flex items-center gap-2">
             <Link

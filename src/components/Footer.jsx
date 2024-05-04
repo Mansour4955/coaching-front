@@ -1,10 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { useLocalStorage } from "../hooks/useLocalStorege";
 const Footer = () => {
-  const { user } = useSelector((state) => state.auth);
-  const isLoggedIn = user ? true : false;
+  const { getItem } = useLocalStorage("Authorization");
+  // const { user } = useSelector((state) => state.auth);
+  const token = getItem();
+  const isLoggedIn = token ? true : false;
   return (
     <div className="bg-white  px-4 pt-4 pb-8 items-center justify-center w-full flex flex-col gap-5">
       <p className="text-base font-semibold text-main_color text-center">

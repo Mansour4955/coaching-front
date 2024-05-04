@@ -7,9 +7,9 @@ import { useDispatch } from "react-redux";
 import { logIn } from "../redux/authSlice";
 import { useLocalStorage } from "../hooks/useLocalStorege";
 const Login = () => {
+  const { setItem } = useLocalStorage("Authorization");
   const navigate = useNavigate();
-  const dispach = useDispatch();
-  const [localStorageValue, setLocalStorageValue] = useLocalStorage('myKey', 'defaultValue');
+  const dispatch = useDispatch();
   const [email, setEmail] = useState(""); //
   const [password, setPassword] = useState(); //
 
@@ -26,9 +26,9 @@ const Login = () => {
         })
         .then((response) => {
           console.log(response.data.token);
-          // dispach(logIn(response.data));
-          // setLocalStorageValue("Authorization", response.data.token); 
-          // navigate("/");
+          dispatch(logIn(response.data));
+          setItem(`Bearer ${response.data.token}`);
+          navigate("/");
         })
         .catch((error) => {
           if (error.response.data.message === "invalid email") {
