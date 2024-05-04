@@ -5,11 +5,13 @@ import { useLocalStorage } from "../hooks/useLocalStorege";
 import { useNavigate } from "react-router-dom";
 const LoggedOutUser = () => {
   const navigate = useNavigate();
+  const { removeItem: removeUserData } = useLocalStorage("userData");
   const { removeItem } = useLocalStorage("Authorization");
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logOut());
     removeItem();
+    removeUserData();
     navigate("/");
   };
   return (

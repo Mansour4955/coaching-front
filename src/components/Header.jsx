@@ -15,8 +15,9 @@ import { useSelector } from "react-redux";
 import LoggedOutUser from "../popups/LoggedOutUser";
 import { useLocalStorage } from "../hooks/useLocalStorege";
 const Header = () => {
+  const { getItem: getUserData } = useLocalStorage("userData");
   const { getItem } = useLocalStorage("Authorization");
-  // const { user } = useSelector((state) => state.auth);
+  const user = getUserData();
   const navigate = useNavigate();
   const token = getItem();
   const isLoggedIn = token ? true : false;
@@ -213,10 +214,12 @@ const Header = () => {
             <Link to="/myprofile" className="flex gap-2 items-center">
               <img
                 alt=""
-                src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+                src={user?.profileImage}
                 className="w-8 h-8 rounded-[100%]"
               />
-              <p className="font-bold text-gray-500">John</p>
+              <p className="font-bold text-gray-500">
+                {user?.username?.split(" ")[0]}
+              </p>
             </Link>
             <div className="absolute top-[100%] right-0 hidden duration-200 group-hover:block">
               <LoggedOutUser />

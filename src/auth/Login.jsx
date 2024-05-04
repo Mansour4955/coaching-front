@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { logIn } from "../redux/authSlice";
 import { useLocalStorage } from "../hooks/useLocalStorege";
 const Login = () => {
+  const { setItem: setUserData } = useLocalStorage("userData");
   const { setItem } = useLocalStorage("Authorization");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const Login = () => {
         .then((response) => {
           console.log(response.data.token);
           dispatch(logIn(response.data));
+          setUserData(response.data);
           setItem(`Bearer ${response.data.token}`);
           navigate("/");
         })
