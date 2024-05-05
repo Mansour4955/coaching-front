@@ -21,6 +21,7 @@ const Home = () => {
   const [errorDescriptionPost, setErrorDescriptionPost] = useState("");
   const [errorImagePost, setErrorImagePost] = useState("");
   const [allPosts, setAllPosts] = useState([]);
+
   const token = auth();
   useEffect(() => {
     axios

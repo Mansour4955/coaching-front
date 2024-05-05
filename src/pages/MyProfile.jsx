@@ -208,7 +208,7 @@ const MyProfile = () => {
                       likes={post.likes}
                       comments={post.comments}
                     />
-                  ))
+                  )).reverse()
                 ) : (
                   <span className="text-main_color font-semibold">
                     This coach has no posts yet

@@ -5,6 +5,9 @@ import CommentCard from "./CommentCard";
 import { IoIosSend } from "react-icons/io";
 import moment from "moment";
 import useGetImages from "../hooks/useGetImages";
+import { URL } from "../data";
+import axios from "axios";
+import { useLocalStorage } from "../hooks/useLocalStorege";
 const PublishedPost = ({
   full_name,
   postPhoto,
@@ -16,13 +19,40 @@ const PublishedPost = ({
   comments,
   domaine,
 }) => {
+  const { getItem } = useLocalStorage("userData");
+  const { getItem: auth } = useLocalStorage("Authorization");
+  const [theLikes, setTheLikes] = useState(
+    likes && likes?.length > 0 ? likes?.length : "0"
+  );
+  const [isLiked, setIsLiked] = useState(false);
+  const theUser = getItem();
   const imageData = useGetImages(postPhoto);
   const [showMore, setShowMore] = useState(false);
-  const [toggleLike, setToggleLike] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [showAllComments, setShowAllComments] = useState(false);
   const [writeComment, setWriteComment] = useState("");
-
+  const token = auth();
+  const handleToggleLike = () => {
+    axios
+      .put(
+        `${URL}/api/posts/like/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        setTheLikes(response.data.likes.length);
+        setIsLiked(response.data.likes.includes(theUser._id));
+      })
+      .catch((error) => {
+        // Handle error if needed
+        console.error("Error toggling like:", error.data);
+      });
+  };
   const handleSendComment = () => {
     console.log(writeComment, { postid: id });
     setWriteComment("");
@@ -70,12 +100,12 @@ const PublishedPost = ({
       <div className="flex flex-col">
         <div className="flex items-center gap-3 text-gray-600 mb-1">
           <p className="text-lg font-semibold flex items-center gap-1">
-            {likes && likes?.length > 0 ? likes?.length : "0"}{" "}
+            {theLikes}{" "}
             <span
-              onClick={() => setToggleLike(!toggleLike)}
+              onClick={handleToggleLike}
               className="font-bold cursor-pointer"
             >
-              {toggleLike ? (
+              {isLiked ? (
                 <AiFillLike size={20} className="text-main_color" />
               ) : (
                 <AiOutlineLike size={20} className="text-main_color" />
