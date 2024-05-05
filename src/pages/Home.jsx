@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  coachStatic,
-  coachCard,
-  postInfo,
-  people,
-  courses,
-  URL,
-} from "../data";
+import { coachCard, courses, URL } from "../data";
 import CoachStatisticsCard from "../cards/CoachStatisticsCard";
 import CoachCard from "../cards/CoachCard";
 import PublishedPost from "../cards/PublishedPost";
@@ -28,6 +21,7 @@ const Home = () => {
   const [errorDescriptionPost, setErrorDescriptionPost] = useState("");
   const [errorImagePost, setErrorImagePost] = useState("");
   const [allPosts, setAllPosts] = useState([]);
+  const token = auth();
   useEffect(() => {
     axios
       .get(`${URL}/api/posts`)
@@ -37,7 +31,7 @@ const Home = () => {
       .catch((error) => {
         console.log("Error getting posts ", error);
       });
-  }, [allPosts]);
+  }, []);
   const handlePublishPost = (e) => {
     e.preventDefault();
     if (
@@ -46,10 +40,26 @@ const Home = () => {
       descriptionPost &&
       descriptionPost.trim().length >= 3
     ) {
-      console.log("Publish post!");
-      console.log(domainPost);
-      console.log(imagePost);
-      console.log(descriptionPost);
+      const postData = new FormData();
+      postData.append("image", imagePost);
+      postData.append("domaine", domainPost);
+      postData.append("description", descriptionPost);
+      axios
+        .post(`${URL}/api/posts`, postData, {
+          headers: {
+            "authorization": token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log("Error posting post ", error);
+        });
+
+      setImagePost(null);
+      setDomainPost("");
+      setDescriptionPost("");
     } else {
       if (!domainPost) {
         setErrorDomainPost("Please choose a domain");
