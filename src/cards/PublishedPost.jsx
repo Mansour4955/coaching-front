@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PiDotsThreeCircle } from "react-icons/pi";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import CommentCard from "./CommentCard";
@@ -24,6 +24,7 @@ const PublishedPost = ({
   const [theLikes, setTheLikes] = useState(
     likes && likes?.length > 0 ? likes?.length : "0"
   );
+  const [theComments, setTheComments] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
   const theUser = getItem();
   const imageData = useGetImages(postPhoto);
@@ -54,9 +55,40 @@ const PublishedPost = ({
       });
   };
   const handleSendComment = () => {
-    console.log(writeComment, { postid: id });
+    axios
+      .post(
+        `${URL}/api/comments`,
+        {
+          postId: id,
+          comment: writeComment,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle error if needed
+        console.error("Error posting comments ", error.data);
+      });
     setWriteComment("");
   };
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/comments?postId=${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setTheComments(response.data)
+      })
+      .catch((error) => {
+        // Handle error if needed
+        console.error("Error get comments of the post:", error.data);
+      });
+  }, []);
 
   const hide = "overflow-hidden line-clamp-2";
   return (
@@ -116,9 +148,9 @@ const PublishedPost = ({
             className="text-lg font-semibold cursor-pointer"
             onClick={() => setShowComments(!showComments)}
           >
-            {comments && comments?.length > 0 ? comments?.length : "0"}{" "}
+            {theComments && theComments?.length > 0 ? theComments?.length : "0"}{" "}
             <span className="font-medium text-base ">
-              {comments?.length == 1 || 0 ? "Comment" : "Comments"}
+              {theComments?.length == 1 || 0 ? "Comment" : "Comments"}
             </span>
           </p>
         </div>
@@ -146,25 +178,25 @@ const PublishedPost = ({
           <div className="flex flex-col">
             <div className="flex flex-col p-2 border border-main_color relative">
               {showAllComments
-                ? comments?.map((comment) => (
-                    <div key={comment.commentId}>
+                ? theComments?.map((comment) => (
+                    <div key={comment._id}>
                       <CommentCard
                         parentDevStyle="ml-0"
                         iconsSize="18"
                         imageStyle="w-[60px] h-[60px]"
                         nameStyle="text-base"
                         descAndDateStyle="text-base"
-                        commentId={comment.commentId}
-                        name={comment.name}
+                        commentId={comment._id}
                         comment={comment.comment}
-                        commentDate={comment.commentDate}
-                        imageProfile={comment.imageProfile}
+                        commentDate={comment.createdAt}
+                        name={comment.user.username}
+                        imageProfile={comment.user.profileImage}
                       />
                       {comment?.level1?.length > 0 &&
                         comment?.level1?.map((level1Item) => (
                           <div
                             className="ml-5 border-l border-l-main_color"
-                            key={level1Item.commentChildId}
+                            key={level1Item._id}
                           >
                             <CommentCard
                               parentDevStyle="ml-2.5"
@@ -172,17 +204,17 @@ const PublishedPost = ({
                               imageStyle="w-[50px] h-[50px]"
                               nameStyle="text-sm"
                               descAndDateStyle="text-sm"
-                              commentId={level1Item.commentChildId}
-                              name={level1Item.name}
+                              commentId={level1Item._id}
                               comment={level1Item.comment}
                               commentDate={level1Item.commentDate}
-                              imageProfile={level1Item.imageProfile}
+                              name={level1Item.user.username}
+                              imageProfile={level1Item.user.profileImage}
                             />
                             {level1Item?.level2?.length > 0 &&
                               level1Item?.level2?.map((level2Item) => (
                                 <div
                                   className="ml-5 border-l border-l-main_color"
-                                  key={level2Item.commentSmallChildId}
+                                  key={level2Item._id}
                                 >
                                   <CommentCard
                                     parentDevStyle="ml-2.5"
@@ -190,11 +222,11 @@ const PublishedPost = ({
                                     imageStyle="w-[40px] h-[40px]"
                                     nameStyle="text-sm"
                                     descAndDateStyle="text-xs"
-                                    commentId={level2Item.commentSmallChildId}
-                                    name={level2Item.name}
+                                    commentId={level2Item._id}
                                     comment={level2Item.comment}
                                     commentDate={level2Item.commentDate}
-                                    imageProfile={level2Item.imageProfile}
+                                    name={level2Item.user.username}
+                                    imageProfile={level2Item.user.profileImage}
                                   />
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
@@ -204,16 +236,14 @@ const PublishedPost = ({
                                         imageStyle="w-[40px] h-[40px]"
                                         nameStyle="text-sm"
                                         descAndDateStyle="text-xs"
-                                        key={
-                                          level3Item.commentTheSmallestChildId
-                                        }
-                                        commentId={
-                                          level3Item.commentTheSmallestChildId
-                                        }
-                                        name={level3Item.name}
+                                        key={level3Item._id}
+                                        commentId={level3Item._id}
                                         comment={level3Item.comment}
                                         commentDate={level3Item.commentDate}
-                                        imageProfile={level3Item.imageProfile}
+                                        name={level3Item.user.username}
+                                        imageProfile={
+                                          level3Item.user.profileImage
+                                        }
                                       />
                                     ))}
                                 </div>
@@ -222,26 +252,26 @@ const PublishedPost = ({
                         ))}
                     </div>
                   ))
-                : comments?.length > 2
-                ? comments?.slice(0, 2).map((comment) => (
-                    <div key={comment.commentId}>
+                : theComments?.length > 2
+                ? theComments?.slice(0, 2).map((comment) => (
+                    <div key={comment._id}>
                       <CommentCard
                         parentDevStyle="ml-0"
                         iconsSize="18"
                         imageStyle="w-[60px] h-[60px]"
                         nameStyle="text-base"
                         descAndDateStyle="text-base"
-                        commentId={comment.commentId}
-                        name={comment.name}
+                        commentId={comment._id}
                         comment={comment.comment}
-                        commentDate={comment.commentDate}
-                        imageProfile={comment.imageProfile}
+                        commentDate={comment.createdAt}
+                        name={comment.user.username}
+                        imageProfile={comment.user.profileImage}
                       />
                       {comment?.level1?.length > 0 &&
                         comment?.level1?.map((level1Item) => (
                           <div
                             className="ml-5 border-l border-l-main_color"
-                            key={level1Item.commentChildId}
+                            key={level1Item._id}
                           >
                             <CommentCard
                               parentDevStyle="ml-2.5"
@@ -249,17 +279,17 @@ const PublishedPost = ({
                               imageStyle="w-[50px] h-[50px]"
                               nameStyle="text-sm"
                               descAndDateStyle="text-sm"
-                              commentId={level1Item.commentChildId}
-                              name={level1Item.name}
+                              commentId={level1Item._id}
                               comment={level1Item.comment}
                               commentDate={level1Item.commentDate}
-                              imageProfile={level1Item.imageProfile}
+                              name={level1Item.user.username}
+                              imageProfile={level1Item.user.profileImage}
                             />
                             {level1Item?.level2?.length > 0 &&
                               level1Item?.level2?.map((level2Item) => (
                                 <div
                                   className="ml-5 border-l border-l-main_color"
-                                  key={level2Item.commentSmallChildId}
+                                  key={level2Item._id}
                                 >
                                   <CommentCard
                                     parentDevStyle="ml-2.5"
@@ -267,11 +297,11 @@ const PublishedPost = ({
                                     imageStyle="w-[40px] h-[40px]"
                                     nameStyle="text-sm"
                                     descAndDateStyle="text-xs"
-                                    commentId={level2Item.commentSmallChildId}
-                                    name={level2Item.name}
+                                    commentId={level2Item._id}
                                     comment={level2Item.comment}
                                     commentDate={level2Item.commentDate}
-                                    imageProfile={level2Item.imageProfile}
+                                    name={level2Item.user.username}
+                                    imageProfile={level2Item.user.profileImage}
                                   />
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
@@ -281,16 +311,14 @@ const PublishedPost = ({
                                         imageStyle="w-[40px] h-[40px]"
                                         nameStyle="text-sm"
                                         descAndDateStyle="text-xs"
-                                        key={
-                                          level3Item.commentTheSmallestChildId
-                                        }
-                                        commentId={
-                                          level3Item.commentTheSmallestChildId
-                                        }
-                                        name={level3Item.name}
+                                        key={level3Item._id}
+                                        commentId={level3Item._id}
                                         comment={level3Item.comment}
                                         commentDate={level3Item.commentDate}
-                                        imageProfile={level3Item.imageProfile}
+                                        name={level3Item.user.username}
+                                        imageProfile={
+                                          level3Item.user.profileImage
+                                        }
                                       />
                                     ))}
                                 </div>
@@ -299,25 +327,25 @@ const PublishedPost = ({
                         ))}
                     </div>
                   ))
-                : comments?.map((comment) => (
-                    <div key={comment.commentId}>
+                : theComments?.map((comment) => (
+                    <div key={comment._id}>
                       <CommentCard
                         parentDevStyle="ml-0"
                         iconsSize="18"
                         imageStyle="w-[60px] h-[60px]"
                         nameStyle="text-base"
                         descAndDateStyle="text-base"
-                        commentId={comment.commentId}
-                        name={comment.name}
+                        commentId={comment._id}
                         comment={comment.comment}
-                        commentDate={comment.commentDate}
-                        imageProfile={comment.imageProfile}
+                        commentDate={comment.createdAt}
+                        name={comment.user.username}
+                        imageProfile={comment.user.profileImage}
                       />
                       {comment?.level1?.length > 0 &&
                         comment?.level1?.map((level1Item) => (
                           <div
                             className="ml-5 border-l border-l-main_color"
-                            key={level1Item.commentChildId}
+                            key={level1Item._id}
                           >
                             <CommentCard
                               parentDevStyle="ml-2.5"
@@ -325,17 +353,17 @@ const PublishedPost = ({
                               imageStyle="w-[50px] h-[50px]"
                               nameStyle="text-sm"
                               descAndDateStyle="text-sm"
-                              commentId={level1Item.commentChildId}
-                              name={level1Item.name}
+                              commentId={level1Item._id}
                               comment={level1Item.comment}
                               commentDate={level1Item.commentDate}
-                              imageProfile={level1Item.imageProfile}
+                              name={level1Item.user.username}
+                              imageProfile={level1Item.user.profileImage}
                             />
                             {level1Item?.level2?.length > 0 &&
                               level1Item?.level2?.map((level2Item) => (
                                 <div
                                   className="ml-5 border-l border-l-main_color"
-                                  key={level2Item.commentSmallChildId}
+                                  key={level2Item._id}
                                 >
                                   <CommentCard
                                     parentDevStyle="ml-2.5"
@@ -343,11 +371,11 @@ const PublishedPost = ({
                                     imageStyle="w-[40px] h-[40px]"
                                     nameStyle="text-sm"
                                     descAndDateStyle="text-xs"
-                                    commentId={level2Item.commentSmallChildId}
-                                    name={level2Item.name}
+                                    commentId={level2Item._id}
                                     comment={level2Item.comment}
                                     commentDate={level2Item.commentDate}
-                                    imageProfile={level2Item.imageProfile}
+                                    name={level2Item.user.username}
+                                    imageProfile={level2Item.user.profileImage}
                                   />
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
@@ -357,16 +385,14 @@ const PublishedPost = ({
                                         imageStyle="w-[40px] h-[40px]"
                                         nameStyle="text-sm"
                                         descAndDateStyle="text-xs"
-                                        key={
-                                          level3Item.commentTheSmallestChildId
-                                        }
-                                        commentId={
-                                          level3Item.commentTheSmallestChildId
-                                        }
-                                        name={level3Item.name}
+                                        key={level3Item._id}
+                                        commentId={level3Item._id}
                                         comment={level3Item.comment}
                                         commentDate={level3Item.commentDate}
-                                        imageProfile={level3Item.imageProfile}
+                                        name={level3Item.user.username}
+                                        imageProfile={
+                                          level3Item.user.profileImage
+                                        }
                                       />
                                     ))}
                                 </div>
@@ -376,7 +402,7 @@ const PublishedPost = ({
                     </div>
                   ))}
             </div>
-            {comments.length > 2 && (
+            {theComments.length > 2 && (
               <button
                 onClick={() => setShowAllComments(!showAllComments)}
                 className="text-main_color text-sm mt-1"

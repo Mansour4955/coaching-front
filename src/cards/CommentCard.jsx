@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import { MdDelete, MdModeEdit, MdOutlineReply } from "react-icons/md";
 import DeleteComment from "../popups/DeleteComment";
-
+import moment from "moment";
 const CommentCard = ({
   commentId,
   name,
@@ -43,7 +43,7 @@ const CommentCard = ({
         <div className="flex flex-col ">
           <h4 className={`${nameStyle} font-semibold`}>{name}</h4>
           <span className={`${descAndDateStyle} text-gray-500`}>
-            {commentDate}
+            {moment(commentDate).fromNow()}
           </span>
         </div>
       </div>
