@@ -37,7 +37,7 @@ const Home = () => {
       .catch((error) => {
         console.log("Error getting posts ", error);
       });
-  }, []);
+  }, [allPosts]);
   const handlePublishPost = (e) => {
     e.preventDefault();
     if (

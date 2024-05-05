@@ -4,6 +4,7 @@ import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import CommentCard from "./CommentCard";
 import { IoIosSend } from "react-icons/io";
 import moment from "moment";
+import useGetImages from "../hooks/useGetImages";
 const PublishedPost = ({
   full_name,
   postPhoto,
@@ -15,6 +16,7 @@ const PublishedPost = ({
   comments,
   domaine,
 }) => {
+  const imageData = useGetImages(postPhoto);
   const [showMore, setShowMore] = useState(false);
   const [toggleLike, setToggleLike] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -64,11 +66,7 @@ const PublishedPost = ({
           {showMore ? "See less" : "See more"}
         </button>
       </div>
-      <img
-        alt="post"
-        src={`E:\COACHING\coaching-back\images/${postPhoto}`}
-        className="w-full h-full"
-      />
+      <img alt="post" src={imageData[postPhoto]} className="w-full h-full" />
       <div className="flex flex-col">
         <div className="flex items-center gap-3 text-gray-600 mb-1">
           <p className="text-lg font-semibold flex items-center gap-1">

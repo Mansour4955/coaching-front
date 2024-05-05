@@ -1,11 +1,28 @@
 import PublishedPost from "../cards/PublishedPost";
 import { MdOutlineStarPurple500, MdOutlineStarOutline } from "react-icons/md";
 import { useLocalStorage } from "../hooks/useLocalStorege";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { URL } from "../data";
 const MyProfile = () => {
+  const [user, setUser] = useState(null);
   const { getItem } = useLocalStorage("userData");
-  const user = getItem();
+  const userId = getItem();
 
+  // const { getItem } = useLocalStorage("userData");
+  // useEffect(() => {
+  //   setUser(getItem());
+  // }, []);
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/users/${userId._id}`)
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching user data ", error.response);
+      });
+  }, []);
   let numberOfReviewers = user?.reviews.length;
   let totalStars = 0;
   user?.reviews.forEach((review) => {
@@ -183,9 +200,9 @@ const MyProfile = () => {
                       key={post._id}
                       id={post._id}
                       domaine={post.domaine}
-                      full_name={post.user.username}
+                      full_name={user.username}
                       description={post.description}
-                      profilePhoto={post.user.profileImage}
+                      profilePhoto={user.profileImage}
                       postPhoto={post.postImage}
                       date_of_publish={post.createdAt}
                       likes={post.likes}
