@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import { MdDelete, MdModeEdit, MdOutlineReply } from "react-icons/md";
 import DeleteComment from "../popups/DeleteComment";
 import moment from "moment";
+import axios from "axios";
+import { URL } from "../data";
+import { useLocalStorage } from "../hooks/useLocalStorege";
 const CommentCard = ({
   commentId,
   name,
@@ -14,20 +17,57 @@ const CommentCard = ({
   descAndDateStyle,
   iconsSize,
   parentDevStyle,
+  level,
+  parentCommentId,
+  user,
 }) => {
+  const [theUser, setTheUser] = useState({});
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/users/${user}`)
+      .then((response) => {
+        setTheUser(response.data);
+      })
+      .catch((error) => {
+        console.log("error getting users data ", error);
+      });
+  }, []);
+
+  const { getItem } = useLocalStorage("Authorization");
   const [reply, setReply] = useState(false);
   const [edit, setEdit] = useState(false);
   const [showDeleteCommentPopup, setShowDeleteCommentPopup] = useState(false);
 
   const [writeComment, setWriteComment] = useState("");
   const [editComment, setEditComment] = useState(comment);
-
-  const handleSendComment = () => {
-    console.log(writeComment, commentId);
+  const handleSendReply = () => {
+    const token = getItem();
+    axios
+      .post(
+        `${URL}/api/comments/${parentCommentId}?level=${level}&levelId=${commentId}`,
+        {
+          comment: writeComment,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then((response) => {
+        // console.log(response.data);
+        // console.log(parentCommentId);
+        // console.log(level);
+        // console.log(commentId);
+      })
+      .catch((error) => {
+        console.log("error posting nested comment ", error.response);
+      });
+    // console.log(writeComment, commentId);
     setReply(false);
   };
   const handleEditComment = () => {
-    console.log(editComment, commentId);
+    // console.log(editComment, commentId);
     setEdit(false);
   };
   return (
@@ -36,8 +76,8 @@ const CommentCard = ({
     >
       <div className="flex gap-2 ">
         <img
-          alt={name}
-          src={imageProfile}
+          alt={level === "main" ? name : theUser.username}
+          src={level === "main" ? imageProfile : theUser.profileImage}
           className={`${imageStyle} rounded-full`}
         />
         <div className="flex flex-col ">
@@ -83,7 +123,7 @@ const CommentCard = ({
             onChange={(e) => setWriteComment(e.target.value)}
           />
           <div
-            onClick={handleSendComment}
+            onClick={handleSendReply}
             className="bg-white flex items-center justify-center rounded-r-xl border border-main_color border-l-0 px-2 py-1 text-main_color font-bold cursor-pointer hover:bg-white_color duration-300"
           >
             <IoIosSend size={20} />
@@ -114,7 +154,10 @@ const CommentCard = ({
       )}
       {showDeleteCommentPopup && (
         <div className="absolute  left-0 min-h-[140px] right-0 flex items-center justify-center ">
-          <DeleteComment setShowDeleteCommentPopup={setShowDeleteCommentPopup} commentId={commentId}/>
+          <DeleteComment
+            setShowDeleteCommentPopup={setShowDeleteCommentPopup}
+            commentId={commentId}
+          />
         </div>
       )}
     </div>

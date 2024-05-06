@@ -45,7 +45,6 @@ const PublishedPost = ({
         }
       )
       .then((response) => {
-        console.log(response.data);
         setTheLikes(response.data.likes.length);
         setIsLiked(response.data.likes.includes(theUser._id));
       })
@@ -69,26 +68,25 @@ const PublishedPost = ({
         }
       )
       .then((response) => {
-        console.log(response.data);
+        setTheComments(response.data);
       })
       .catch((error) => {
         // Handle error if needed
         console.error("Error posting comments ", error.data);
       });
+
     setWriteComment("");
   };
   useEffect(() => {
     axios
       .get(`${URL}/api/comments?postId=${id}`)
       .then((response) => {
-        console.log(response.data);
-        setTheComments(response.data)
+        setTheComments(response.data);
       })
       .catch((error) => {
-        // Handle error if needed
         console.error("Error get comments of the post:", error.data);
       });
-  }, []);
+  }, [theComments]);
 
   const hide = "overflow-hidden line-clamp-2";
   return (
@@ -181,12 +179,15 @@ const PublishedPost = ({
                 ? theComments?.map((comment) => (
                     <div key={comment._id}>
                       <CommentCard
+                        level="main"
                         parentDevStyle="ml-0"
                         iconsSize="18"
                         imageStyle="w-[60px] h-[60px]"
                         nameStyle="text-base"
                         descAndDateStyle="text-base"
+                        user={comment.user}
                         commentId={comment._id}
+                        parentCommentId={comment._id}
                         comment={comment.comment}
                         commentDate={comment.createdAt}
                         name={comment.user.username}
@@ -199,12 +200,15 @@ const PublishedPost = ({
                             key={level1Item._id}
                           >
                             <CommentCard
+                              level="level1"
+                              parentCommentId={comment._id}
                               parentDevStyle="ml-2.5"
                               iconsSize="16"
                               imageStyle="w-[50px] h-[50px]"
                               nameStyle="text-sm"
                               descAndDateStyle="text-sm"
                               commentId={level1Item._id}
+                              user={level1Item.user}
                               comment={level1Item.comment}
                               commentDate={level1Item.commentDate}
                               name={level1Item.user.username}
@@ -217,12 +221,15 @@ const PublishedPost = ({
                                   key={level2Item._id}
                                 >
                                   <CommentCard
+                                    level="level2"
+                                    parentCommentId={comment._id}
                                     parentDevStyle="ml-2.5"
                                     iconsSize="14"
                                     imageStyle="w-[40px] h-[40px]"
                                     nameStyle="text-sm"
                                     descAndDateStyle="text-xs"
                                     commentId={level2Item._id}
+                                    user={level2Item.user}
                                     comment={level2Item.comment}
                                     commentDate={level2Item.commentDate}
                                     name={level2Item.user.username}
@@ -231,12 +238,15 @@ const PublishedPost = ({
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
                                       <CommentCard
+                                        level="level3"
+                                        parentCommentId={comment._id}
                                         parentDevStyle="ml-2.5"
                                         iconsSize="14"
                                         imageStyle="w-[40px] h-[40px]"
                                         nameStyle="text-sm"
                                         descAndDateStyle="text-xs"
                                         key={level3Item._id}
+                                        user={level3Item.user}
                                         commentId={level3Item._id}
                                         comment={level3Item.comment}
                                         commentDate={level3Item.commentDate}
@@ -256,11 +266,14 @@ const PublishedPost = ({
                 ? theComments?.slice(0, 2).map((comment) => (
                     <div key={comment._id}>
                       <CommentCard
+                        level="main"
                         parentDevStyle="ml-0"
                         iconsSize="18"
                         imageStyle="w-[60px] h-[60px]"
                         nameStyle="text-base"
                         descAndDateStyle="text-base"
+                        user={comment.user}
+                        parentCommentId={comment._id}
                         commentId={comment._id}
                         comment={comment.comment}
                         commentDate={comment.createdAt}
@@ -274,12 +287,15 @@ const PublishedPost = ({
                             key={level1Item._id}
                           >
                             <CommentCard
+                              level="level1"
+                              parentCommentId={comment._id}
                               parentDevStyle="ml-2.5"
                               iconsSize="16"
                               imageStyle="w-[50px] h-[50px]"
                               nameStyle="text-sm"
                               descAndDateStyle="text-sm"
                               commentId={level1Item._id}
+                              user={level1Item.user}
                               comment={level1Item.comment}
                               commentDate={level1Item.commentDate}
                               name={level1Item.user.username}
@@ -292,12 +308,15 @@ const PublishedPost = ({
                                   key={level2Item._id}
                                 >
                                   <CommentCard
+                                    level="level2"
+                                    parentCommentId={comment._id}
                                     parentDevStyle="ml-2.5"
                                     iconsSize="14"
                                     imageStyle="w-[40px] h-[40px]"
                                     nameStyle="text-sm"
                                     descAndDateStyle="text-xs"
                                     commentId={level2Item._id}
+                                    user={level2Item.user}
                                     comment={level2Item.comment}
                                     commentDate={level2Item.commentDate}
                                     name={level2Item.user.username}
@@ -306,12 +325,15 @@ const PublishedPost = ({
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
                                       <CommentCard
+                                        level="level3"
+                                        parentCommentId={comment._id}
                                         parentDevStyle="ml-2.5"
                                         iconsSize="14"
                                         imageStyle="w-[40px] h-[40px]"
                                         nameStyle="text-sm"
                                         descAndDateStyle="text-xs"
                                         key={level3Item._id}
+                                        user={level3Item.user}
                                         commentId={level3Item._id}
                                         comment={level3Item.comment}
                                         commentDate={level3Item.commentDate}
@@ -330,11 +352,14 @@ const PublishedPost = ({
                 : theComments?.map((comment) => (
                     <div key={comment._id}>
                       <CommentCard
+                        level="main"
                         parentDevStyle="ml-0"
                         iconsSize="18"
                         imageStyle="w-[60px] h-[60px]"
                         nameStyle="text-base"
                         descAndDateStyle="text-base"
+                        user={comment.user}
+                        parentCommentId={comment._id}
                         commentId={comment._id}
                         comment={comment.comment}
                         commentDate={comment.createdAt}
@@ -348,12 +373,15 @@ const PublishedPost = ({
                             key={level1Item._id}
                           >
                             <CommentCard
+                              level="level1"
+                              parentCommentId={comment._id}
                               parentDevStyle="ml-2.5"
                               iconsSize="16"
                               imageStyle="w-[50px] h-[50px]"
                               nameStyle="text-sm"
                               descAndDateStyle="text-sm"
                               commentId={level1Item._id}
+                              user={level1Item.user}
                               comment={level1Item.comment}
                               commentDate={level1Item.commentDate}
                               name={level1Item.user.username}
@@ -366,12 +394,15 @@ const PublishedPost = ({
                                   key={level2Item._id}
                                 >
                                   <CommentCard
+                                    level="level2"
+                                    parentCommentId={comment._id}
                                     parentDevStyle="ml-2.5"
                                     iconsSize="14"
                                     imageStyle="w-[40px] h-[40px]"
                                     nameStyle="text-sm"
                                     descAndDateStyle="text-xs"
                                     commentId={level2Item._id}
+                                    user={level2Item.user}
                                     comment={level2Item.comment}
                                     commentDate={level2Item.commentDate}
                                     name={level2Item.user.username}
@@ -380,12 +411,15 @@ const PublishedPost = ({
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
                                       <CommentCard
+                                        level="level3"
+                                        parentCommentId={comment._id}
                                         parentDevStyle="ml-2.5"
                                         iconsSize="14"
                                         imageStyle="w-[40px] h-[40px]"
                                         nameStyle="text-sm"
                                         descAndDateStyle="text-xs"
                                         key={level3Item._id}
+                                        user={level3Item.user}
                                         commentId={level3Item._id}
                                         comment={level3Item.comment}
                                         commentDate={level3Item.commentDate}
