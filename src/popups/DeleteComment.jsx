@@ -1,8 +1,32 @@
+import axios from "axios";
 import React from "react";
+import { URL } from "../data";
+import { useLocalStorage } from "../hooks/useLocalStorege";
 
-const DeleteComment = ({ setShowDeleteCommentPopup, commentId }) => {
+const DeleteComment = ({
+  setShowDeleteCommentPopup,
+  commentId,
+  parentCommentId,
+  level,
+}) => {
+  const { getItem } = useLocalStorage("Authorization");
   const handleDeleteComment = () => {
-    console.log(commentId);
+    const token = getItem();
+    axios
+      .delete(
+        `${URL}/api/comments/${parentCommentId}?level=${level}&levelId=${commentId}`,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then((response) => {
+        console.log("comment has been deleted");
+      })
+      .catch((error) => {
+        console.log("error edit comment ", error.response);
+      });
     setShowDeleteCommentPopup(false);
   };
   return (

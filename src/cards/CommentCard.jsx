@@ -21,10 +21,15 @@ const CommentCard = ({
   parentCommentId,
   user,
 }) => {
-  const [theUser, setTheUser] = useState({});
+  const [theUser, setTheUser] = useState(user);
+  useEffect(() => {
+    console.log("theUser._id ", theUser._id);
+    console.log("theDataOfUser._id ", theDataOfUser._id);
+    console.log("user ", user._id);
+  }, []);
   useEffect(() => {
     axios
-      .get(`${URL}/api/users/${user}`)
+      .get(`${URL}/api/users/${user._id}`)
       .then((response) => {
         setTheUser(response.data);
       })
@@ -34,6 +39,8 @@ const CommentCard = ({
   }, []);
 
   const { getItem } = useLocalStorage("Authorization");
+  const { getItem: theUserData } = useLocalStorage("userData");
+  const theDataOfUser = theUserData();
   const [reply, setReply] = useState(false);
   const [edit, setEdit] = useState(false);
   const [showDeleteCommentPopup, setShowDeleteCommentPopup] = useState(false);
@@ -59,33 +66,35 @@ const CommentCard = ({
         // console.log(parentCommentId);
         // console.log(level);
         // console.log(commentId);
+        console.log("theUser._id ", theUser._id);
+        console.log("theDataOfUser._id ", theDataOfUser._id);
+        console.log("user ", user._id);
       })
       .catch((error) => {
         console.log("error posting nested comment ", error.response);
       });
     // console.log(writeComment, commentId);
     setReply(false);
-    setWriteComment("")
+    setWriteComment("");
   };
   const handleEditComment = () => {
     const token = getItem();
     axios
-    .put(
-      `${URL}/api/comments/${parentCommentId}?level=${level}&levelId=${commentId}`,
-      {
-        comment: editComment,
-      },
-      {
-        headers: {
-          Authorization: token,
+      .put(
+        `${URL}/api/comments/${parentCommentId}?level=${level}&levelId=${commentId}`,
+        {
+          comment: editComment,
         },
-      }
-    )
-    .then((response) => {
-    })
-    .catch((error) => {
-      console.log("error edit comment ", error.response);
-    });
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then((response) => {})
+      .catch((error) => {
+        console.log("error edit comment ", error.response);
+      });
     setEdit(false);
   };
   return (
@@ -94,12 +103,25 @@ const CommentCard = ({
     >
       <div className="flex gap-2 ">
         <img
-          alt={level === "main" ? name : theUser.username}
-          src={level === "main" ? imageProfile : theUser.profileImage}
+          alt={
+            level === "main"
+              ? name
+              : theUser.username
+          }
+          src={
+            level === "main"
+              ? imageProfile
+              : theUser.profileImage
+          }
           className={`${imageStyle} rounded-full`}
         />
         <div className="flex flex-col ">
-          <h4 className={`${nameStyle} font-semibold`}>{name}</h4>
+          <h4 className={`${nameStyle} font-semibold`}>
+            {level === "main"
+              ? name
+              : theUser.username
+              }
+          </h4>
           <span className={`${descAndDateStyle} text-gray-500`}>
             {moment(commentDate).fromNow()}
           </span>
@@ -107,18 +129,22 @@ const CommentCard = ({
       </div>
       <p className={`${descAndDateStyle} text-gray-700 `}>{comment}</p>
       <div className="flex items-center gap-2 mt-1">
-        <p
-          onClick={() => setShowDeleteCommentPopup(!showDeleteCommentPopup)}
-          className="text-red-600 cursor-pointer"
-        >
-          <MdDelete size={`${iconsSize}`} />
-        </p>
-        <p
-          onClick={() => setEdit(!edit)}
-          className="text-green-600 cursor-pointer"
-        >
-          <MdModeEdit size={`${iconsSize}`} />
-        </p>
+        {user._id == theDataOfUser._id && (
+          <div className="flex items-center gap-2 mt-1">
+            <p
+              onClick={() => setShowDeleteCommentPopup(!showDeleteCommentPopup)}
+              className="text-red-600 cursor-pointer"
+            >
+              <MdDelete size={`${iconsSize}`} />
+            </p>
+            <p
+              onClick={() => setEdit(!edit)}
+              className="text-green-600 cursor-pointer"
+            >
+              <MdModeEdit size={`${iconsSize}`} />
+            </p>
+          </div>
+        )}
         <p
           onClick={() => setReply(!reply)}
           className="text-blue-600 cursor-pointer"
@@ -175,6 +201,8 @@ const CommentCard = ({
           <DeleteComment
             setShowDeleteCommentPopup={setShowDeleteCommentPopup}
             commentId={commentId}
+            level={level}
+            parentCommentId={parentCommentId}
           />
         </div>
       )}
