@@ -65,9 +65,27 @@ const CommentCard = ({
       });
     // console.log(writeComment, commentId);
     setReply(false);
+    setWriteComment("")
   };
   const handleEditComment = () => {
-    // console.log(editComment, commentId);
+    const token = getItem();
+    axios
+    .put(
+      `${URL}/api/comments/${parentCommentId}?level=${level}&levelId=${commentId}`,
+      {
+        comment: editComment,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    )
+    .then((response) => {
+    })
+    .catch((error) => {
+      console.log("error edit comment ", error.response);
+    });
     setEdit(false);
   };
   return (
