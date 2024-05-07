@@ -24,7 +24,12 @@ const Home = () => {
   const [theValueAgain, setTheValueAgain] = useState(false);
 
   const token = auth();
-
+  useEffect(() => {
+    setTheValueAgain(true);
+    setTimeout(() => {
+      setTheValueAgain(false);
+    }, 3000);
+  }, []);
   useEffect(() => {
     axios
       .get(`${URL}/api/posts`)

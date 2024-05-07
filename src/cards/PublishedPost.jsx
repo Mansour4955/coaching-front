@@ -57,6 +57,10 @@ const PublishedPost = ({
         setTheLikes(response.data.likes.length);
         setIsLiked(response.data.likes.includes(theUser._id));
         setTheValue(true);
+        setTheValueAgain(true);
+        setTimeout(() => {
+          setTheValueAgain(false);
+        }, 3000);
       })
       .catch((error) => {
         // Handle error if needed

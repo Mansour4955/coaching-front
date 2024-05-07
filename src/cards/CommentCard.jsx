@@ -23,7 +23,7 @@ const CommentCard = ({
   setTheValueAgain,
   theValueAgain,
 }) => {
-  const [theUser, setTheUser] = useState(user);
+  const [theUser, setTheUser] = useState({});
   useEffect(() => {
     console.log("theUser._id ", theUser._id);
     console.log("theDataOfUser._id ", theDataOfUser._id);
@@ -31,14 +31,14 @@ const CommentCard = ({
   }, []);
   useEffect(() => {
     axios
-      .get(`${URL}/api/users/${user._id}`)
+      .get(`${URL}/api/users/${user._id ? user._id : user}`)
       .then((response) => {
         setTheUser(response.data);
       })
       .catch((error) => {
         console.log("error getting users data ", error);
       });
-  }, [theValueAgain]);
+  }, []);
 
   const { getItem } = useLocalStorage("Authorization");
   const { getItem: theUserData } = useLocalStorage("userData");
