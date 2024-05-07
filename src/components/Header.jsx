@@ -169,7 +169,7 @@ const Header = () => {
               isActive ? "text-main_color" : "text-gray-500"
             }
           >
-            <MdHome size={19} />
+            <MdHome size={24} />
           </NavLink>
           <NavLink
             to="/coachCards"
@@ -177,7 +177,7 @@ const Header = () => {
               isActive ? "text-main_color" : "text-gray-500"
             }
           >
-            <FaChalkboardTeacher size={19} />
+            <FaChalkboardTeacher size={24} />
           </NavLink>
 
           {isLoggedIn && (
@@ -188,7 +188,7 @@ const Header = () => {
                   isActive ? "text-main_color" : "text-gray-500"
                 }
               >
-                <HiMiniChatBubbleLeftRight size={19} />
+                <HiMiniChatBubbleLeftRight size={24} />
               </NavLink>
               <NavLink
                 to="/notification"
@@ -196,7 +196,7 @@ const Header = () => {
                   isActive ? "text-main_color" : "text-gray-500"
                 }
               >
-                <IoNotifications size={19} />
+                <IoNotifications size={24} />
               </NavLink>
               <NavLink
                 to="/rendez-vous"
