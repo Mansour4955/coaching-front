@@ -8,6 +8,9 @@ import useGetImages from "../hooks/useGetImages";
 import { URL } from "../data";
 import axios from "axios";
 import { useLocalStorage } from "../hooks/useLocalStorege";
+import PostPopup from "../popups/PostPopup";
+import EditPost from "../popups/EditPost";
+import DeletePost from "../popups/DeletePost";
 const PublishedPost = ({
   full_name,
   postPhoto,
@@ -35,6 +38,9 @@ const PublishedPost = ({
   const [showComments, setShowComments] = useState(false);
   const [showAllComments, setShowAllComments] = useState(false);
   const [writeComment, setWriteComment] = useState("");
+  const [postPopup, setPostPopup] = useState(false);
+  const [showDeletePost, setShowDeletePost] = useState(false);
+  const [showEditPost, setShowEditPost] = useState(false);
   const token = auth();
   const handleToggleLike = () => {
     axios
@@ -131,9 +137,45 @@ const PublishedPost = ({
             </span>
           </div>
         </div>
-        <span className="font-bold text-gray-500 cursor-pointer">
-          <PiDotsThreeCircle size={20} />
-        </span>
+        <div className="relative">
+          <span
+            onClick={() => setPostPopup(true)}
+            className="font-bold text-gray-500 cursor-pointer"
+          >
+            <PiDotsThreeCircle size={20} />
+          </span>
+          {postPopup && (
+            <div className={`absolute top-[100%] right-0`}>
+              <PostPopup
+                setShowDeletePost={setShowDeletePost}
+                setShowEditPost={setShowEditPost}
+                setPostPopup={setPostPopup}
+              />
+            </div>
+          )}
+          {showEditPost && (
+            <div className={`absolute top-[100%] right-0 `}>
+              <EditPost
+                setShowEditPost={setShowEditPost}
+                id={id}
+                theValueAgain={theValueAgain}
+                setTheValueAgain={setTheValueAgain}
+                description={description}
+              />
+            </div>
+          )}
+          {showDeletePost && (
+            <div className={`absolute top-[100%] right-0`}>
+              <DeletePost
+                setShowDeletePost={setShowDeletePost}
+                setPostPopup={setPostPopup}
+                id={id}
+                theValueAgain={theValueAgain}
+                setTheValueAgain={setTheValueAgain}
+              />
+            </div>
+          )}
+        </div>
       </div>
       <div>
         <p className={`text-gray-500  ${!showMore ? hide : ""}`}>
@@ -199,8 +241,8 @@ const PublishedPost = ({
                 ? theComments?.map((comment) => (
                     <div key={comment._id}>
                       <CommentCard
-                      theValueAgain={theValueAgain}
-                      setTheValueAgain={setTheValueAgain}
+                        theValueAgain={theValueAgain}
+                        setTheValueAgain={setTheValueAgain}
                         level="main"
                         parentDevStyle="ml-0"
                         iconsSize="18"
@@ -222,8 +264,8 @@ const PublishedPost = ({
                             key={level1Item._id}
                           >
                             <CommentCard
-                            theValueAgain={theValueAgain}
-                            setTheValueAgain={setTheValueAgain}
+                              theValueAgain={theValueAgain}
+                              setTheValueAgain={setTheValueAgain}
                               level="level1"
                               parentCommentId={comment._id}
                               parentDevStyle="ml-2.5"
@@ -245,8 +287,8 @@ const PublishedPost = ({
                                   key={level2Item._id}
                                 >
                                   <CommentCard
-                                  theValueAgain={theValueAgain}
-                                  setTheValueAgain={setTheValueAgain}
+                                    theValueAgain={theValueAgain}
+                                    setTheValueAgain={setTheValueAgain}
                                     level="level2"
                                     parentCommentId={comment._id}
                                     parentDevStyle="ml-2.5"
@@ -264,8 +306,8 @@ const PublishedPost = ({
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
                                       <CommentCard
-                                      theValueAgain={theValueAgain}
-                                      setTheValueAgain={setTheValueAgain}
+                                        theValueAgain={theValueAgain}
+                                        setTheValueAgain={setTheValueAgain}
                                         level="level3"
                                         parentCommentId={comment._id}
                                         parentDevStyle="ml-2.5"
@@ -294,8 +336,8 @@ const PublishedPost = ({
                 ? theComments?.slice(0, 2).map((comment) => (
                     <div key={comment._id}>
                       <CommentCard
-                      theValueAgain={theValueAgain}
-                      setTheValueAgain={setTheValueAgain}
+                        theValueAgain={theValueAgain}
+                        setTheValueAgain={setTheValueAgain}
                         level="main"
                         parentDevStyle="ml-0"
                         iconsSize="18"
@@ -317,8 +359,8 @@ const PublishedPost = ({
                             key={level1Item._id}
                           >
                             <CommentCard
-                            theValueAgain={theValueAgain}
-                            setTheValueAgain={setTheValueAgain}
+                              theValueAgain={theValueAgain}
+                              setTheValueAgain={setTheValueAgain}
                               level="level1"
                               parentCommentId={comment._id}
                               parentDevStyle="ml-2.5"
@@ -340,8 +382,8 @@ const PublishedPost = ({
                                   key={level2Item._id}
                                 >
                                   <CommentCard
-                                  theValueAgain={theValueAgain}
-                                  setTheValueAgain={setTheValueAgain}
+                                    theValueAgain={theValueAgain}
+                                    setTheValueAgain={setTheValueAgain}
                                     level="level2"
                                     parentCommentId={comment._id}
                                     parentDevStyle="ml-2.5"
@@ -359,8 +401,8 @@ const PublishedPost = ({
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
                                       <CommentCard
-                                      theValueAgain={theValueAgain}
-                                      setTheValueAgain={setTheValueAgain}
+                                        theValueAgain={theValueAgain}
+                                        setTheValueAgain={setTheValueAgain}
                                         level="level3"
                                         parentCommentId={comment._id}
                                         parentDevStyle="ml-2.5"
@@ -388,8 +430,8 @@ const PublishedPost = ({
                 : theComments?.map((comment) => (
                     <div key={comment._id}>
                       <CommentCard
-                      theValueAgain={theValueAgain}
-                      setTheValueAgain={setTheValueAgain}
+                        theValueAgain={theValueAgain}
+                        setTheValueAgain={setTheValueAgain}
                         level="main"
                         parentDevStyle="ml-0"
                         iconsSize="18"
@@ -411,8 +453,8 @@ const PublishedPost = ({
                             key={level1Item._id}
                           >
                             <CommentCard
-                            theValueAgain={theValueAgain}
-                            setTheValueAgain={setTheValueAgain}
+                              theValueAgain={theValueAgain}
+                              setTheValueAgain={setTheValueAgain}
                               level="level1"
                               parentCommentId={comment._id}
                               parentDevStyle="ml-2.5"
@@ -434,8 +476,8 @@ const PublishedPost = ({
                                   key={level2Item._id}
                                 >
                                   <CommentCard
-                                  theValueAgain={theValueAgain}
-                                  setTheValueAgain={setTheValueAgain}
+                                    theValueAgain={theValueAgain}
+                                    setTheValueAgain={setTheValueAgain}
                                     level="level2"
                                     parentCommentId={comment._id}
                                     parentDevStyle="ml-2.5"
@@ -453,8 +495,8 @@ const PublishedPost = ({
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
                                       <CommentCard
-                                      theValueAgain={theValueAgain}
-                                      setTheValueAgain={setTheValueAgain}
+                                        theValueAgain={theValueAgain}
+                                        setTheValueAgain={setTheValueAgain}
                                         level="level3"
                                         parentCommentId={comment._id}
                                         parentDevStyle="ml-2.5"
