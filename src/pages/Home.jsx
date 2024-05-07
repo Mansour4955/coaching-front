@@ -21,18 +21,43 @@ const Home = () => {
   const [errorDescriptionPost, setErrorDescriptionPost] = useState("");
   const [errorImagePost, setErrorImagePost] = useState("");
   const [allPosts, setAllPosts] = useState([]);
+  const [theValueAgain, setTheValueAgain] = useState(false);
 
   const token = auth();
+
   useEffect(() => {
     axios
       .get(`${URL}/api/posts`)
       .then((response) => {
         setAllPosts(response.data);
+        console.log("All Posts");
       })
       .catch((error) => {
         console.log("Error getting posts ", error);
       });
-  }, []);
+  }, [theValueAgain]);
+
+  // useEffect(() => {
+  //   let internalId;
+
+  //   if (theValue) {
+  //     internalId = setInterval(() => {
+  //       axios
+  //         .get(`${URL}/api/posts`)
+  //         .then((response) => {
+  //           setAllPosts(response.data);
+  //           console.log("All Posts");
+  //         })
+  //         .catch((error) => {
+  //           console.log("Error getting posts ", error);
+  //         });
+  //     }, 100);
+  //   }
+  //   return () => {
+  //     clearInterval(internalId);
+  //     setTheValue(false);
+  //   };
+  // }, [allPosts]);
   const handlePublishPost = (e) => {
     e.preventDefault();
     if (
@@ -48,11 +73,16 @@ const Home = () => {
       axios
         .post(`${URL}/api/posts`, postData, {
           headers: {
-            "authorization": token,
+            authorization: token,
           },
         })
         .then((response) => {
           console.log(response.data);
+          // window.location.reload();
+          setTheValueAgain(true);
+          setTimeout(() => {
+            setTheValueAgain(false);
+          }, 3000);
         })
         .catch((error) => {
           console.log("Error posting post ", error);
@@ -192,6 +222,8 @@ const Home = () => {
           <div className="flex flex-col p-4 bg-white gap-y-3">
             {allPosts.map((post) => (
               <PublishedPost
+                theValueAgain={theValueAgain}
+                setTheValueAgain={setTheValueAgain}
                 key={post._id}
                 id={post._id}
                 domaine={post.domaine}

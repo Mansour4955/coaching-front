@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { PiDotsThreeCircle } from "react-icons/pi";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import CommentCard from "./CommentCard";
@@ -18,6 +18,8 @@ const PublishedPost = ({
   likes,
   comments,
   domaine,
+  theValueAgain,
+  setTheValueAgain,
 }) => {
   const { getItem } = useLocalStorage("userData");
   const { getItem: auth } = useLocalStorage("Authorization");
@@ -26,6 +28,7 @@ const PublishedPost = ({
   );
   const [theComments, setTheComments] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
+  const [theValue, setTheValue] = useState(false);
   const theUser = getItem();
   const imageData = useGetImages(postPhoto);
   const [showMore, setShowMore] = useState(false);
@@ -47,6 +50,7 @@ const PublishedPost = ({
       .then((response) => {
         setTheLikes(response.data.likes.length);
         setIsLiked(response.data.likes.includes(theUser._id));
+        setTheValue(true);
       })
       .catch((error) => {
         // Handle error if needed
@@ -69,6 +73,11 @@ const PublishedPost = ({
       )
       .then((response) => {
         setTheComments(response.data);
+        setTheValue(true);
+        setTheValueAgain(true);
+        setTimeout(() => {
+          setTheValueAgain(false);
+        }, 3000);
       })
       .catch((error) => {
         // Handle error if needed
@@ -77,16 +86,27 @@ const PublishedPost = ({
 
     setWriteComment("");
   };
+
   useEffect(() => {
-    axios
-      .get(`${URL}/api/comments?postId=${id}`)
-      .then((response) => {
-        setTheComments(response.data);
-      })
-      .catch((error) => {
-        console.error("Error get comments of the post:", error.data);
-      });
-  }, [theComments]);
+    const internalId = setInterval(() => {
+      if (theValue || theValueAgain) {
+        axios
+          .get(`${URL}/api/comments?postId=${id}`)
+          .then((response) => {
+            setTheComments(response.data);
+            console.log("get comments ", response.data);
+          })
+          .catch((error) => {
+            console.error("Error get comments of the post:", error.data);
+          });
+      }
+    }, 0);
+
+    return () => {
+      clearInterval(internalId);
+      setTheValue(false);
+    };
+  }, [theComments, theValueAgain]);
 
   const hide = "overflow-hidden line-clamp-2";
   return (
@@ -179,6 +199,8 @@ const PublishedPost = ({
                 ? theComments?.map((comment) => (
                     <div key={comment._id}>
                       <CommentCard
+                      theValueAgain={theValueAgain}
+                      setTheValueAgain={setTheValueAgain}
                         level="main"
                         parentDevStyle="ml-0"
                         iconsSize="18"
@@ -200,6 +222,8 @@ const PublishedPost = ({
                             key={level1Item._id}
                           >
                             <CommentCard
+                            theValueAgain={theValueAgain}
+                            setTheValueAgain={setTheValueAgain}
                               level="level1"
                               parentCommentId={comment._id}
                               parentDevStyle="ml-2.5"
@@ -221,6 +245,8 @@ const PublishedPost = ({
                                   key={level2Item._id}
                                 >
                                   <CommentCard
+                                  theValueAgain={theValueAgain}
+                                  setTheValueAgain={setTheValueAgain}
                                     level="level2"
                                     parentCommentId={comment._id}
                                     parentDevStyle="ml-2.5"
@@ -238,6 +264,8 @@ const PublishedPost = ({
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
                                       <CommentCard
+                                      theValueAgain={theValueAgain}
+                                      setTheValueAgain={setTheValueAgain}
                                         level="level3"
                                         parentCommentId={comment._id}
                                         parentDevStyle="ml-2.5"
@@ -266,6 +294,8 @@ const PublishedPost = ({
                 ? theComments?.slice(0, 2).map((comment) => (
                     <div key={comment._id}>
                       <CommentCard
+                      theValueAgain={theValueAgain}
+                      setTheValueAgain={setTheValueAgain}
                         level="main"
                         parentDevStyle="ml-0"
                         iconsSize="18"
@@ -287,6 +317,8 @@ const PublishedPost = ({
                             key={level1Item._id}
                           >
                             <CommentCard
+                            theValueAgain={theValueAgain}
+                            setTheValueAgain={setTheValueAgain}
                               level="level1"
                               parentCommentId={comment._id}
                               parentDevStyle="ml-2.5"
@@ -308,6 +340,8 @@ const PublishedPost = ({
                                   key={level2Item._id}
                                 >
                                   <CommentCard
+                                  theValueAgain={theValueAgain}
+                                  setTheValueAgain={setTheValueAgain}
                                     level="level2"
                                     parentCommentId={comment._id}
                                     parentDevStyle="ml-2.5"
@@ -325,6 +359,8 @@ const PublishedPost = ({
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
                                       <CommentCard
+                                      theValueAgain={theValueAgain}
+                                      setTheValueAgain={setTheValueAgain}
                                         level="level3"
                                         parentCommentId={comment._id}
                                         parentDevStyle="ml-2.5"
@@ -352,6 +388,8 @@ const PublishedPost = ({
                 : theComments?.map((comment) => (
                     <div key={comment._id}>
                       <CommentCard
+                      theValueAgain={theValueAgain}
+                      setTheValueAgain={setTheValueAgain}
                         level="main"
                         parentDevStyle="ml-0"
                         iconsSize="18"
@@ -373,6 +411,8 @@ const PublishedPost = ({
                             key={level1Item._id}
                           >
                             <CommentCard
+                            theValueAgain={theValueAgain}
+                            setTheValueAgain={setTheValueAgain}
                               level="level1"
                               parentCommentId={comment._id}
                               parentDevStyle="ml-2.5"
@@ -394,6 +434,8 @@ const PublishedPost = ({
                                   key={level2Item._id}
                                 >
                                   <CommentCard
+                                  theValueAgain={theValueAgain}
+                                  setTheValueAgain={setTheValueAgain}
                                     level="level2"
                                     parentCommentId={comment._id}
                                     parentDevStyle="ml-2.5"
@@ -411,6 +453,8 @@ const PublishedPost = ({
                                   {level2Item?.level3?.length > 0 &&
                                     level2Item?.level3?.map((level3Item) => (
                                       <CommentCard
+                                      theValueAgain={theValueAgain}
+                                      setTheValueAgain={setTheValueAgain}
                                         level="level3"
                                         parentCommentId={comment._id}
                                         parentDevStyle="ml-2.5"

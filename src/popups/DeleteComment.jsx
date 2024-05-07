@@ -8,6 +8,8 @@ const DeleteComment = ({
   commentId,
   parentCommentId,
   level,
+  setTheValueAgain,
+  theValueAgain,
 }) => {
   const { getItem } = useLocalStorage("Authorization");
   const handleDeleteComment = () => {
@@ -23,6 +25,10 @@ const DeleteComment = ({
       )
       .then((response) => {
         console.log("comment has been deleted");
+        setTheValueAgain(true);
+        setTimeout(() => {
+          setTheValueAgain(false);
+        }, 3000);
       })
       .catch((error) => {
         console.log("error edit comment ", error.response);

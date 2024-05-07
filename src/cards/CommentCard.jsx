@@ -20,6 +20,8 @@ const CommentCard = ({
   level,
   parentCommentId,
   user,
+  setTheValueAgain,
+  theValueAgain,
 }) => {
   const [theUser, setTheUser] = useState(user);
   useEffect(() => {
@@ -36,7 +38,7 @@ const CommentCard = ({
       .catch((error) => {
         console.log("error getting users data ", error);
       });
-  }, []);
+  }, [theValueAgain]);
 
   const { getItem } = useLocalStorage("Authorization");
   const { getItem: theUserData } = useLocalStorage("userData");
@@ -69,6 +71,10 @@ const CommentCard = ({
         console.log("theUser._id ", theUser._id);
         console.log("theDataOfUser._id ", theDataOfUser._id);
         console.log("user ", user._id);
+        setTheValueAgain(true);
+        setTimeout(() => {
+          setTheValueAgain(false);
+        }, 3000);
       })
       .catch((error) => {
         console.log("error posting nested comment ", error.response);
@@ -91,7 +97,12 @@ const CommentCard = ({
           },
         }
       )
-      .then((response) => {})
+      .then((response) => {
+        setTheValueAgain(true);
+        setTimeout(() => {
+          setTheValueAgain(false);
+        }, 3000);
+      })
       .catch((error) => {
         console.log("error edit comment ", error.response);
       });
@@ -103,24 +114,13 @@ const CommentCard = ({
     >
       <div className="flex gap-2 ">
         <img
-          alt={
-            level === "main"
-              ? name
-              : theUser.username
-          }
-          src={
-            level === "main"
-              ? imageProfile
-              : theUser.profileImage
-          }
+          alt={level === "main" ? name : theUser.username}
+          src={level === "main" ? imageProfile : theUser.profileImage}
           className={`${imageStyle} rounded-full`}
         />
         <div className="flex flex-col ">
           <h4 className={`${nameStyle} font-semibold`}>
-            {level === "main"
-              ? name
-              : theUser.username
-              }
+            {level === "main" ? name : theUser.username}
           </h4>
           <span className={`${descAndDateStyle} text-gray-500`}>
             {moment(commentDate).fromNow()}
@@ -199,6 +199,8 @@ const CommentCard = ({
       {showDeleteCommentPopup && (
         <div className="absolute  left-0 min-h-[140px] right-0 flex items-center justify-center ">
           <DeleteComment
+            setTheValueAgain={setTheValueAgain}
+            theValueAgain={theValueAgain}
             setShowDeleteCommentPopup={setShowDeleteCommentPopup}
             commentId={commentId}
             level={level}
