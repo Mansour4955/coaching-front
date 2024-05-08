@@ -14,6 +14,7 @@ import { courses, cities, methods } from "../data";
 import { useSelector } from "react-redux";
 import LoggedOutUser from "../popups/LoggedOutUser";
 import { useLocalStorage } from "../hooks/useLocalStorege";
+import useGetImages from "../hooks/useGetImages";
 const Header = () => {
   const { getItem: getUserData } = useLocalStorage("userData");
   const { getItem } = useLocalStorage("Authorization");
@@ -43,6 +44,9 @@ const Header = () => {
     setShowFilter(false);
     console.log(filterByName);
   };
+  const imageOfUser = useGetImages(user?.profileImage);
+  
+  // user?.profileImage
   return (
     <div className="fixed right-0 left-0 top-0 z-50 bg-white px-4 py-3 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] flex justify-between items-center">
       <div className="flex gap-2 items-center">
@@ -214,7 +218,7 @@ const Header = () => {
             <Link to="/myprofile" className="flex gap-2 items-center">
               <img
                 alt=""
-                src={user?.profileImage}
+                src={imageOfUser[user.profileImage]}
                 className="w-8 h-8 rounded-[100%]"
               />
               <p className="font-bold text-gray-500">

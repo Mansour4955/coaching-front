@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
-import { coachCardInfo } from "../data";
+import { URL, coachCardInfo } from "../data";
 import CoachSingleCard from "../cards/CoachSingleCard";
 import { IoFilterCircleOutline, IoFilterCircle } from "react-icons/io5";
 import { courses, cities, methods } from "../data";
 import { IoSearchOutline } from "react-icons/io5";
+import axios from "axios";
 const CoachCards = () => {
   const [showAllCards, setShowAllCards] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
@@ -13,20 +14,47 @@ const CoachCards = () => {
   const [selectedMethod, setSelectedMethod] = useState("");
   const [filterByName, setFilterByName] = useState("");
   const [maxPrice, setMaxPrice] = useState(1000);
+  const [coachCards, setCoachCards] = useState([]);
   const handleFilter = (e) => {
     e.preventDefault();
+     axios
+      .get(`${URL}/api/users?role=coach&name=${filterByName}&city=${selectedCity}&method=${selectedMethod}&course=${selectedcourse}&maxPrice=${maxPrice}`)
+      .then((response) => {
+        setCoachCards(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching coaches data ", error.response);
+      });
     setShowFilter(false);
-    console.log(selectedcourse);
-    console.log(selectedCity);
-    console.log(selectedMethod);
-    console.log(filterByName);
-    console.log(maxPrice);
+    // console.log(selectedcourse);
+    // console.log(selectedCity);
+    // console.log(selectedMethod);
+    // console.log(filterByName);
+    // console.log(maxPrice);
   };
   const handleFilterBySearch = (e) => {
     e.preventDefault();
+     axios
+      .get(`${URL}/api/users?role=coach&name=${filterByName}`)
+      .then((response) => {
+        setCoachCards(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching coaches data ", error.response);
+      });
     setShowFilter(false);
-    console.log(filterByName);
+    // console.log(filterByName);
   };
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/users?role=coach`)
+      .then((response) => {
+        setCoachCards(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching coaches data ", error.response);
+      });
+  }, []);
   return (
     <div className="flex justify-center mb-10 gap-x-10 pt-5 px-4 bg-white_color">
       <div className="w-[70%] flex flex-col gap-10">
@@ -71,8 +99,8 @@ const CoachCards = () => {
                           className="outline-none"
                         >
                           <option className="outline-none" selected disabled>
-                          Choose a course
-                        </option>
+                            Choose a course
+                          </option>
                           {courses.map((course) => (
                             <option className="outline-none" key={course.id}>
                               {course.course}
@@ -89,8 +117,8 @@ const CoachCards = () => {
                           className="outline-none"
                         >
                           <option className="outline-none" selected disabled>
-                          Choose a city
-                        </option>
+                            Choose a city
+                          </option>
                           {cities.map((city) => (
                             <option className="outline-none" key={city.id}>
                               {city.city}
@@ -107,8 +135,8 @@ const CoachCards = () => {
                           className="outline-none"
                         >
                           <option className="outline-none" selected disabled>
-                          Choose a method
-                        </option>
+                            Choose a method
+                          </option>
                           {methods.map((method) => (
                             <option className="outline-none" key={method.id}>
                               {method.meetingType}
@@ -142,32 +170,32 @@ const CoachCards = () => {
           </div>
           <div className=" justify-items-center bg-white p-4 grid grid-cols-3 gap-5 max-xl:grid-cols-2 max-lg:grid-cols-1 ">
             {showAllCards
-              ? coachCardInfo.map((card) => (
+              ? coachCards.map((card) => (
                   <CoachSingleCard
-                    id={card.id}
-                    name={card.name}
+                    id={card._id}
+                    name={card.username}
                     city={card.city}
                     method={card.method}
                     profession={card.profession}
                     course={card.course}
-                    diplomas={card.diplomas}
+                    diplomas={card.education}
                     price={card.price}
-                    imageUrl={card.imageUrl}
+                    imageUrl={card.profileImage}
                   />
                 ))
-              : coachCardInfo
+              : coachCards
                   .slice(0, 6)
                   .map((card) => (
                     <CoachSingleCard
-                      id={card.id}
-                      name={card.name}
+                      id={card._id}
+                      name={card.username}
                       city={card.city}
                       method={card.method}
                       profession={card.profession}
                       course={card.course}
-                      diplomas={card.diplomas}
+                      diplomas={card.education}
                       price={card.price}
-                      imageUrl={card.imageUrl}
+                      imageUrl={card.profileImage}
                     />
                   ))}
             <button
@@ -178,7 +206,6 @@ const CoachCards = () => {
             </button>
           </div>
         </div>
-
       </div>
     </div>
   );

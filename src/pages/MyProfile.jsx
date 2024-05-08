@@ -4,6 +4,7 @@ import { useLocalStorage } from "../hooks/useLocalStorege";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { URL } from "../data";
+import useGetImages from "../hooks/useGetImages";
 const MyProfile = () => {
   const [user, setUser] = useState(null);
   const { getItem } = useLocalStorage("userData");
@@ -18,6 +19,7 @@ const MyProfile = () => {
       .get(`${URL}/api/users/${userId._id}`)
       .then((response) => {
         setUser(response.data);
+        console.log(response.data.profileImage);
       })
       .catch((error) => {
         console.log("Error fetching user data ", error.response);
@@ -30,7 +32,12 @@ const MyProfile = () => {
   });
   const averageStars = totalStars / numberOfReviewers;
   const resultStars = Math.round(averageStars);
-
+  const imageOfUser = useGetImages(user?.profileImage);
+  console.log(
+    "imageOfUser[user?.profileImage] ",
+    imageOfUser[user?.profileImage]
+  );
+  console.log("imageOfUser ", imageOfUser);
   return (
     <div className="bg-white_color pt-5 flex justify-center mb-10">
       <div className="w-[60%] max-sm:w-[95%] max-md:w-[90%] max-lg:w-[80%] max-xl:w-[70%]  flex-col flex min-h-[60vh]">
@@ -41,8 +48,8 @@ const MyProfile = () => {
                 <div className="flex flex-col gap-3">
                   <img
                     className="w-[160px] h-[160px] rounded-full mx-auto max-md:w-[140px] max-md:h-[140px]"
-                    alt={user?.profileImage}
-                    src={user?.profileImage}
+                    alt="profileImage"
+                    src={imageOfUser[user?.profileImage]}
                   />
                   <div className=" flex flex-col gap-3 ">
                     <div className="mx-auto flex flex-col justify-center items-center">
@@ -195,20 +202,22 @@ const MyProfile = () => {
             <div className="p-4 bg-white">
               <div className="flex flex-col items-center gap-2">
                 {user?.posts?.length > 0 ? (
-                  user?.posts.map((post) => (
-                    <PublishedPost
-                      key={post._id}
-                      id={post._id}
-                      domaine={post.domaine}
-                      full_name={user.username}
-                      description={post.description}
-                      profilePhoto={user.profileImage}
-                      postPhoto={post.postImage}
-                      date_of_publish={post.createdAt}
-                      likes={post.likes}
-                      comments={post.comments}
-                    />
-                  )).reverse()
+                  user?.posts
+                    .map((post) => (
+                      <PublishedPost
+                        key={post._id}
+                        id={post._id}
+                        domaine={post.domaine}
+                        full_name={user.username}
+                        description={post.description}
+                        profilePhoto={user.profileImage}
+                        postPhoto={post.postImage}
+                        date_of_publish={post.createdAt}
+                        likes={post.likes}
+                        comments={post.comments}
+                      />
+                    ))
+                    .reverse()
                 ) : (
                   <span className="text-main_color font-semibold">
                     This coach has no posts yet

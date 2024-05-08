@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useGetImages from "../hooks/useGetImages";
 
 const CoachStatisticsCard = ({
   full_name,
@@ -12,17 +13,17 @@ const CoachStatisticsCard = ({
   role,
 }) => {
   const [showMore, setShowMore] = useState(false);
-
+  const imageOfUser = useGetImages(profilePhoto);
   const hide = "overflow-hidden line-clamp-3";
   return (
     <div className="bg-white flex flex-col items-center gap-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
       <img
         className=" w-[80px] h-[80px] rounded-full mt-5"
-        alt={profilePhoto}
-        src={profilePhoto}
+        alt={imageOfUser[profilePhoto]}
+        src={imageOfUser[profilePhoto]}
       />
       <p className="font-bold text-lg">{full_name}</p>
-      <span className="text-gray-500 text-sm">{email}</span>
+      <span className="text-gray-500 text-sm pb-1">{email}</span>
       {role === "coach" && <span className="-mt-2 font-medium">{course}</span>}
       {role === "coach" && (
         <div className="px-2">

@@ -8,6 +8,7 @@ import { FaCamera } from "react-icons/fa";
 import Footer from "../components/Footer";
 import { useLocalStorage } from "../hooks/useLocalStorege";
 import axios from "axios";
+import useGetImages from "../hooks/useGetImages";
 const Home = () => {
   const { getItem: getUserData } = useLocalStorage("userData");
   const { getItem: auth } = useLocalStorage("Authorization");
@@ -110,6 +111,8 @@ const Home = () => {
       }
     }
   };
+
+  const imageOfUser = useGetImages(user?.profileImage);
   return (
     <div className="flex mb-10 gap-x-10 pt-5 px-4 bg-white_color">
       {isLoggedIn && (
@@ -138,8 +141,8 @@ const Home = () => {
             <div className="flex gap-4">
               <img
                 className="w-[50px] h-[50px] rounded-full"
-                alt=""
-                src={user?.profileImage}
+                alt={imageOfUser[user?.profileImage]}
+                src={imageOfUser[user?.profileImage]}
               />
               <div className="flex flex-col gap-1 w-full">
                 <textarea
