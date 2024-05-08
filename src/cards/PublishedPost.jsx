@@ -23,6 +23,7 @@ const PublishedPost = ({
   domaine,
   theValueAgain,
   setTheValueAgain,
+  idofuserofpost,
 }) => {
   const { getItem } = useLocalStorage("userData");
   const { getItem: auth } = useLocalStorage("Authorization");
@@ -42,6 +43,7 @@ const PublishedPost = ({
   const [showDeletePost, setShowDeletePost] = useState(false);
   const [showEditPost, setShowEditPost] = useState(false);
   const token = auth();
+
   const handleToggleLike = () => {
     axios
       .put(
@@ -118,6 +120,17 @@ const PublishedPost = ({
       setTheValue(false);
     };
   }, [theComments, theValueAgain]);
+  let theCoachProfile;
+  if (idofuserofpost) {
+    axios
+      .get(`${URL}/api/users/${idofuserofpost}`)
+      .then((response) => {
+        theCoachProfile = response.data;
+      })
+      .catch((error) => {
+        console.log("Error fetching coach profile data ", error.response);
+      });
+};
 
   const hide = "overflow-hidden line-clamp-2";
   return (
@@ -131,7 +144,9 @@ const PublishedPost = ({
           />
           <div className="flex flex-col">
             <p className="text-sm">
-              <span className="font-semibold text-base">{full_name}</span>{" "}
+              <span className="font-semibold text-base">
+                {theCoachProfile ? theCoachProfile?.username : full_name}
+              </span>{" "}
               published{" "}
               <span className="font-semibold text-base text-main_color">
                 a photo
@@ -541,6 +556,6 @@ const PublishedPost = ({
       </div>
     </div>
   );
-};
+}
 
 export default PublishedPost;

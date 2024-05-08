@@ -1,26 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PublishedPost from "../cards/PublishedPost";
-import { coachCardInfo, postInfo } from "../data";
+import { URL, coachCardInfo, postInfo } from "../data";
 import { MdOutlineStarPurple500, MdOutlineStarOutline } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import StarRating from "../StarRating";
 import Appointment from "../popups/Appointment";
+import axios from "axios";
+import useGetImages from "../hooks/useGetImages";
 const CoachProfile = () => {
-  const isLoggedIn = true
+  const isLoggedIn = true;
   const [reviewText, setReviewText] = useState("");
   const [showAppointment, setShowAppointment] = useState(false);
   const [rating, setRating] = useState(0);
   const [counter, setCounter] = useState(0);
+  const [user, setUser] = useState(null);
   const { coachProfileId } = useParams();
-  const coachProfileInfo = coachCardInfo.find(
-    (coachInfo) => coachInfo.id === parseInt(coachProfileId)
-  );
-  const coachProfilePosts = postInfo.filter(
-    (coachPosts) => coachPosts.id === parseInt(coachProfileId)
-  );
-  let numberOfReviewers = coachProfileInfo.reviews.length;
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/users/${coachProfileId}`)
+      .then((response) => {
+        setUser(response.data);
+        // console.log(response.data.profileImage);
+      })
+      .catch((error) => {
+        console.log("Error fetching user data ", error.response);
+      });
+  }, []);
+  // const coachProfileInfo = coachCardInfo.find(
+  //   (coachInfo) => coachInfo.id === parseInt(coachProfileId)
+  // );
+  // const coachProfilePosts = postInfo.filter(
+  //   (coachPosts) => coachPosts.id === parseInt(coachProfileId)
+  // );
+  let numberOfReviewers = user?.reviews.length;
   let totalStars = 0;
-  coachProfileInfo.reviews.forEach((review) => {
+  user?.reviews.forEach((review) => {
     totalStars += review.stars;
   });
   const averageStars = totalStars / numberOfReviewers;
@@ -31,24 +45,24 @@ const CoachProfile = () => {
   const handleReviewData = (e) => {
     e.preventDefault();
     console.log(reviewText);
-    console.log(rating);  
-    setCounter(counter + 1)
+    console.log(rating);
+    setCounter(counter + 1);
     setReviewText("");
   };
-  const {
-    id,
-    name,
-    city,
-    method,
-    profession,
-    course,
-    diplomas,
-    price,
-    imageUrl,
-  } = coachProfileInfo;
-  
+  // const {
+  //   id,
+  //   name,
+  //   city,
+  //   method,
+  //   profession,
+  //   course,
+  //   diplomas,
+  //   price,
+  //   imageUrl,
+  // } = coachProfileInfo;
+  const imageOfUser = useGetImages(user?.profileImage);
   const handleSendMessage = () => {
-    console.log("Send Message ",id);
+    console.log("Send Message ", user?._id);
   };
   return (
     <div className="bg-white_color pt-5 flex justify-center mb-10">
@@ -59,128 +73,140 @@ const CoachProfile = () => {
               <div className="flex flex-col gap-3">
                 <img
                   className="w-[160px] h-[160px] rounded-full mx-auto max-md:w-[140px] max-md:h-[140px]"
-                  alt={imageUrl}
-                  src={imageUrl}
+                  alt={imageOfUser[user?.profileImage]}
+                  src={imageOfUser[user?.profileImage]}
                 />
                 <div className=" flex flex-col gap-3 ">
                   <div className="mx-auto flex flex-col justify-center items-center">
                     <div className="flex flex-col gap-2 items-center justify-center">
                       <p className="font-semibold text-lg max-md:text-base">
-                        {name}{" "}
+                        {user?.username}{" "}
                         <span className="text-main_color font-medium text-sm max-md:text-xs">
-                          {profession}
+                          {user?.profession}
                         </span>
                       </p>
-                      <div className="text-yellow-500 flex items-center gap-[2px] text-xl max-md:text-lg">
-                        {Array.from({ length: resultStars }).map(
-                          (star, index) => (
-                            <p
-                              key={index}
-                              className="flex gap-[2px] items-center"
-                            >
-                              <span>
-                                <MdOutlineStarPurple500 />
-                              </span>
-                            </p>
-                          )
-                        )}
-                        {5 - resultStars > 0 &&
-                          Array.from({ length: 5 - resultStars }).map(
-                            (addedStar, index) => (
-                              <span
-                                className="flex items-center gap-0.5"
+                      {user?.reviews && user?.reviews?.length > 0 && (
+                        <div className="text-yellow-500 flex items-center gap-[2px] text-xl max-md:text-lg">
+                          {Array.from({ length: resultStars }).map(
+                            (star, index) => (
+                              <p
                                 key={index}
+                                className="flex gap-[2px] items-center"
                               >
-                                <p>
-                                  <MdOutlineStarOutline />
-                                </p>
-                              </span>
+                                <span>
+                                  <MdOutlineStarPurple500 />
+                                </span>
+                              </p>
                             )
                           )}
-                      </div>
-                     {isLoggedIn &&  <div className="flex gap-10 max-lg:gap-5">
-                        <p
-                          onClick={handleFollow}
-                          className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
-                        >
-                          Follow
-                        </p>
-                        <p
-                          onClick={()=>setShowAppointment(!showAppointment)}
-                          className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
-                        >
-                          Appointment
-                        </p>
-                        <p
-                          onClick={handleSendMessage}
-                          className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
-                        >
-                          Message
-                        </p>
-                      </div>}
-                      {showAppointment && <div>
-                        <Appointment setShowAppointment={setShowAppointment}/>
-                        </div>}
-                        
+                          {5 - resultStars > 0 &&
+                            Array.from({ length: 5 - resultStars }).map(
+                              (addedStar, index) => (
+                                <span
+                                  className="flex items-center gap-0.5"
+                                  key={index}
+                                >
+                                  <p>
+                                    <MdOutlineStarOutline />
+                                  </p>
+                                </span>
+                              )
+                            )}
+                        </div>
+                      )}
+                      {isLoggedIn && (
+                        <div className="flex gap-10 max-lg:gap-5">
+                          <p
+                            onClick={handleFollow}
+                            className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
+                          >
+                            Follow
+                          </p>
+                          <p
+                            onClick={() => setShowAppointment(!showAppointment)}
+                            className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
+                          >
+                            Appointment
+                          </p>
+                          <p
+                            onClick={handleSendMessage}
+                            className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
+                          >
+                            Message
+                          </p>
+                        </div>
+                      )}
+                      {showAppointment && (
+                        <div>
+                          <Appointment
+                            setShowAppointment={setShowAppointment}
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                   <p className="font-medium">
-                    {city}{" "}
+                    {user?.city}{" "}
                     <span className="text-main_color font-medium text-sm">
-                      ({method})
+                      ({user?.method})
                     </span>
                   </p>
                   <p className="font-medium">
-                    {course}{" "}
-                    <span className="text-sm text-gray-500">{diplomas}</span>
+                    {user?.course}{" "}
+                    <span className="text-sm text-gray-500">
+                      {user?.education}
+                    </span>
                   </p>
-                  <p className="text-gray-600 font-semibold">{price}MAD/h</p>
+                  <p className="text-gray-600 font-semibold">
+                    {user?.price}MAD/h
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col gap-5">
                 <div className="flex flex-col gap-2">
                   <h3 className="font-semibold text-lg">About Me:</h3>
                   <p className=" text-sm text-gray-700 font-medium">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Adipisci dicta, iste soluta et vitae suscipit provident ea
-                    neque, illum similique possimus. Natus facilis accusantium
-                    architecto vel cum sunt quod aspernatur!
+                    {user?.about}
                   </p>
                 </div>
                 <div className="flex flex-col gap-2">
                   <h3 className="font-semibold text-lg">Training:</h3>
                   <ul className="flex flex-col gap-1 text-sm text-gray-700 font-medium list-disc ml-4 capitalize">
-                    {coachProfileInfo.triningItems.map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
+                    {user?.trainings &&
+                      user?.trainings.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
                   </ul>
                 </div>
                 <div className="flex flex-col gap-2">
                   <h3 className="font-semibold text-lg ">Soft skills:</h3>
                   <div className="flex gap-2 flex-wrap">
-                    {coachProfileInfo.softSkillsItems.map((item, index) => (
-                      <span
-                        className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize max-md:text-xs"
-                        key={index}
-                      >
-                        {item}
-                      </span>
-                    ))}
+                    {user?.softSkills &&
+                      user?.softSkills.map((item, index) => (
+                        <span
+                          className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize max-md:text-xs"
+                          key={index}
+                        >
+                          {item}
+                        </span>
+                      ))}
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
                   <h3 className="font-semibold text-lg">Experience:</h3>
                   <ul className="flex flex-col gap-1 text-sm text-gray-700 font-medium list-disc ml-4 capitalize">
-                    {coachProfileInfo.experienceItems.map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
+                    {user?.experiences &&
+                      user?.experiences.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
                   </ul>
                 </div>
                 <div className="flex flex-col gap-2">
                   <h3 className="font-semibold ">Reviews:</h3>
                   <div className="flex flex-col gap-2">
-                    {coachProfileInfo.reviews.length > 0 &&
-                      coachProfileInfo.reviews.map((review, index) => (
+                    {user?.reviews &&
+                      user?.reviews.length > 0 &&
+                      user?.reviews.map((review, index) => (
                         <div key={index} className="flex flex-col gap-1">
                           <div className="flex gap-2">
                             <h3 className="font-semibold text-sm capitalize">
@@ -228,7 +254,7 @@ const CoachProfile = () => {
                     </p>
                     <div className="flex flex-col gap-1 items-start">
                       <div class="">
-                      <StarRating onRate={setRating} counter={counter}/>
+                        <StarRating onRate={setRating} counter={counter} />
                       </div>
                       <textarea
                         value={reviewText}
@@ -251,24 +277,45 @@ const CoachProfile = () => {
           </div>
           <div className="p-4 bg-white">
             <div className="flex flex-col items-center gap-2">
-              {coachProfilePosts.map((card) => (
-                <PublishedPost
-                  key={card.id}
-                  full_name={card.full_name}
-                  description={card.description}
-                  profilePhoto={card.profilePhoto}
-                  id={card.id}
-                  postPhoto={card.postPhoto}
-                  date_of_publish={card.date_of_publish}
-                  name={card.theComments.name}
-                  date={card.theComments.date}
-                  likes={card.theComments.likes}
-                  comments={card.theComments.comments}
-                />
-              ))}
+              {user?.posts.length > 0 ? (
+                user?.posts.map((post) => (
+                  // <PublishedPost
+                  //   key={card.id}
+                  //   full_name={card.full_name}
+                  //   description={card.description}
+                  //   profilePhoto={card.profilePhoto}
+                  //   id={card.id}
+                  //   postPhoto={card.postPhoto}
+                  //   date_of_publish={card.date_of_publish}
+                  //   name={card.theComments.name}
+                  //   date={card.theComments.date}
+                  //   likes={card.theComments.likes}
+                  //   comments={card.theComments.comments}
+                  // />
+
+                  <PublishedPost
+                    // theValueAgain={theValueAgain}
+                    // setTheValueAgain={setTheValueAgain}
+                    key={post._id}
+                    id={post._id}
+                    domaine={post.domaine}
+                    full_name={post.user.username}
+                    description={post.description}
+                    profilePhoto={post.user.profileImage}
+                    postPhoto={post.postImage}
+                    date_of_publish={post.createdAt}
+                    likes={post.likes}
+                    comments={post.comments}
+                    idofuserofpost={coachProfileId}
+                  />
+                ))
+              ) : (
+                <span className="text-main_color font-semibold">
+                  This coach has no posts yet
+                </span>
+              )}
             </div>
           </div>
-
         </div>
       </div>
     </div>
