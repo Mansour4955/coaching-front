@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorege";
 const Footer = () => {
   const { getItem } = useLocalStorage("Authorization");
+  const { getItem: getUserData } = useLocalStorage("userData");
   // const { user } = useSelector((state) => state.auth);
   const token = getItem();
   const isLoggedIn = token ? true : false;
+  const user = getUserData();
   return (
     <div className="bg-white  px-4 pt-4 pb-8 items-center justify-center w-full flex flex-col gap-5">
       <p className="text-base font-semibold text-main_color text-center">
@@ -39,12 +41,14 @@ const Footer = () => {
             >
               Notification
             </Link>
-            <Link
-              className="border-b border-b-transparent hover:border-b-main_color duration-150 hover:text-main_color"
-              to="/myprofile"
-            >
-              my Profile
-            </Link>
+            {user.role === "coach" && (
+              <Link
+                className="border-b border-b-transparent hover:border-b-main_color duration-150 hover:text-main_color"
+                to="/myprofile"
+              >
+                my Profile
+              </Link>
+            )}
             <Link
               className="border-b border-b-transparent hover:border-b-main_color duration-150 hover:text-main_color"
               to="/rendez-vous"

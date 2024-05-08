@@ -43,27 +43,6 @@ const Home = () => {
       });
   }, [theValueAgain]);
 
-  // useEffect(() => {
-  //   let internalId;
-
-  //   if (theValue) {
-  //     internalId = setInterval(() => {
-  //       axios
-  //         .get(`${URL}/api/posts`)
-  //         .then((response) => {
-  //           setAllPosts(response.data);
-  //           console.log("All Posts");
-  //         })
-  //         .catch((error) => {
-  //           console.log("Error getting posts ", error);
-  //         });
-  //     }, 100);
-  //   }
-  //   return () => {
-  //     clearInterval(internalId);
-  //     setTheValue(false);
-  //   };
-  // }, [allPosts]);
   const handlePublishPost = (e) => {
     e.preventDefault();
     if (

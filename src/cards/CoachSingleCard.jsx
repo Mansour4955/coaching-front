@@ -20,7 +20,7 @@ const CoachSingleCard = ({
           className={`relative bg-cover bg-center w-full h-[300px] rounded-lg`}
           style={{ backgroundImage: `url(${imageData[imageUrl]})` }}
         >
-          <div className="absolute left-2 text-white bottom-1">
+          <div className="absolute left-2 bottom-1 text-main_color">
             <p className="font-bold text-lg">{name}</p>
             <p className="font-semibold">
               {city} <span className="text-sm">({method})</span>

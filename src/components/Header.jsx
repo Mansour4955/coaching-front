@@ -10,12 +10,15 @@ import {
   IoNotifications,
   IoSearchOutline,
 } from "react-icons/io5";
-import { courses, cities, methods } from "../data";
-import { useSelector } from "react-redux";
+import { courses, cities, methods, URL } from "../data";
+import { useDispatch, useSelector } from "react-redux";
 import LoggedOutUser from "../popups/LoggedOutUser";
+import { changeCoach, changeLoading } from "../redux/coachDataSlice";
 import { useLocalStorage } from "../hooks/useLocalStorege";
 import useGetImages from "../hooks/useGetImages";
+import axios from "axios";
 const Header = () => {
+  const dispatch = useDispatch();
   const { getItem: getUserData } = useLocalStorage("userData");
   const { getItem } = useLocalStorage("Authorization");
   const user = getUserData();
@@ -28,25 +31,60 @@ const Header = () => {
   const [selectedMethod, setSelectedMethod] = useState("");
   const [filterByName, setFilterByName] = useState("");
   const [maxPrice, setMaxPrice] = useState(1000);
+  // const handleFilter = (e) => {
+  //   e.preventDefault();
+  //   navigate("/coachCards");
+  //   setShowFilter(false);
+  //   console.log(selectedcourse);
+  //   console.log(selectedCity);
+  //   console.log(selectedMethod);
+  //   console.log(filterByName);
+  //   console.log(maxPrice);
+  // };
+  // const handleFilterBySearch = (e) => {
+  //   e.preventDefault();
+  //   navigate("/coachCards");
+  //   setShowFilter(false);
+  //   console.log(filterByName);
+  // };
+
   const handleFilter = (e) => {
     e.preventDefault();
-    navigate("/coachCards");
+    axios
+      .get(
+        `${URL}/api/users?role=coach&name=${filterByName}&city=${selectedCity}&method=${selectedMethod}&course=${selectedcourse}&maxPrice=${maxPrice}`
+      )
+      .then((response) => {
+        // setCoachCards(response.data);
+        navigate("/coachCards");
+        setShowFilter(false);
+        console.log(response.data);
+        dispatch(changeCoach(response.data));
+        dispatch(changeLoading(true));
+      })
+      .catch((error) => {
+        console.log("Error fetching coaches data ", error.response);
+      });
     setShowFilter(false);
-    console.log(selectedcourse);
-    console.log(selectedCity);
-    console.log(selectedMethod);
-    console.log(filterByName);
-    console.log(maxPrice);
   };
   const handleFilterBySearch = (e) => {
     e.preventDefault();
-    navigate("/coachCards");
+    axios
+      .get(`${URL}/api/users?role=coach&name=${filterByName}`)
+      .then((response) => {
+        // setCoachCards(response.data);
+        navigate("/coachCards");
+        setShowFilter(false);
+        console.log(response.data);
+        dispatch(changeCoach(response.data));
+        dispatch(changeLoading(true));
+      })
+      .catch((error) => {
+        console.log("Error fetching coaches data ", error.response);
+      });
     setShowFilter(false);
-    console.log(filterByName);
   };
   const imageOfUser = useGetImages(user?.profileImage);
-  
-  // user?.profileImage
   return (
     <div className="fixed right-0 left-0 top-0 z-50 bg-white px-4 py-3 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] flex justify-between items-center">
       <div className="flex gap-2 items-center">
@@ -215,16 +253,29 @@ const Header = () => {
         </div>
         {isLoggedIn ? (
           <div className="relative group">
-            <Link to="/myprofile" className="flex gap-2 items-center">
-              <img
-                alt=""
-                src={imageOfUser[user.profileImage]}
-                className="w-8 h-8 rounded-[100%]"
-              />
-              <p className="font-bold text-gray-500">
-                {user?.username?.split(" ")[0]}
-              </p>
-            </Link>
+            {user.role === "coach" ? (
+              <Link to="/myprofile" className="flex gap-2 items-center">
+                <img
+                  alt=""
+                  src={imageOfUser[user.profileImage]}
+                  className="w-8 h-8 rounded-[100%]"
+                />
+                <p className="font-bold text-gray-500">
+                  {user?.username?.split(" ")[0]}
+                </p>
+              </Link>
+            ) : (
+              <div to="/myprofile" className="flex gap-2 items-center">
+                <img
+                  alt=""
+                  src={imageOfUser[user.profileImage]}
+                  className="w-8 h-8 rounded-[100%]"
+                />
+                <p className="font-bold text-gray-500">
+                  {user?.username?.split(" ")[0]}
+                </p>
+              </div>
+            )}
             <div className="absolute top-[100%] right-0 hidden duration-200 group-hover:block">
               <LoggedOutUser />
             </div>

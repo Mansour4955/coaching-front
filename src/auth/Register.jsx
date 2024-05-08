@@ -242,6 +242,7 @@ const Register = () => {
             username,
             email,
             password,
+            role
           })
           .then((response) => {
             navigate("/login");

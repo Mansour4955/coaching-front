@@ -6,6 +6,8 @@ import { IoFilterCircleOutline, IoFilterCircle } from "react-icons/io5";
 import { courses, cities, methods } from "../data";
 import { IoSearchOutline } from "react-icons/io5";
 import axios from "axios";
+import { changeLoading } from "../redux/coachDataSlice";
+import { useDispatch, useSelector } from "react-redux";
 const CoachCards = () => {
   const [showAllCards, setShowAllCards] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
@@ -15,10 +17,13 @@ const CoachCards = () => {
   const [filterByName, setFilterByName] = useState("");
   const [maxPrice, setMaxPrice] = useState(1000);
   const [coachCards, setCoachCards] = useState([]);
+  const dispatch = useDispatch();
   const handleFilter = (e) => {
     e.preventDefault();
-     axios
-      .get(`${URL}/api/users?role=coach&name=${filterByName}&city=${selectedCity}&method=${selectedMethod}&course=${selectedcourse}&maxPrice=${maxPrice}`)
+    axios
+      .get(
+        `${URL}/api/users?role=coach&name=${filterByName}&city=${selectedCity}&method=${selectedMethod}&course=${selectedcourse}&maxPrice=${maxPrice}`
+      )
       .then((response) => {
         setCoachCards(response.data);
       })
@@ -26,15 +31,10 @@ const CoachCards = () => {
         console.log("Error fetching coaches data ", error.response);
       });
     setShowFilter(false);
-    // console.log(selectedcourse);
-    // console.log(selectedCity);
-    // console.log(selectedMethod);
-    // console.log(filterByName);
-    // console.log(maxPrice);
   };
   const handleFilterBySearch = (e) => {
     e.preventDefault();
-     axios
+    axios
       .get(`${URL}/api/users?role=coach&name=${filterByName}`)
       .then((response) => {
         setCoachCards(response.data);
@@ -43,7 +43,6 @@ const CoachCards = () => {
         console.log("Error fetching coaches data ", error.response);
       });
     setShowFilter(false);
-    // console.log(filterByName);
   };
   useEffect(() => {
     axios
@@ -55,6 +54,17 @@ const CoachCards = () => {
         console.log("Error fetching coaches data ", error.response);
       });
   }, []);
+  const { loading, coaches } = useSelector((state) => state.coach);
+  useEffect(() => {
+    setTimeout(() => {
+      if (loading) {
+        setCoachCards(coaches);
+      }
+    }, 100);
+    return () => {
+      dispatch(changeLoading(false));
+    };
+  }, [loading]);
   return (
     <div className="flex justify-center mb-10 gap-x-10 pt-5 px-4 bg-white_color">
       <div className="w-[70%] flex flex-col gap-10">

@@ -96,6 +96,7 @@ const PublishedPost = ({
 
     setWriteComment("");
   };
+  const imageOfUser = useGetImages(profilePhoto);
 
   useEffect(() => {
     const internalId = setInterval(() => {
@@ -125,8 +126,8 @@ const PublishedPost = ({
         <div className="flex gap-3">
           <img
             className="w-[50px] h-[50px] rounded-full"
-            alt={profilePhoto}
-            src={profilePhoto}
+            alt={imageOfUser[profilePhoto]}
+            src={imageOfUser[profilePhoto]}
           />
           <div className="flex flex-col">
             <p className="text-sm">
