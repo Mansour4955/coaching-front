@@ -6,6 +6,7 @@ import moment from "moment";
 import axios from "axios";
 import { URL } from "../data";
 import { useLocalStorage } from "../hooks/useLocalStorege";
+import useGetImages from "../hooks/useGetImages";
 const CommentCard = ({
   commentId,
   name,
@@ -23,6 +24,7 @@ const CommentCard = ({
   setTheValueAgain,
   theValueAgain,
 }) => {
+  const imageOfUser = useGetImages(imageProfile);
   const [theUser, setTheUser] = useState({});
   useEffect(() => {
     console.log("theUser._id ", theUser._id);
@@ -115,7 +117,7 @@ const CommentCard = ({
       <div className="flex gap-2 ">
         <img
           alt={level === "main" ? name : theUser.username}
-          src={level === "main" ? imageProfile : theUser.profileImage}
+          src={imageOfUser[imageProfile]}
           className={`${imageStyle} rounded-full`}
         />
         <div className="flex flex-col ">

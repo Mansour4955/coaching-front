@@ -4,7 +4,6 @@ import { IoIosSend } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { URL } from "../data";
-import { FaCamera } from "react-icons/fa";
 const Register = () => {
   const navigate = useNavigate();
   // Set data
@@ -27,9 +26,7 @@ const Register = () => {
   const [fillTheExperiences, setFillTheExperiences] = useState([]);
   const [softSkill, setSoftSkill] = useState("");
   const [fillTheSoftSkills, setFillTheSoftSkills] = useState([]);
-  const [picture, setPicture] = useState(null);
   // Set errors
-  const [errorPicture, setErrorPicture] = useState("");
   const [errorPrice, setErrorPrice] = useState("");
   const [errorAbout, setErrorAbout] = useState("");
   const [errorDescription, setErrorDescription] = useState("");
@@ -106,30 +103,26 @@ const Register = () => {
         password &&
         password.length >= 8 &&
         cPassword &&
-        cPassword === password &&
-        picture &&
-        picture !== null
+        cPassword === password
       ) {
-        const registerData = new FormData();
-        registerData.append("image", picture);
-        registerData.append("username", username);
-        registerData.append("email", email);
-        registerData.append("password", password);
-        registerData.append("role", role);
-        registerData.append("profession", profession);
-        registerData.append("course", course);
-        registerData.append("city", city);
-        registerData.append("method", method);
-        registerData.append("price", price);
-        registerData.append("about", about);
-        registerData.append("education", description);
-        registerData.append("trainings", fillTheTrinings);
-        registerData.append("softSkills", fillTheSoftSkills);
-        registerData.append("experiences", fillTheExperiences);
         axios
-          .post(`${URL}/api/auth/register`, registerData)
+          .post(`${URL}/api/auth/register`, {
+            username,
+            email,
+            password,
+            role,
+            profession,
+            course,
+            city,
+            method,
+            price,
+            education: description,
+            about,
+            trainings: fillTheTrinings,
+            softSkills: fillTheSoftSkills,
+            experiences: fillTheExperiences,
+          })
           .then((response) => {
-            console.log(response.data);
             navigate("/login");
           })
           .catch((error) => {
@@ -230,10 +223,6 @@ const Register = () => {
         } else if (cPassword !== password) {
           setErrorCPassword("Confirm password does not match");
         }
-        // image
-        if (!picture) {
-          setErrorPicture("Profile picture is required!");
-        }
       }
     } else {
       if (
@@ -246,20 +235,15 @@ const Register = () => {
         cPassword &&
         cPassword === password &&
         role &&
-        role === "client" &&
-        picture &&
-        picture !== null
+        role === "client"
       ) {
-        const registerData = new FormData();
-        registerData.append("image", picture);
-        registerData.append("username", username);
-        registerData.append("email", email);
-        registerData.append("password", password);
-        registerData.append("role", role);
         axios
-          .post(`${URL}/api/auth/register`, registerData)
+          .post(`${URL}/api/auth/register`, {
+            username,
+            email,
+            password,
+          })
           .then((response) => {
-            console.log(response.data);
             navigate("/login");
           })
           .catch((error) => {
@@ -299,10 +283,6 @@ const Register = () => {
         //role
         if (!role) {
           setErrorRole("Role is required");
-        }
-        // image
-        if (!picture) {
-          setErrorPicture("Profile picture is required!");
         }
       }
     }
@@ -388,30 +368,6 @@ const Register = () => {
                     </p>
                   )}
                 </label>
-
-                <label
-                  htmlFor="picture"
-                  className="flex gap-1 flex-col text-black cursor-pointer"
-                >
-                  <span className="font-semibold ml-1">Photo</span>
-
-                  <span className="caret-main_color px-2 py-2 flex items-center justify-center rounded-xl outline-none border w-full border-main_color">
-                    <FaCamera size={16} />
-                  </span>
-                  <input
-                    onChange={(e) => {
-                      setPicture(e.target.files[0]);
-                      setErrorPicture("");
-                    }}
-                    type="file"
-                    className="hidden"
-                    id="picture"
-                  />
-                  {errorPicture && (
-                    <p className="text-red-600 text-sm ml-1">{errorPicture}</p>
-                  )}
-                </label>
-
                 <div className="flex flex-col w-full">
                   <label className="font-semibold ml-1">
                     Are you a coach or a client?
