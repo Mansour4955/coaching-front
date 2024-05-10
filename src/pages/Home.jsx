@@ -23,6 +23,7 @@ const Home = () => {
   const [errorImagePost, setErrorImagePost] = useState("");
   const [allPosts, setAllPosts] = useState([]);
   const [theValueAgain, setTheValueAgain] = useState(false);
+  const [coachCards, setCoachCards] = useState([]);
 
   const token = auth();
   useEffect(() => {
@@ -90,6 +91,16 @@ const Home = () => {
       }
     }
   };
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/users?role=coach`)
+      .then((response) => {
+        setCoachCards(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching coaches data ", error.response);
+      });
+  }, []);
 
   const imageOfUser = useGetImages(user?.profileImage);
   return (
@@ -235,28 +246,29 @@ const Home = () => {
         <div className=" flex flex-col rounded-lg p-4 bg-white h-fit">
           <div className="flex flex-col gap-2 items-center">
             {showMoreCoachCards
-              ? coachCard.map((card) => (
+              ? coachCards.map((card) => (
                   <CoachCard
-                    key={card.id}
-                    full_name={card.full_name}
-                    description={card.description}
-                    profilePhoto={card.profilePhoto}
-                    id={card.id}
-                    domaine={card.domaine}
+                    key={card._id}
+                    id={card._id}
+                    full_name={card.username}
+                    description={card.education}
+                    profilePhoto={card.profileImage}
+                    domaine={card.course}
                   />
-                ))
-              : coachCard
+                )).reverse()
+              : coachCards
                   .slice(0, 3)
                   .map((card) => (
                     <CoachCard
-                      key={card.id}
-                      full_name={card.full_name}
-                      description={card.description}
-                      profilePhoto={card.profilePhoto}
-                      id={card.id}
-                      domaine={card.domaine}
+                      key={card._id}
+                      id={card._id}
+                      full_name={card.username}
+                      description={card.education}
+                      profilePhoto={card.profileImage}
+                      domaine={card.course}
                     />
-                  ))}
+                  )).reverse()
+                  }
             <button
               className="flex w-full items-center justify-center px-2 border border-main_color rounded-xl font-semibold text-main_color duration-300 hover:bg-main_color hover:text-white"
               onClick={() => setShowMoreCoachCards(!showMoreCoachCards)}
