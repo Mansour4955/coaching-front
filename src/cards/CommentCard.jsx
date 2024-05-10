@@ -110,6 +110,11 @@ const CommentCard = ({
       });
     setEdit(false);
   };
+  const imageOfUserWhoReply = useGetImages(theUser?.profileImage);
+  const imageOfUserBeforeReplyOrEdit = useGetImages(
+    theDataOfUser?.profileImage
+  );
+
   return (
     <div
       className={`${parentDevStyle} bg-gray-100 rounded-lg mb-2 p-2 flex-col flex `}
@@ -117,7 +122,11 @@ const CommentCard = ({
       <div className="flex gap-2 ">
         <img
           alt={level === "main" ? name : theUser.username}
-          src={imageOfUser[imageProfile]}
+          src={
+            level === "main"
+              ? imageOfUser[imageProfile]
+              : imageOfUserWhoReply[theUser?.profileImage]
+          }
           className={`${imageStyle} rounded-full`}
         />
         <div className="flex flex-col ">
@@ -131,7 +140,7 @@ const CommentCard = ({
       </div>
       <p className={`${descAndDateStyle} text-gray-700 `}>{comment}</p>
       <div className="flex items-center gap-2 mt-1">
-        {user._id == theDataOfUser._id && (
+        {theUser._id === theDataOfUser._id && (
           <div className="flex items-center gap-2 mt-1">
             <p
               onClick={() => setShowDeleteCommentPopup(!showDeleteCommentPopup)}
@@ -158,7 +167,7 @@ const CommentCard = ({
         <div className="flex mt-2">
           <img
             alt=""
-            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+            src={imageOfUserBeforeReplyOrEdit[theDataOfUser?.profileImage]}
             className="border-2 border-white rounded-full w-[32px] h-[32px] mr-2"
           />
           <input
@@ -180,7 +189,7 @@ const CommentCard = ({
         <div className="flex mt-2">
           <img
             alt=""
-            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+            src={imageOfUserBeforeReplyOrEdit[theDataOfUser?.profileImage]}
             className="border-2 border-white rounded-full w-[32px] h-[32px] mr-2"
           />
           <input

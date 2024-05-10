@@ -99,6 +99,7 @@ const PublishedPost = ({
     setWriteComment("");
   };
   const imageOfUser = useGetImages(profilePhoto);
+  const imageOfUserInEveryPostComments = useGetImages(theUser?.profileImage);
 
   useEffect(() => {
     const internalId = setInterval(() => {
@@ -130,7 +131,7 @@ const PublishedPost = ({
       .catch((error) => {
         console.log("Error fetching coach profile data ", error.response);
       });
-};
+  }
 
   const hide = "overflow-hidden line-clamp-2";
   return (
@@ -157,45 +158,47 @@ const PublishedPost = ({
             </span>
           </div>
         </div>
-        <div className="relative">
-          <span
-            onClick={() => setPostPopup(true)}
-            className="font-bold text-gray-500 cursor-pointer"
-          >
-            <PiDotsThreeCircle size={20} />
-          </span>
-          {postPopup && (
-            <div className={`absolute top-[100%] right-0`}>
-              <PostPopup
-                setShowDeletePost={setShowDeletePost}
-                setShowEditPost={setShowEditPost}
-                setPostPopup={setPostPopup}
-              />
-            </div>
-          )}
-          {showEditPost && (
-            <div className={`absolute top-[100%] right-0 `}>
-              <EditPost
-                setShowEditPost={setShowEditPost}
-                id={id}
-                theValueAgain={theValueAgain}
-                setTheValueAgain={setTheValueAgain}
-                description={description}
-              />
-            </div>
-          )}
-          {showDeletePost && (
-            <div className={`absolute top-[100%] right-0`}>
-              <DeletePost
-                setShowDeletePost={setShowDeletePost}
-                setPostPopup={setPostPopup}
-                id={id}
-                theValueAgain={theValueAgain}
-                setTheValueAgain={setTheValueAgain}
-              />
-            </div>
-          )}
-        </div>
+        {theUser?._id === idofuserofpost  && (
+          <div className="relative">
+            <span
+              onClick={() => setPostPopup(true)}
+              className="font-bold text-gray-500 cursor-pointer"
+            >
+              <PiDotsThreeCircle size={20} />
+            </span>
+            {postPopup && (
+              <div className={`absolute top-[100%] right-0`}>
+                <PostPopup
+                  setShowDeletePost={setShowDeletePost}
+                  setShowEditPost={setShowEditPost}
+                  setPostPopup={setPostPopup}
+                />
+              </div>
+            )}
+            {showEditPost && (
+              <div className={`absolute top-[100%] right-0 `}>
+                <EditPost
+                  setShowEditPost={setShowEditPost}
+                  id={id}
+                  theValueAgain={theValueAgain}
+                  setTheValueAgain={setTheValueAgain}
+                  description={description}
+                />
+              </div>
+            )}
+            {showDeletePost && (
+              <div className={`absolute top-[100%] right-0`}>
+                <DeletePost
+                  setShowDeletePost={setShowDeletePost}
+                  setPostPopup={setPostPopup}
+                  id={id}
+                  theValueAgain={theValueAgain}
+                  setTheValueAgain={setTheValueAgain}
+                />
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <div>
         <p className={`text-gray-500  ${!showMore ? hide : ""}`}>
@@ -237,7 +240,7 @@ const PublishedPost = ({
         <div className="flex mb-2">
           <img
             alt=""
-            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+            src={imageOfUserInEveryPostComments[theUser?.profileImage]}
             className="rounded-full w-[40px] h-[40px] mr-2"
           />
           <input
@@ -556,6 +559,6 @@ const PublishedPost = ({
       </div>
     </div>
   );
-}
+};
 
 export default PublishedPost;

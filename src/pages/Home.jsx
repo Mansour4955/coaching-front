@@ -221,6 +221,7 @@ const Home = () => {
                 date_of_publish={post.createdAt}
                 likes={post.likes}
                 comments={post.comments}
+                idofuserofpost={post.user._id}
               />
             ))}
           </div>

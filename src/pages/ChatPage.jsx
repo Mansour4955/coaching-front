@@ -1,5 +1,4 @@
 import ConversationChat from "../components/ConversationChat";
-import Footer from "../components/Footer";
 import SidebarChat from "../components/SidebarChat";
 
 const ChatPage = () => {
@@ -14,8 +13,6 @@ const ChatPage = () => {
           </div>
           </div>
         </div>
-
-
       </div>
     </div>
   );

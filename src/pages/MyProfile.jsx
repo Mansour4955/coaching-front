@@ -215,6 +215,7 @@ const MyProfile = () => {
                         date_of_publish={post.createdAt}
                         likes={post.likes}
                         comments={post.comments}
+                        idofuserofpost={user._id}
                       />
                     ))
                     .reverse()
