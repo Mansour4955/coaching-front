@@ -15,7 +15,7 @@ const CoachSingleCard = ({
   const imageData = useGetImages(imageUrl);
   return (
     <Link to={`${id}`}>
-      <div className=" duration-300 h-fit hover:shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] cursor-pointer bg-white min-w-[266px] max-md:min-w-[216px] flex flex-col p-2 gap-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg col-span-1">
+      <div className=" duration-300 w-full h-fit hover:shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] cursor-pointer bg-white min-w-[266px] max-md:min-w-[216px] flex flex-col p-2 gap-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg col-span-1">
         <div
           className={`relative bg-cover bg-center w-full h-[300px] rounded-lg`}
           style={{ backgroundImage: `url(${imageData[imageUrl]})` }}

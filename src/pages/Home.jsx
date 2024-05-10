@@ -108,15 +108,15 @@ const Home = () => {
       {isLoggedIn && (
         <div className="w-[25%]  rounded-lg p-4 bg-white gap-y-3 h-fit max-xl:hidden">
           <CoachStatisticsCard
-            key={user._id}
-            id={user._id}
-            full_name={user.username}
+            key={user?._id}
+            id={user?._id}
+            full_name={user?.username}
             email={user.email}
             course={user.course}
             description={user.education}
             followers={user.followers}
             following={user.following}
-            profilePhoto={user.profileImage}
+            profilePhoto={user?.profileImage}
             role={user.role}
           />
         </div>
@@ -222,17 +222,17 @@ const Home = () => {
               <PublishedPost
                 theValueAgain={theValueAgain}
                 setTheValueAgain={setTheValueAgain}
-                key={post._id}
-                id={post._id}
+                key={post?._id}
+                id={post?._id}
                 domaine={post.domaine}
-                full_name={post.user.username}
+                full_name={post.user?.username}
                 description={post.description}
-                profilePhoto={post.user.profileImage}
+                profilePhoto={post.user?.profileImage}
                 postPhoto={post.postImage}
                 date_of_publish={post.createdAt}
                 likes={post.likes}
                 comments={post.comments}
-                idofuserofpost={post.user._id}
+                idofuserofpost={post.user?._id}
               />
             ))}
           </div>
@@ -248,11 +248,11 @@ const Home = () => {
             {showMoreCoachCards
               ? coachCards.map((card) => (
                   <CoachCard
-                    key={card._id}
-                    id={card._id}
-                    full_name={card.username}
+                    key={card?._id}
+                    id={card?._id}
+                    full_name={card?.username}
                     description={card.education}
-                    profilePhoto={card.profileImage}
+                    profilePhoto={card?.profileImage}
                     domaine={card.course}
                   />
                 )).reverse()
@@ -260,11 +260,11 @@ const Home = () => {
                   .slice(0, 3)
                   .map((card) => (
                     <CoachCard
-                      key={card._id}
-                      id={card._id}
-                      full_name={card.username}
+                      key={card?._id}
+                      id={card?._id}
+                      full_name={card?.username}
                       description={card.education}
-                      profilePhoto={card.profileImage}
+                      profilePhoto={card?.profileImage}
                       domaine={card.course}
                     />
                   )).reverse()
