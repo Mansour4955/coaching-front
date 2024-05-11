@@ -8,7 +8,7 @@ import { URL } from "../data";
 import useGetImages from "../hooks/useGetImages";
 import { changeChat } from "../redux/changeChatConversation";
 import { PiDotsThreeCircle } from "react-icons/pi";
-const ConversationChat = () => {
+const ConversationChat = ({ setCount }) => {
   const dispatch = useDispatch();
   const { getItem } = useLocalStorage("userData");
   const { getItem: getToken } = useLocalStorage("Authorization");
@@ -63,6 +63,8 @@ const ConversationChat = () => {
       })
       .then((response) => {
         dispatch(changeChat(null));
+        setCurrentChat(null);
+        setCount((n) => (n += 1));
         console.log(response.data);
         setShowDeleteChat(false);
       })

@@ -6,7 +6,7 @@ import { URL, conversations } from "../data";
 import { IoSearchOutline } from "react-icons/io5";
 import axios from "axios";
 import { useLocalStorage } from "../hooks/useLocalStorege";
-const SidebarChat = () => {
+const SidebarChat = ({ count }) => {
   const { getItem } = useLocalStorage("Authorization");
   const token = getItem();
   const [filterByName, setFilterByName] = useState("");
@@ -34,7 +34,7 @@ const SidebarChat = () => {
         // Handle error if needed
         console.error("Error getting chats ", error.response);
       });
-  }, []);
+  }, [count]);
   return (
     <div className=" flex-col flex-1 min-h-[50vh]  border-r border-main_color mr-1">
       <div className="flex justify-between bg-main_color items-center mb-2 py-2 gap-1 pr-2">
