@@ -7,15 +7,17 @@ import axios from "axios";
 import { URL } from "../data";
 import useGetImages from "../hooks/useGetImages";
 import { changeChat } from "../redux/changeChatConversation";
+import { PiDotsThreeCircle } from "react-icons/pi";
 const ConversationChat = () => {
   const dispatch = useDispatch();
   const { getItem } = useLocalStorage("userData");
   const { getItem: getToken } = useLocalStorage("Authorization");
   const token = getToken();
   const dataOfUser = getItem();
+  const [showDeleteChat, setShowDeleteChat] = useState(false);
   const [currentChat, setCurrentChat] = useState();
   const [sendMessage, setSendMessage] = useState("");
-
+  const theOwnerOfAccountImage = useGetImages(dataOfUser?.profileImage);
   const { theCurrentChat } = useSelector((state) => state.chat);
   useEffect(() => {
     if (theCurrentChat) {
@@ -53,7 +55,20 @@ const ConversationChat = () => {
         });
       setSendMessage("");
     }
-    // console.log(sendMessage);
+  };
+  const handleDeleteChat = () => {
+    axios
+      .delete(`${URL}/api/chats/${currentChat?._id}`, {
+        headers: { Authorization: token },
+      })
+      .then((response) => {
+        dispatch(changeChat(null));
+        console.log(response.data);
+        setShowDeleteChat(false);
+      })
+      .catch((error) => {
+        console.log("Error deleting chat ", error.response);
+      });
   };
   return (
     <div className=" flex-[2] h-[70vh] relative">
@@ -64,19 +79,57 @@ const ConversationChat = () => {
             alt=""
             src={imageOfUser[theUser?.profileImage]}
           />
-          <div className="flex flex-col ">
-            {theUser && (
-              <span className="font-semibold text-white">
-                {theUser?.username}
-              </span>
-            )}
-            {theUser &&
-              currentChat?.messages?.length > 0 &&
-              theDateOfOnline && (
-                <span className="text-sm  text-white">
-                  {theDateOfOnline[theDateOfOnline?.length - 1]?.createdAt}
+          <div className="flex items-center justify-between w-full pr-2">
+            <div className="flex flex-col ">
+              {theUser && (
+                <span className="font-semibold text-white">
+                  {theUser?.username}
                 </span>
               )}
+              {theUser &&
+                currentChat?.messages?.length > 0 &&
+                theDateOfOnline && (
+                  <span className="text-sm  text-white">
+                    {theDateOfOnline[theDateOfOnline?.length - 1]?.createdAt}
+                  </span>
+                )}
+            </div>
+            {currentChat && (
+              <div className="relative h-[100%] flex items-center">
+                <span
+                  onClick={() => setShowDeleteChat(true)}
+                  className="text-white font-semibold cursor-pointer"
+                >
+                  <PiDotsThreeCircle size={22} />
+                </span>
+                {showDeleteChat && (
+                  <div className="absolute top-[100%] right-0 rounded-lg p-4 bg-white">
+                    <div className="bg-white p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg flex items-center justify-center flex-col z-20">
+                      <p className="font-semibold text-lg text-main_color">
+                        Warning
+                      </p>
+                      <p className="text-gray-600 font-medium">
+                        Are you sure you want to delete this chat!
+                      </p>
+                      <div className="flex justify-center gap-10 mt-2">
+                        <p
+                          onClick={handleDeleteChat}
+                          className="px-2 py-0.5 border border-main_color bg-main_color active:bg-main_color active:text-white hover:bg-white hover:text-main_color text-white duration-100 font-medium cursor-pointer rounded-lg"
+                        >
+                          Delete
+                        </p>
+                        <p
+                          onClick={() => setShowDeleteChat(false)}
+                          className="px-2 py-0.5 border border-green-600 bg-green-600 active:bg-green-600 active:text-white hover:bg-white hover:text-green-600 text-white duration-100 font-medium cursor-pointer rounded-lg"
+                        >
+                          Cancel
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
         <div className="h-[56vh] px-2 flex flex-col gap-1 overflow-y-auto pb-2">
@@ -101,7 +154,7 @@ const ConversationChat = () => {
         <div className="flex absolute bottom-0 right-0 left-0">
           <img
             alt=""
-            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+            src={theOwnerOfAccountImage[dataOfUser?.profileImage]}
             className="border-2 border-white rounded-full w-[32px] h-[32px] mr-2"
           />
           <input
