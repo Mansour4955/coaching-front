@@ -22,7 +22,7 @@ const SidebarChatFriend = ({ messages, users, id }) => {
       <div className="flex flex-col ">
         <span className="font-semibold">{theUser?.username}</span>
         <span className="text-sm text-gray-500 overflow-hidden line-clamp-1">
-          {messages[messages.length - 1].message}
+          {messages[messages.length - 1]?.message}
         </span>
       </div>
     </div>

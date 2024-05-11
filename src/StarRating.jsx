@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 
-const StarRating = ({ onRate, counter }) => {
+const StarRating = ({ onRate, counter, setErrorRating }) => {
   const [rating, setRating] = useState(0);
 
   const handleStarClick = (value) => {
     setRating(value);
+    setErrorRating("");
     onRate(value);
   };
   useEffect(() => {

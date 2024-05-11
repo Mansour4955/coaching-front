@@ -7,59 +7,105 @@ import StarRating from "../StarRating";
 import Appointment from "../popups/Appointment";
 import axios from "axios";
 import useGetImages from "../hooks/useGetImages";
+import { useLocalStorage } from "../hooks/useLocalStorege";
 const CoachProfile = () => {
-  const isLoggedIn = true;
-  const [reviewText, setReviewText] = useState("");
+  const { getItem } = useLocalStorage("Authorization");
+  const { getItem: getReviewer } = useLocalStorage("userData");
+
+  const reviewer = getReviewer();
+  const isLoggedIn = getItem() ? true : false;
   const [showAppointment, setShowAppointment] = useState(false);
+  const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
+  const [totalStars, setTotalStars] = useState(0);
+  const [numberOfReviewers, setNumberOfReviewers] = useState(0);
+  const [averageStars, setAverageStars] = useState(0);
+  const [resultStars, setResultStars] = useState(0);
+  const [errorReviewText, setErrorReviewText] = useState("");
+  const [errorRating, setErrorRating] = useState("");
+  const [showStars, setShowStars] = useState(false);
   const [counter, setCounter] = useState(0);
   const [user, setUser] = useState(null);
   const { coachProfileId } = useParams();
+
   useEffect(() => {
     axios
       .get(`${URL}/api/users/${coachProfileId}`)
       .then((response) => {
+        setTotalStars(0);
+        response?.data?.reviews.forEach((review) => {
+          setTotalStars((prev) => (prev += parseInt(review.stars)));
+        });
+        setNumberOfReviewers(response?.data?.reviews.length);
         setUser(response.data);
-        // console.log(response.data.profileImage);
+        // console.log("numberOfReviewers ", numberOfReviewers);
+        // console.log("totalStars ", totalStars);
       })
       .catch((error) => {
         console.log("Error fetching user data ", error.response);
       });
   }, []);
-  // const coachProfileInfo = coachCardInfo.find(
-  //   (coachInfo) => coachInfo.id === parseInt(coachProfileId)
-  // );
-  // const coachProfilePosts = postInfo.filter(
-  //   (coachPosts) => coachPosts.id === parseInt(coachProfileId)
-  // );
-  let numberOfReviewers = user?.reviews.length;
-  let totalStars = 0;
-  user?.reviews.forEach((review) => {
-    totalStars += review.stars;
-  });
-  const averageStars = totalStars / numberOfReviewers;
-  const resultStars = Math.round(averageStars);
   const handleFollow = () => {
     console.log("Follow");
   };
   const handleReviewData = (e) => {
     e.preventDefault();
-    console.log(reviewText);
-    console.log(rating);
-    setCounter(counter + 1);
-    setReviewText("");
+    // console.log(reviewText);
+    // console.log(rating);
+    if (rating && reviewText) {
+      axios
+        .put(`${URL}/api/users/${coachProfileId}`, {
+          reviews: [
+            {
+              name: reviewer?.username,
+              stars: rating.toString(),
+              description: reviewText,
+            },
+          ],
+        })
+        .then((response) => {
+          // totalStars = 0;
+          setTotalStars(0);
+          response?.data?.reviews.forEach((review) => {
+            setTotalStars((prev) => (prev += parseInt(review.stars)));
+          });
+          setNumberOfReviewers(response?.data?.reviews.length);
+          setUser(response.data);
+        })
+        .catch((error) => {
+          console.log("Error updating reviews ", error.response);
+        });
+      setCounter(counter + 1);
+      setReviewText("");
+    } else {
+      if (!rating) {
+        setErrorRating("You must rate");
+      }
+      if (!reviewText) {
+        setErrorReviewText("You must let a review");
+      }
+    }
   };
-  // const {
-  //   id,
-  //   name,
-  //   city,
-  //   method,
-  //   profession,
-  //   course,
-  //   diplomas,
-  //   price,
-  //   imageUrl,
-  // } = coachProfileInfo;
+  // useEffect(() => {
+  //   do {
+  //     setTimeout(() => {
+  //       setAverageStars(totalStars / numberOfReviewers);
+  //       setResultStars(Math.round(totalStars / numberOfReviewers));
+  //       console.log(resultStars);
+  //     }, 500);
+  //   } while (1 > 2);
+  // }, [totalStars, numberOfReviewers]);
+  useEffect(() => {
+    setAverageStars(totalStars / numberOfReviewers);
+    setResultStars(Math.round(totalStars / numberOfReviewers)); // Calculate directly here
+    // setTimeout(() => {
+    // }, 1000);
+    return () => {
+      console.log("numberOfReviewers ", numberOfReviewers);
+      console.log("totalStars ", totalStars);
+      setShowStars(true);
+    };
+  }, [totalStars, numberOfReviewers]);
   const imageOfUser = useGetImages(user?.profileImage);
   const handleSendMessage = () => {
     console.log("Send Message ", user?._id);
@@ -85,33 +131,37 @@ const CoachProfile = () => {
                           {user?.profession}
                         </span>
                       </p>
-                      {user?.reviews && user?.reviews?.length > 0 && (
-                        <div className="text-yellow-500 flex items-center gap-[2px] text-xl max-md:text-lg">
-                          {Array.from({ length: resultStars }).map(
-                            (star, index) => (
-                              <p
-                                key={index}
-                                className="flex gap-[2px] items-center"
-                              >
-                                <span>
-                                  <MdOutlineStarPurple500 />
-                                </span>
-                              </p>
-                            )
-                          )}
-                          {5 - resultStars > 0 &&
-                            Array.from({ length: 5 - resultStars }).map(
-                              (addedStar, index) => (
-                                <span
-                                  className="flex items-center gap-0.5"
-                                  key={index}
-                                >
-                                  <p>
-                                    <MdOutlineStarOutline />
+                      {showStars && (
+                        <div>
+                          {user?.reviews && user?.reviews?.length > 0 && (
+                            <div className="text-yellow-500 flex items-center gap-[2px] text-xl max-md:text-lg">
+                              {Array.from({ length: resultStars }).map(
+                                (star, index) => (
+                                  <p
+                                    key={index}
+                                    className="flex gap-[2px] items-center"
+                                  >
+                                    <span>
+                                      <MdOutlineStarPurple500 />
+                                    </span>
                                   </p>
-                                </span>
-                              )
-                            )}
+                                )
+                              )}
+                              {5 - resultStars > 0 &&
+                                Array.from({ length: 5 - resultStars }).map(
+                                  (addedStar, index) => (
+                                    <span
+                                      className="flex items-center gap-0.5"
+                                      key={index}
+                                    >
+                                      <p>
+                                        <MdOutlineStarOutline />
+                                      </p>
+                                    </span>
+                                  )
+                                )}
+                            </div>
+                          )}
                         </div>
                       )}
                       {isLoggedIn && (
@@ -254,15 +304,30 @@ const CoachProfile = () => {
                     </p>
                     <div className="flex flex-col gap-1 items-start">
                       <div class="">
-                        <StarRating onRate={setRating} counter={counter} />
+                        <StarRating
+                          setErrorRating={setErrorRating}
+                          onRate={setRating}
+                          counter={counter}
+                        />
                       </div>
+                      {errorRating && (
+                        <p className="text-red-600 text-sm">{errorRating}</p>
+                      )}
                       <textarea
                         value={reviewText}
-                        onChange={(e) => setReviewText(e.target.value)}
+                        onChange={(e) => {
+                          setReviewText(e.target.value);
+                          setErrorReviewText("");
+                        }}
                         className="w-full outline-none border border-main_color rounded-lg px-2 py-1 caret-main_color"
                         rows="2"
                         placeholder="Write something"
                       />
+                      {errorReviewText && (
+                        <p className="text-red-600 text-sm">
+                          {errorReviewText}
+                        </p>
+                      )}
                       <button
                         onClick={handleReviewData}
                         className="border bg-main_color hover:bg-white hover:text-main_color font-semibold text-white active:bg-main_color active:text-white duration-150 rounded-lg px-2 py-1"
@@ -299,9 +364,9 @@ const CoachProfile = () => {
                     key={post._id}
                     id={post._id}
                     domaine={post.domaine}
-                    full_name={post.user.username}
+                    full_name={post.user?.username}
                     description={post.description}
-                    profilePhoto={post.user.profileImage}
+                    profilePhoto={post.user?.profileImage}
                     postPhoto={post.postImage}
                     date_of_publish={post.createdAt}
                     likes={post.likes}
