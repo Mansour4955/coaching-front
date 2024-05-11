@@ -2,18 +2,21 @@ import { useEffect, useState } from "react";
 import PublishedPost from "../cards/PublishedPost";
 import { URL, coachCardInfo, postInfo } from "../data";
 import { MdOutlineStarPurple500, MdOutlineStarOutline } from "react-icons/md";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import StarRating from "../StarRating";
 import Appointment from "../popups/Appointment";
 import axios from "axios";
 import useGetImages from "../hooks/useGetImages";
 import { useLocalStorage } from "../hooks/useLocalStorege";
+import { changeChat } from "../redux/changeChatConversation";
+import { useDispatch } from "react-redux";
 const CoachProfile = () => {
   const { getItem } = useLocalStorage("Authorization");
   const { getItem: getReviewer } = useLocalStorage("userData");
 
   const reviewer = getReviewer();
   const isLoggedIn = getItem() ? true : false;
+  const token = getItem();
   const [showAppointment, setShowAppointment] = useState(false);
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
@@ -27,6 +30,8 @@ const CoachProfile = () => {
   const [counter, setCounter] = useState(0);
   const [user, setUser] = useState(null);
   const { coachProfileId } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -38,8 +43,6 @@ const CoachProfile = () => {
         });
         setNumberOfReviewers(response?.data?.reviews.length);
         setUser(response.data);
-        // console.log("numberOfReviewers ", numberOfReviewers);
-        // console.log("totalStars ", totalStars);
       })
       .catch((error) => {
         console.log("Error fetching user data ", error.response);
@@ -50,8 +53,6 @@ const CoachProfile = () => {
   };
   const handleReviewData = (e) => {
     e.preventDefault();
-    // console.log(reviewText);
-    // console.log(rating);
     if (rating && reviewText) {
       axios
         .put(`${URL}/api/users/${coachProfileId}`, {
@@ -86,15 +87,6 @@ const CoachProfile = () => {
       }
     }
   };
-  // useEffect(() => {
-  //   do {
-  //     setTimeout(() => {
-  //       setAverageStars(totalStars / numberOfReviewers);
-  //       setResultStars(Math.round(totalStars / numberOfReviewers));
-  //       console.log(resultStars);
-  //     }, 500);
-  //   } while (1 > 2);
-  // }, [totalStars, numberOfReviewers]);
   useEffect(() => {
     setAverageStars(totalStars / numberOfReviewers);
     setResultStars(Math.round(totalStars / numberOfReviewers)); // Calculate directly here
@@ -108,7 +100,25 @@ const CoachProfile = () => {
   }, [totalStars, numberOfReviewers]);
   const imageOfUser = useGetImages(user?.profileImage);
   const handleSendMessage = () => {
-    console.log("Send Message ", user?._id);
+    axios
+      .post(
+        `${URL}/api/chats`,
+        {
+          users: [coachProfileId, reviewer?._id],
+        },
+        {
+          headers: { Authorization: token },
+        }
+      )
+      .then((response) => {
+        dispatch(changeChat(response.data));
+        navigate("/chat");
+      })
+      .catch((error) => {
+        console.log("Error creating chat ", error.response.data.status);
+        navigate("/chat");
+      });
+    // console.log("Send Message ", coachProfileId);
   };
   return (
     <div className="bg-white_color pt-5 flex justify-center mb-10">

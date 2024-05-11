@@ -3,15 +3,33 @@ import { useDispatch } from "react-redux";
 import { changeChat } from "../redux/changeChatConversation";
 import useGetImages from "../hooks/useGetImages";
 import { useLocalStorage } from "../hooks/useLocalStorege";
+import axios from "axios";
+import { URL } from "../data";
 
 const SidebarChatFriend = ({ messages, users, id }) => {
+  const { getItem: getToken } = useLocalStorage("Authorization");
+  const token = getToken();
+  const [chat, setChat] = useState(null);
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/chats/${id}`, {
+        headers: { Authorization: token },
+      })
+      .then((response) => {
+        setChat(response.data);
+      })
+      .catch((error) => {
+        console.log("Error getting chat ", error.response);
+      });
+  }, []);
   const { getItem } = useLocalStorage("userData");
   const myData = getItem();
   const theUser = users.find((user) => user._id !== myData._id);
   const imageOfUser = useGetImages(theUser?.profileImage);
+  const dispatch = useDispatch();
   return (
     <div
-      // onClick={() => dispatch(changeChat(friendChat))}
+      onClick={() => dispatch(changeChat(chat))}
       className="flex gap-2 p-1 hover:bg-gray-100 cursor-pointer border-b border-b-main_color "
     >
       <img

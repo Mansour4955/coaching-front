@@ -70,15 +70,16 @@ const SidebarChat = () => {
       <div className="flex flex-col overflow-y-auto h-[60vh]">
         {theChats &&
           theChats?.map((chat) => (
-            <div key={chat._id}>
-              <SidebarChatFriend
-                id={chat._id}
-                messages={chat.messages}
-                users={chat.users}
-                // image={chat.users}
-                // username={chat.username}
-              />
-            </div>
+            // <div key={chat._id}>
+            <SidebarChatFriend
+              key={chat._id}
+              id={chat._id}
+              messages={chat.messages}
+              users={chat.users}
+              // image={chat.users}
+              // username={chat.username}
+            />
+            // </div>
           ))}
       </div>
     </div>
