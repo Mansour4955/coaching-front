@@ -100,7 +100,7 @@ const PublishedPost = ({
   };
   const imageOfUser = useGetImages(profilePhoto);
   const imageOfUserInEveryPostComments = useGetImages(theUser?.profileImage);
-
+  
   useEffect(() => {
     const internalId = setInterval(() => {
       if (theValue || theValueAgain) {
@@ -131,9 +131,10 @@ const PublishedPost = ({
       .catch((error) => {
         console.log("Error fetching coach profile data ", error.response);
       });
-  }
-
-  const hide = "overflow-hidden line-clamp-2";
+    }
+    
+    const imageOfUserWhoPublishPost = useGetImages(theCoachProfile?.profileImage);
+    const hide = "overflow-hidden line-clamp-2";
   return (
     <div className="bg-white flex flex-col p-4 gap-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
       <div className="flex justify-between">

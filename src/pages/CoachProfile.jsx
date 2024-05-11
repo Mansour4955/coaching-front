@@ -164,7 +164,7 @@ const CoachProfile = () => {
                           )}
                         </div>
                       )}
-                      {isLoggedIn && (
+                      {isLoggedIn && coachProfileId !== reviewer._id && (
                         <div className="flex gap-10 max-lg:gap-5">
                           <p
                             onClick={handleFollow}
@@ -298,44 +298,46 @@ const CoachProfile = () => {
                         </div>
                       ))}
                   </div>
-                  <div className="">
-                    <p className="text-main_color font-semibold text-lg max-md:text-base">
-                      Let a review:
-                    </p>
-                    <div className="flex flex-col gap-1 items-start">
-                      <div class="">
-                        <StarRating
-                          setErrorRating={setErrorRating}
-                          onRate={setRating}
-                          counter={counter}
+                  {isLoggedIn && coachProfileId !== reviewer._id && (
+                    <div className="">
+                      <p className="text-main_color font-semibold text-lg max-md:text-base">
+                        Let a review:
+                      </p>
+                      <div className="flex flex-col gap-1 items-start">
+                        <div class="">
+                          <StarRating
+                            setErrorRating={setErrorRating}
+                            onRate={setRating}
+                            counter={counter}
+                          />
+                        </div>
+                        {errorRating && (
+                          <p className="text-red-600 text-sm">{errorRating}</p>
+                        )}
+                        <textarea
+                          value={reviewText}
+                          onChange={(e) => {
+                            setReviewText(e.target.value);
+                            setErrorReviewText("");
+                          }}
+                          className="w-full outline-none border border-main_color rounded-lg px-2 py-1 caret-main_color"
+                          rows="2"
+                          placeholder="Write something"
                         />
+                        {errorReviewText && (
+                          <p className="text-red-600 text-sm">
+                            {errorReviewText}
+                          </p>
+                        )}
+                        <button
+                          onClick={handleReviewData}
+                          className="border bg-main_color hover:bg-white hover:text-main_color font-semibold text-white active:bg-main_color active:text-white duration-150 rounded-lg px-2 py-1"
+                        >
+                          Send
+                        </button>
                       </div>
-                      {errorRating && (
-                        <p className="text-red-600 text-sm">{errorRating}</p>
-                      )}
-                      <textarea
-                        value={reviewText}
-                        onChange={(e) => {
-                          setReviewText(e.target.value);
-                          setErrorReviewText("");
-                        }}
-                        className="w-full outline-none border border-main_color rounded-lg px-2 py-1 caret-main_color"
-                        rows="2"
-                        placeholder="Write something"
-                      />
-                      {errorReviewText && (
-                        <p className="text-red-600 text-sm">
-                          {errorReviewText}
-                        </p>
-                      )}
-                      <button
-                        onClick={handleReviewData}
-                        className="border bg-main_color hover:bg-white hover:text-main_color font-semibold text-white active:bg-main_color active:text-white duration-150 rounded-lg px-2 py-1"
-                      >
-                        Send
-                      </button>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -364,9 +366,9 @@ const CoachProfile = () => {
                     key={post._id}
                     id={post._id}
                     domaine={post.domaine}
-                    full_name={post.user?.username}
+                    full_name={user?.username}
                     description={post.description}
-                    profilePhoto={post.user?.profileImage}
+                    profilePhoto={user?.profileImage}
                     postPhoto={post.postImage}
                     date_of_publish={post.createdAt}
                     likes={post.likes}

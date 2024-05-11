@@ -13,14 +13,14 @@ const CoachCard = ({ full_name, description, profilePhoto, domaine, id }) => {
         alt={profilePhoto}
         src={imageOfCoach[profilePhoto]}
       />
-      <div className="px-2">
+      <div className="px-2 w-full">
         <p className="font-bold text-base">{full_name}</p>
         <p className="font-semibold text-sm">{domaine}</p>
-        <div>
+        <div className="w-full">
           <p className={`text-gray-500  ${!showMore ? hide : ""}`}>
             {description}
           </p>
-          <div className="flex items-center justify-between mt-1">
+          <div className="flex w-full items-center justify-between mt-1">
             <button
               onClick={() => setShowMore(!showMore)}
               className="text-main_color text-sm"
