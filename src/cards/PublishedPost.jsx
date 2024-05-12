@@ -258,7 +258,7 @@ const PublishedPost = ({
             <IoIosSend size={20} />
           </div>
         </div>
-        {showComments && (
+        {showComments && theComments.length > 0 &&(
           <div className="flex flex-col">
             <div className="flex flex-col p-2 border border-main_color relative">
               {showAllComments

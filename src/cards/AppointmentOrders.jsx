@@ -3,16 +3,120 @@ import React, { useEffect, useState } from "react";
 import { URL } from "../data";
 import useGetImages from "../hooks/useGetImages";
 import moment from "moment";
+import { useLocalStorage } from "../hooks/useLocalStorege";
 
 const AppointmentOrders = ({ client, date, id, message }) => {
+  const { getItem } = useLocalStorage("userData");
+  const coachData = getItem();
   const [theClient, setTheClient] = useState(null);
   const handleAcceptAppointment = (e) => {
     e.preventDefault();
-    console.log("Congratilation your appointment has been accepted! ", id);
+    axios
+      .put(`${URL}/api/users/${client}`, {
+        clientNotifications: [
+          {
+            user: coachData?._id,
+            date,
+            action: "accept",
+          },
+        ],
+      })
+      .then((response) => {})
+      .catch((error) => {
+        console.log("Error fetching updating client ", error.response);
+      });
+
+    axios
+      .put(`${URL}/api/users/${coachData?._id}`, {
+        appointmentAccepted: [
+          {
+            user: client,
+            date,
+          },
+        ],
+      })
+      .then((response) => {})
+      .catch((error) => {
+        console.log("Error fetching updating coach ", error.response);
+      });
+
+    axios
+      .put(`${URL}/api/users/${client}`, {
+        appointmentAcceptedFromCoach: [
+          {
+            user: coachData?._id,
+            date,
+          },
+        ],
+      })
+      .then((response) => {})
+      .catch((error) => {
+        console.log("Error fetching updating coach ", error.response);
+      });
+/////////////////////////////
+      axios
+      .put(`${URL}/api/users/${client}`, {
+        appointmentAcceptedFromCoach: [
+          {
+            user: coachData?._id,
+            date,
+          },
+        ],
+      })
+      .then((response) => {})
+      .catch((error) => {
+        console.log("Error fetching updating coach ", error.response);
+      });
+
+      axios
+      .put(`${URL}/api/users/${client}`, {
+        appointmentAcceptedFromCoach: [
+          {
+            user: coachData?._id,
+            date,
+          },
+        ],
+      })
+      .then((response) => {})
+      .catch((error) => {
+        console.log("Error fetching updating coach ", error.response);
+      });
+      ///////////////////////////
   };
   const handleRefuseAppointment = (e) => {
     e.preventDefault();
-    console.log("Sorry your appointment has been refused! ", id);
+    axios
+      .put(`${URL}/api/users/${client}`, {
+        clientNotifications: [
+          {
+            user: coachData?._id,
+            date,
+            action: "cancel",
+          },
+        ],
+      })
+      .then((response) => {})
+      .catch((error) => {
+        console.log("Error fetching updating client ", error.response);
+      });
+
+    axios
+      .put(
+        `${URL}/api/users/${coachData?._id}?user=${client}&date=${date}&message=${message}&field=appointmentOrders`
+      )
+      .then((response) => {})
+      .catch((error) => {
+        console.log("Error fetching updating coach ", error.response);
+      });
+
+    axios
+      .put(
+        `${URL}/api/users/${client}?user=${coachData?._id}&date=${date}&field=appointmentOnWait`
+      )
+      .then((response) => {})
+      .catch((error) => {
+        console.log("Error fetching updating coach ", error.response);
+      });
   };
   useEffect(() => {
     axios
@@ -23,7 +127,7 @@ const AppointmentOrders = ({ client, date, id, message }) => {
       .catch((error) => {
         console.log("Error fetching client data ", error.response);
       });
-  }, [theClient]);
+  }, []);
   const profileImage = useGetImages(theClient?.profileImage);
   return (
     <div className="flex gap-2 p-2 max-sm:flex-col max-sm:items-center border-t border-t-gray-100">
@@ -43,7 +147,9 @@ const AppointmentOrders = ({ client, date, id, message }) => {
             Message:
             <span className="text-gray-500 text-sm text-center">{message}</span>
           </p>
-          <p className="text-base font-semibold text-gray-700">{moment(date).fromNow()}</p>
+          <p className="text-base font-semibold text-gray-700">
+            {moment(date).fromNow()}
+          </p>
         </div>
         <div className="flex gap-2 max-sm:gap-6 max-sm:mt-3">
           <button

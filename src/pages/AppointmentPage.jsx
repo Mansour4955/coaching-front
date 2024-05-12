@@ -8,7 +8,10 @@ import { useLocalStorage } from "../hooks/useLocalStorege";
 import axios from "axios";
 const AppointmentPage = () => {
   const { getItem } = useLocalStorage("userData");
-  const user = getItem();
+  let user;
+  useEffect(() => {
+    user = getItem();
+  }, []);
   const appointmentClientContent = user?.role === "client" ? true : false;
   const [showAllAppointmentOrders, setShowAllAppointmentOrders] =
     useState(false);
