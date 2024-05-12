@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { URL } from "../data";
 import useGetImages from "../hooks/useGetImages";
+import moment from "moment";
 
 const AppointmentOrders = ({ client, date, id, message }) => {
   const [theClient, setTheClient] = useState(null);
@@ -42,7 +43,7 @@ const AppointmentOrders = ({ client, date, id, message }) => {
             Message:
             <span className="text-gray-500 text-sm text-center">{message}</span>
           </p>
-          <p className="text-base font-semibold text-gray-700">{date}</p>
+          <p className="text-base font-semibold text-gray-700">{moment(date).fromNow()}</p>
         </div>
         <div className="flex gap-2 max-sm:gap-6 max-sm:mt-3">
           <button
