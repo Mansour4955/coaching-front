@@ -253,29 +253,16 @@ const Header = () => {
         </div>
         {isLoggedIn ? (
           <div className="relative group">
-            {user.role === "coach" ? (
-              <Link to="/myprofile" className="flex gap-2 items-center">
-                <img
-                  alt=""
-                  src={imageOfUser[user.profileImage]}
-                  className="w-8 h-8 rounded-[100%]"
-                />
-                <p className="font-bold text-gray-500">
-                  {user?.username?.split(" ")[0]}
-                </p>
-              </Link>
-            ) : (
-              <div to="/myprofile" className="flex gap-2 items-center">
-                <img
-                  alt=""
-                  src={imageOfUser[user.profileImage]}
-                  className="w-8 h-8 rounded-[100%]"
-                />
-                <p className="font-bold text-gray-500">
-                  {user?.username?.split(" ")[0]}
-                </p>
-              </div>
-            )}
+            <Link to="/myprofile" className="flex gap-2 items-center">
+              <img
+                alt=""
+                src={imageOfUser[user.profileImage]}
+                className="w-8 h-8 rounded-[100%]"
+              />
+              <p className="font-bold text-gray-500">
+                {user?.username?.split(" ")[0]}
+              </p>
+            </Link>
             <div className="absolute top-[100%] right-0 hidden duration-200 group-hover:block">
               <LoggedOutUser />
             </div>

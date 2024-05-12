@@ -1,14 +1,41 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { URL } from "../data";
 import moment from "moment";
 import useGetImages from "../hooks/useGetImages";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useLocalStorage } from "../hooks/useLocalStorege";
+import { changeChat } from "../redux/changeChatConversation";
 
 const AcceptedAppointment = ({ client, date, id, style }) => {
+  const { getItem } = useLocalStorage("Authorization");
+  const { getItem: getCoachData } = useLocalStorage("userData");
+  const coachData = getCoachData();
+  const token = getItem();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [theClient, setTheClient] = useState(null);
   const handleSendMsgToAnAcceptedClient = (e) => {
     e.preventDefault(e);
-    console.log("Sending msg to an accepted client! ", id);
+    axios
+      .post(
+        `${URL}/api/chats`,
+        {
+          users: [client, coachData?._id],
+        },
+        {
+          headers: { Authorization: token },
+        }
+      )
+      .then((response) => {
+        dispatch(changeChat(response.data));
+        navigate("/chat");
+      })
+      .catch((error) => {
+        console.log("Error creating chat ", error.response.data.status);
+        navigate("/chat");
+      });
   };
   useEffect(() => {
     axios

@@ -99,7 +99,7 @@ const ConversationChat = ({ setCount }) => {
                   </span>
                 )}
             </div>
-            {currentChat && (
+            {/* {currentChat && (
               <div className="relative h-[100%] flex items-center">
                 <span
                   onClick={() => setShowDeleteChat(true)}
@@ -134,7 +134,7 @@ const ConversationChat = ({ setCount }) => {
                   </div>
                 )}
               </div>
-            )}
+            )} */}
           </div>
         </div>
         <div className="h-[56vh] px-2 flex flex-col gap-1 overflow-y-auto pb-2">

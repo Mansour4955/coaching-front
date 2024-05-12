@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { URL } from "../data.js";
+import useGetImages from "../hooks/useGetImages.js";
 const FollowNotification = ({ id, client }) => {
   const [theUser, setTheUser] = useState(null);
   useEffect(() => {

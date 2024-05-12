@@ -41,14 +41,12 @@ const Footer = () => {
             >
               Notification
             </Link>
-            {user.role === "coach" && (
-              <Link
-                className="border-b border-b-transparent hover:border-b-main_color duration-150 hover:text-main_color"
-                to="/myprofile"
-              >
-                my Profile
-              </Link>
-            )}
+            <Link
+              className="border-b border-b-transparent hover:border-b-main_color duration-150 hover:text-main_color"
+              to="/myprofile"
+            >
+              my Profile
+            </Link>
             <Link
               className="border-b border-b-transparent hover:border-b-main_color duration-150 hover:text-main_color"
               to="/rendez-vous"

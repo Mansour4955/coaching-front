@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 const CoachProfile = () => {
   const { getItem } = useLocalStorage("Authorization");
   const { getItem: getReviewer } = useLocalStorage("userData");
-
+  const [catchError, setCatchError] = useState(null);
   const reviewer = getReviewer();
   const isLoggedIn = getItem() ? true : false;
   const token = getItem();
@@ -50,6 +50,43 @@ const CoachProfile = () => {
   }, []);
   const handleFollow = () => {
     console.log("Follow");
+    axios
+      .put(`${URL}/api/users/${coachProfileId}`, {
+        follow: [reviewer?._id],
+      })
+      .then((response) => {})
+      .catch((error) => {
+        setCatchError(error);
+        console.log("Error following coach ", error.response);
+      });
+    axios
+      .put(`${URL}/api/users/${reviewer?._id}`, {
+        following: [coachProfileId],
+      })
+      .then((response) => {})
+      .catch((error) => {
+        setCatchError(error);
+        console.log("Error following coach ", error.response);
+      });
+
+    if (!catchError) {
+      axios
+        .put(`${URL}/api/users/${coachProfileId}`, {
+          coachNotifications: [
+            {
+              user: reviewer?._id,
+              date: new Date().toISOString(),
+              action: "follow",
+            },
+          ],
+        })
+        .then((response) => {})
+        .catch((error) => {
+          console.log("Error following coach ", error.response);
+        });
+    } else {
+      console.log("can not put them in coach notifications");
+    }
   };
   const handleReviewData = (e) => {
     e.preventDefault();
