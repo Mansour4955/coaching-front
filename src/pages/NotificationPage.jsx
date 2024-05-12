@@ -27,7 +27,7 @@ const NotificationPage = () => {
           <div className="min-h-[60vh] w-full flex flex-col p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
             {isCoach
               ? theUser?.coachNotifications.length > 0 &&
-                theUser?.coachNotifications.map((notification, index) =>
+                theUser?.coachNotifications.reverse().map((notification, index) =>
                   notification.action === "cancel" ? (
                     <CancelAppointment
                       key={index}
@@ -46,7 +46,7 @@ const NotificationPage = () => {
                   )
                 )
               : theUser?.clientNotifications.length > 0 &&
-                theUser?.clientNotifications.map((notification, index) =>
+                theUser?.clientNotifications.reverse().map((notification, index) =>
                   notification.action === "cancel" ? (
                     <CancelAppointment
                       key={index}
@@ -65,7 +65,6 @@ const NotificationPage = () => {
                     ""
                   )
                 )}
-
           </div>
         </div>
       </div>

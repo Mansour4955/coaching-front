@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { appointmentOrders, appointmentOnWait, URL } from "../data";
 import AppointmentOrders from "../cards/AppointmentOrders";
 import AcceptedAppointment from "../cards/AcceptedAppointment";
@@ -8,10 +8,8 @@ import { useLocalStorage } from "../hooks/useLocalStorege";
 import axios from "axios";
 const AppointmentPage = () => {
   const { getItem } = useLocalStorage("userData");
-  let user;
-  useEffect(() => {
-    user = getItem();
-  }, []);
+  const user = getItem();
+
   const appointmentClientContent = user?.role === "client" ? true : false;
   const [showAllAppointmentOrders, setShowAllAppointmentOrders] =
     useState(false);
@@ -27,7 +25,7 @@ const AppointmentPage = () => {
       .catch((error) => {
         console.log("Error fetching user data ", error.response);
       });
-  }, [theUser]);
+  }, []);
   return (
     <div className="flex justify-center mb-10 gap-x-10 pt-5 px-4 bg-white_color">
       <div className="w-[70%] max-xl:w-[80%] max-lg:w-[90%] max-md:w-[95%] flex flex-col gap-6 min-h-[70vh]">
@@ -63,7 +61,7 @@ const AppointmentPage = () => {
                 </div>
                 <div className="w-full flex flex-col">
                   {showAllAppointmentOrders
-                    ? theUser?.appointmentOrders.map((order, index) => (
+                    ? theUser?.appointmentOrders.reverse().map((order, index) => (
                         <AppointmentOrders
                           id={index}
                           key={index}
@@ -73,7 +71,7 @@ const AppointmentPage = () => {
                         />
                       ))
                     : theUser?.appointmentOrders
-                        .slice(0, 3)
+                        .slice(0, 3).reverse()
                         .map((order, index) => (
                           <AppointmentOrders
                             id={index}
@@ -115,7 +113,7 @@ const AppointmentPage = () => {
                 </div>
                 <div className="w-full flex flex-col">
                   {showAllAppointmentsOnWait
-                    ? theUser?.appointmentOnWait.map((order, index) => (
+                    ? theUser?.appointmentOnWait.reverse().map((order, index) => (
                         <AppointmentOnWait
                           key={index}
                           date={order?.date}
@@ -124,7 +122,7 @@ const AppointmentPage = () => {
                         />
                       ))
                     : theUser?.appointmentOnWait
-                        .slice(0, 3)
+                        .slice(0, 3).reverse()
                         .map((order, index) => (
                           <AppointmentOnWait
                             key={index}
@@ -144,22 +142,19 @@ const AppointmentPage = () => {
               <>
                 <div className="flex items-center justify-between pb-4 font-semibold">
                   <div>The appointments that you accepted</div>
-                  <p>{appointmentOrders.length}</p>
+                  <p>{theUser?.appointmentAccepted.length}</p>
                 </div>
                 <div>
                   {" "}
-                  {appointmentOrders.length > 0 ? (
+                  {theUser?.appointmentAccepted.length > 0 ? (
                     <div className="grid grid-cols-3 max-md:grid-cols-1 max-xl:grid-cols-2 gap-4 ">
-                      {appointmentOrders.map((acceptedOrder, index) => (
+                      {theUser?.appointmentAccepted.reverse().map((acceptedOrder, index) => (
                         <AcceptedAppointment
                           style="col-span-1"
                           key={index}
                           id={index}
-                          profileImage={acceptedOrder.profileImage}
-                          profession={acceptedOrder.profession}
-                          name={acceptedOrder.name}
-                          education={acceptedOrder.education}
-                          date={acceptedOrder.date}
+                          date={acceptedOrder?.date}
+                          client={acceptedOrder?.user}
                         />
                       ))}
                     </div>
@@ -172,22 +167,19 @@ const AppointmentPage = () => {
               <>
                 <div className="flex items-center justify-between pb-4 font-semibold">
                   <div>The appointments you have been accepted in</div>
-                  <p>{appointmentOnWait.length}</p>
+                  <p>{theUser?.appointmentAcceptedFromCoach.length}</p>
                 </div>
                 <div>
                   {" "}
-                  {appointmentOnWait.length > 0 ? (
+                  {theUser?.appointmentAcceptedFromCoach.length > 0 ? (
                     <div className="grid grid-cols-3 max-md:grid-cols-1 max-xl:grid-cols-2 gap-4 ">
-                      {appointmentOnWait.map((acceptedOrder, index) => (
+                      {theUser?.appointmentAcceptedFromCoach.reverse().map((acceptedOrder, index) => (
                         <AcceptedAppointmentFromCoach
                           style="col-span-1"
                           key={index}
                           id={index}
-                          profileImage={acceptedOrder.profileImage}
-                          profession={acceptedOrder.profession}
-                          name={acceptedOrder.name}
-                          education={acceptedOrder.education}
-                          date={acceptedOrder.date}
+                          date={acceptedOrder?.date}
+                          coach={acceptedOrder?.user}
                         />
                       ))}
                     </div>

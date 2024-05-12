@@ -2,8 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { URL } from "../data";
 import useGetImages from "../hooks/useGetImages";
-import moment from "moment"
+import moment from "moment";
+import { useLocalStorage } from "../hooks/useLocalStorege";
 const AppointmentOnWait = ({ date, id, coach }) => {
+  const { getItem } = useLocalStorage("userData");
+  const theAccountOwner = getItem();
   const [theCoach, setTheCoach] = useState(null);
   useEffect(() => {
     axios
@@ -14,11 +17,42 @@ const AppointmentOnWait = ({ date, id, coach }) => {
       .catch((error) => {
         console.log("Error fetching coach data ", error.response);
       });
-  }, [theCoach]);
+  }, []);
   const profileImage = useGetImages(theCoach?.profileImage);
   const handleRefuseAppointment = (e) => {
     e.preventDefault();
-    console.log("Sorry I canceled my appointment! ", id);
+    axios
+      .put(`${URL}/api/users/${coach}`, {
+        coachNotifications: [
+          {
+            user: theAccountOwner?._id,
+            date,
+            action: "cancel",
+          },
+        ],
+      })
+      .then((response) => {})
+      .catch((error) => {
+        console.log("Error fetching updating coach ", error.response);
+      });
+
+    axios
+      .put(
+        `${URL}/api/users/${coach}?user=${theAccountOwner?._id}&date=${date}&field=appointmentOrders`
+      )
+      .then((response) => {})
+      .catch((error) => {
+        console.log("Error fetching updating coach ", error.response);
+      });
+
+    axios
+      .put(
+        `${URL}/api/users/${theAccountOwner?._id}?user=${coach}&date=${date}&field=appointmentOnWait`
+      )
+      .then((response) => {})
+      .catch((error) => {
+        console.log("Error fetching updating coach ", error.response);
+      });
   };
   return (
     <div className="flex gap-2 p-2 max-sm:flex-col max-sm:items-center border-t border-t-gray-100">
@@ -34,7 +68,9 @@ const AppointmentOnWait = ({ date, id, coach }) => {
           <p className="text-gray-500 text-sm overflow-hidden line-clamp-2">
             {theCoach?.education}
           </p>
-          <p className=" text-base font-semibold text-gray-700">{moment(date).fromNow()}</p>
+          <p className=" text-base font-semibold text-gray-700">
+            {moment(date).fromNow()}
+          </p>
         </div>
         <div className="flex gap-2 max-sm:gap-6 max-sm:mt-3">
           <button

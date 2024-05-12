@@ -53,35 +53,23 @@ const AppointmentOrders = ({ client, date, id, message }) => {
       .catch((error) => {
         console.log("Error fetching updating coach ", error.response);
       });
-/////////////////////////////
-      axios
-      .put(`${URL}/api/users/${client}`, {
-        appointmentAcceptedFromCoach: [
-          {
-            user: coachData?._id,
-            date,
-          },
-        ],
-      })
+    axios
+      .put(
+        `${URL}/api/users/${coachData?._id}?user=${client}&date=${date}&message=${message}&field=appointmentOrders`
+      )
       .then((response) => {})
       .catch((error) => {
         console.log("Error fetching updating coach ", error.response);
       });
 
-      axios
-      .put(`${URL}/api/users/${client}`, {
-        appointmentAcceptedFromCoach: [
-          {
-            user: coachData?._id,
-            date,
-          },
-        ],
-      })
+    axios
+      .put(
+        `${URL}/api/users/${client}?user=${coachData?._id}&date=${date}&field=appointmentOnWait`
+      )
       .then((response) => {})
       .catch((error) => {
         console.log("Error fetching updating coach ", error.response);
       });
-      ///////////////////////////
   };
   const handleRefuseAppointment = (e) => {
     e.preventDefault();

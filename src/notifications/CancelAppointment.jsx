@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { URL } from "../data";
-import useGetImages from "../hooks/useGetImages";
 import moment from "moment";
+import useGetImages from "../hooks/useGetImages";
 
 const CancelAppointment = ({ date, id, user }) => {
   const [theUser, setTheUser] = useState(null);

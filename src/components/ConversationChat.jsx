@@ -8,6 +8,7 @@ import { URL } from "../data";
 import useGetImages from "../hooks/useGetImages";
 import { changeChat } from "../redux/changeChatConversation";
 import { PiDotsThreeCircle } from "react-icons/pi";
+import moment from "moment";
 const ConversationChat = ({ setCount }) => {
   const dispatch = useDispatch();
   const { getItem } = useLocalStorage("userData");
@@ -92,7 +93,9 @@ const ConversationChat = ({ setCount }) => {
                 currentChat?.messages?.length > 0 &&
                 theDateOfOnline && (
                   <span className="text-sm  text-white">
-                    {theDateOfOnline[theDateOfOnline?.length - 1]?.createdAt}
+                    {moment(
+                      theDateOfOnline[theDateOfOnline?.length - 1]?.createdAt
+                    ).fromNow()}
                   </span>
                 )}
             </div>
