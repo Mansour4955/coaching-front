@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import AppointmentCalendar from "./AppointmentCalendar";
-
-const Appointment = ({ setShowAppointment }) => {
+import axios from "axios";
+import { URL } from "../data";
+const Appointment = ({ setShowAppointment, theUserId, theCoachId }) => {
   const availableTimes = [
     "9:00 AM",
     "10:00 AM",
@@ -31,9 +32,41 @@ const Appointment = ({ setShowAppointment }) => {
       appointmentMessage !== null &&
       appointmentMessage !== ""
     ) {
-      setShowSuccessMsg(true);
-      console.log(appointmentDate);
-      console.log(appointmentMessage);
+      axios
+        .put(`${URL}/api/users/${theCoachId}`, {
+          appointmentOrders: [
+            {
+              user: theUserId,
+              date: appointmentDate,
+              message: appointmentMessage,
+            },
+          ],
+        })
+        .then((response) => {
+          setShowSuccessMsg(true);
+        })
+        .catch((error) => {
+          console.log("error edit coach ", error.response);
+        });
+
+      axios
+        .put(`${URL}/api/users/${theUserId}`, {
+          appointmentOnWait: [
+            {
+              user: theCoachId,
+              date: appointmentDate,
+            },
+          ],
+        })
+        .then((response) => {
+          setShowSuccessMsg(true);
+        })
+        .catch((error) => {
+          console.log("error edit sender ", error.response);
+        });
+
+      // console.log(appointmentDate);
+      // console.log(appointmentMessage);
 
       setTimeout(() => {
         setShowAppointment(false);
@@ -56,12 +89,6 @@ const Appointment = ({ setShowAppointment }) => {
               <h5 className="font-medium text-lg flex-1">
                 Choose date of an appointment:
               </h5>
-              {/* <input
-                value={appointmentDate}
-                onChange={(e) => setAppointmentDate(e.target.value)}
-                type="date"
-                className="caret-main_color flex-1 cursor-pointer outline-none px-2 py-1 border border-main_color rounded-lg text-gray-600"
-              /> */}
               <AppointmentCalendar
                 availableTimes={availableTimes}
                 appointmentDate={appointmentDate}

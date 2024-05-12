@@ -1,14 +1,10 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { URL } from "../data";
+import useGetImages from "../hooks/useGetImages";
 
-const AppointmentOrders = ({
-  profileImage,
-  name,
-  profession,
-  education,
-  date,
-  id,
-  message,
-}) => {
+const AppointmentOrders = ({ client, date, id, message }) => {
+  const [theClient, setTheClient] = useState(null);
   const handleAcceptAppointment = (e) => {
     e.preventDefault();
     console.log("Congratilation your appointment has been accepted! ", id);
@@ -17,27 +13,36 @@ const AppointmentOrders = ({
     e.preventDefault();
     console.log("Sorry your appointment has been refused! ", id);
   };
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/users/${client}`)
+      .then((response) => {
+        setTheClient(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching client data ", error.response);
+      });
+  }, [theClient]);
+  const profileImage = useGetImages(theClient?.profileImage);
   return (
     <div className="flex gap-2 p-2 max-sm:flex-col max-sm:items-center border-t border-t-gray-100">
       <img
         alt=""
-        src={profileImage}
+        src={profileImage[theClient?.profileImage]}
         className="w-[80px] h-[80px] min-w-[80px] min-h-[80px] rounded-full"
       />
       <div className="flex justify-between items-center  w-full max-sm:flex-col">
         <div className="flex flex-col gap-1 max-sm:items-center">
-          <p className="font-semibold">{name}</p>
-          <p className="font-medium text-sm">{profession}</p>
+          <p className="font-semibold">{theClient?.username}</p>
+          {/* <p className="font-medium text-sm">{profession}</p>
           <p className="text-gray-500 text-sm overflow-hidden line-clamp-2">
             {education}
-          </p>
+          </p> */}
           <p className="font-semibold text-main_color text-sm flex overflow-hidden line-clamp-2 gap-2">
             Message:
             <span className="text-gray-500 text-sm text-center">{message}</span>
           </p>
-          <p className="text-base font-semibold text-gray-700">
-            {date} 
-          </p>
+          <p className="text-base font-semibold text-gray-700">{date}</p>
         </div>
         <div className="flex gap-2 max-sm:gap-6 max-sm:mt-3">
           <button

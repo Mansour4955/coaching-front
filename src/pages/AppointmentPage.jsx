@@ -1,15 +1,30 @@
-import { useState } from "react";
-import { appointmentOrders, appointmentOnWait } from "../data";
+import { useEffect, useState } from "react";
+import { appointmentOrders, appointmentOnWait, URL } from "../data";
 import AppointmentOrders from "../cards/AppointmentOrders";
 import AcceptedAppointment from "../cards/AcceptedAppointment";
 import AppointmentOnWait from "../cards/AppointmentOnWait";
 import AcceptedAppointmentFromCoach from "../cards/AcceptedAppointmentFromCoach";
+import { useLocalStorage } from "../hooks/useLocalStorege";
+import axios from "axios";
 const AppointmentPage = () => {
-  const appointmentClientContent = false;
+  const { getItem } = useLocalStorage("userData");
+  const user = getItem();
+  const appointmentClientContent = user?.role === "client" ? true : false;
   const [showAllAppointmentOrders, setShowAllAppointmentOrders] =
     useState(false);
   const [showAllAppointmentsOnWait, setShowAllAppointmentsOnWait] =
     useState(false);
+  const [theUser, setTheUser] = useState(null);
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/users/${user?._id}`)
+      .then((response) => {
+        setTheUser(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching user data ", error.response);
+      });
+  }, [theUser]);
   return (
     <div className="flex justify-center mb-10 gap-x-10 pt-5 px-4 bg-white_color">
       <div className="w-[70%] max-xl:w-[80%] max-lg:w-[90%] max-md:w-[95%] flex flex-col gap-6 min-h-[70vh]">
@@ -20,13 +35,13 @@ const AppointmentPage = () => {
                 <div className="w-full flex justify-between items-center p-2">
                   <h3 className="font-semibold">Appintments</h3>
 
-                  {appointmentOrders.length > 3 ? (
+                  {theUser?.appointmentOrders.length > 3 ? (
                     !showAllAppointmentOrders ? (
                       <p
                         onClick={() => setShowAllAppointmentOrders(true)}
                         className="font-medium cursor-pointer"
                       >
-                        See all <span>{appointmentOrders.length}</span>
+                        See all <span>{theUser?.appointmentOrders.length}</span>
                       </p>
                     ) : (
                       <p
@@ -38,38 +53,31 @@ const AppointmentPage = () => {
                     )
                   ) : (
                     <p className="font-medium">
-                      You have only <span>{appointmentOrders.length}</span>
+                      You have only{" "}
+                      <span>{theUser?.appointmentOrders.length}</span>
                     </p>
                   )}
                 </div>
                 <div className="w-full flex flex-col">
                   {showAllAppointmentOrders
-                    ? appointmentOrders.map((order, index) => (
+                    ? theUser?.appointmentOrders.map((order, index) => (
                         <AppointmentOrders
-                          date={order.date}
-                          
                           id={index}
                           key={index}
-                          profileImage={order.profileImage}
-                          profession={order.profession}
-                          name={order.name}
-                          education={order.education}
-                          message={order.message}
+                          date={order?.date}
+                          message={order?.message}
+                          client={order?.user}
                         />
                       ))
-                    : appointmentOrders
+                    : theUser?.appointmentOrders
                         .slice(0, 3)
                         .map((order, index) => (
                           <AppointmentOrders
-                            date={order.date}
-                      
                             id={index}
                             key={index}
-                            profileImage={order.profileImage}
-                            profession={order.profession}
-                            name={order.name}
-                            education={order.education}
-                            message={order.message}
+                            date={order?.date}
+                            message={order?.message}
+                            client={order?.user}
                           />
                         ))}
                 </div>
@@ -79,13 +87,13 @@ const AppointmentPage = () => {
                 <div className="w-full flex justify-between items-center p-2">
                   <h3 className="font-semibold">Your appintments on wait</h3>
 
-                  {appointmentOnWait.length > 3 ? (
+                  {theUser?.appointmentOnWait.length > 3 ? (
                     !showAllAppointmentsOnWait ? (
                       <p
                         onClick={() => setShowAllAppointmentsOnWait(true)}
                         className="font-medium cursor-pointer"
                       >
-                        See all <span>{appointmentOnWait.length}</span>
+                        See all <span>{theUser?.appointmentOnWait.length}</span>
                       </p>
                     ) : (
                       <p
@@ -97,36 +105,29 @@ const AppointmentPage = () => {
                     )
                   ) : (
                     <p className="font-medium">
-                      You have only <span>{appointmentOnWait.length}</span>
+                      You have only{" "}
+                      <span>{theUser?.appointmentOnWait.length}</span>
                     </p>
                   )}
                 </div>
                 <div className="w-full flex flex-col">
                   {showAllAppointmentsOnWait
-                    ? appointmentOnWait.map((order, index) => (
+                    ? theUser?.appointmentOnWait.map((order, index) => (
                         <AppointmentOnWait
-                          date={order.date}
-                    
-                          id={index}
                           key={index}
-                          profileImage={order.profileImage}
-                          profession={order.profession}
-                          name={order.name}
-                          education={order.education}
+                          date={order?.date}
+                          id={index}
+                          coach={order?.user}
                         />
                       ))
-                    : appointmentOnWait
+                    : theUser?.appointmentOnWait
                         .slice(0, 3)
                         .map((order, index) => (
                           <AppointmentOnWait
-                            date={order.date}
-                        
-                            id={index}
                             key={index}
-                            profileImage={order.profileImage}
-                            profession={order.profession}
-                            name={order.name}
-                            education={order.education}
+                            date={order?.date}
+                            id={index}
+                            coach={order?.user}
                           />
                         ))}
                 </div>
@@ -156,7 +157,6 @@ const AppointmentPage = () => {
                           name={acceptedOrder.name}
                           education={acceptedOrder.education}
                           date={acceptedOrder.date}
-                        
                         />
                       ))}
                     </div>
@@ -185,7 +185,6 @@ const AppointmentPage = () => {
                           name={acceptedOrder.name}
                           education={acceptedOrder.education}
                           date={acceptedOrder.date}
-                      
                         />
                       ))}
                     </div>

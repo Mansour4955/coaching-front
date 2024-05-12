@@ -199,6 +199,8 @@ const CoachProfile = () => {
                       {showAppointment && (
                         <div>
                           <Appointment
+                            theUserId={reviewer?._id}
+                            theCoachId={coachProfileId}
                             setShowAppointment={setShowAppointment}
                           />
                         </div>
