@@ -16,8 +16,67 @@ const SidebarChat = ({ count }) => {
   const [theChats, setTheChats] = useState([]);
   const handleFilterByName = (e) => {
     e.preventDefault();
-    console.log(filterByName);
-    setFilterByName("");
+    if (filterByName) {
+      axios
+      .get(`${URL}/api/chats`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        const chatMatched = response?.data?.filter((chat) => {
+          const lowerFilter = filterByName.toLowerCase();
+          if (chat.users && Array.isArray(chat.users)) {
+            for (const user of chat.users) {
+              if (
+                user.username &&
+                user.username.toLowerCase().includes(lowerFilter)
+              ) {
+                return true; 
+              }
+            }
+          }
+          return false;
+        });
+        setTheChats(chatMatched);
+      })
+      .catch((error) => {
+        console.error("Error getting chats ", error.response);
+      });
+     
+    } else {
+      axios
+        .get(`${URL}/api/chats`, {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((response) => {
+          setTheChats(response.data);
+        })
+        .catch((error) => {
+          console.error("Error getting chats ", error.response);
+        });
+    }
+    // console.log(filterByName);
+    // axios
+    // .get(`${URL}/api/chats?filterByName=${filterByName}`, {
+    //   headers: {
+    //     Authorization: token,
+    //   },
+    // })
+    // .then((response) => {
+    //   setTheChats(response.data);
+    //   // setTheValueAgain(true);
+    //   // setTimeout(() => {
+    //   //   setTheValueAgain(false);
+    //   // }, 3000);
+    // })
+    // .catch((error) => {
+    //   // Handle error if needed
+    //   console.error("Error getting chats ", error.response);
+    // });
+    // setFilterByName("");
   };
   useEffect(() => {
     axios

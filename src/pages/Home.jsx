@@ -246,17 +246,17 @@ const Home = () => {
         <div className=" flex flex-col rounded-lg p-4 bg-white h-fit">
           <div className="flex flex-col gap-2 items-center">
             {showMoreCoachCards
-              ? coachCards.map((card) => (
+              ? coachCards.filter(card=>card?._id !== user?._id).map((card) => (
                   <CoachCard
                     key={card?._id}
                     id={card?._id}
                     full_name={card?.username}
                     description={card.education}
                     profilePhoto={card?.profileImage}
-                    domaine={card.course}
+                    domaine={card?.course}
                   />
                 )).reverse()
-              : coachCards
+              : coachCards.filter(card=>card?._id !== user?._id)
                   .slice(0, 3)
                   .map((card) => (
                     <CoachCard
@@ -265,7 +265,7 @@ const Home = () => {
                       full_name={card?.username}
                       description={card.education}
                       profilePhoto={card?.profileImage}
-                      domaine={card.course}
+                      domaine={card?.course}
                     />
                   )).reverse()
                   }

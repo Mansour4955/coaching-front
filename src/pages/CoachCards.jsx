@@ -8,7 +8,10 @@ import { IoSearchOutline } from "react-icons/io5";
 import axios from "axios";
 import { changeLoading } from "../redux/coachDataSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocalStorage } from "../hooks/useLocalStorege";
 const CoachCards = () => {
+  const { getItem } = useLocalStorage("userData");
+  const user = getItem();
   const [showAllCards, setShowAllCards] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [selectedcourse, setSelectedcourse] = useState("");
@@ -180,32 +183,37 @@ const CoachCards = () => {
           </div>
           <div className=" justify-items-center bg-white p-4 grid grid-cols-3 gap-5 max-xl:grid-cols-2 max-lg:grid-cols-1 ">
             {showAllCards
-              ? coachCards.map((card) => (
-                  <CoachSingleCard
-                    id={card._id}
-                    name={card.username}
-                    city={card.city}
-                    method={card.method}
-                    profession={card.profession}
-                    course={card.course}
-                    diplomas={card.education}
-                    price={card.price}
-                    imageUrl={card.profileImage}
-                  />
-                ))
+              ? coachCards
+                  .filter((card) => card?._id !== user?._id)
+                  .map((card) => (
+                    <CoachSingleCard
+                    key={card?._id}
+                      id={card?._id}
+                      name={card?.username}
+                      city={card?.city}
+                      method={card?.method}
+                      profession={card?.profession}
+                      course={card?.course}
+                      diplomas={card?.education}
+                      price={card?.price}
+                      imageUrl={card?.profileImage}
+                    />
+                  ))
               : coachCards
+                  .filter((card) => card?._id !== user?._id)
                   .slice(0, 6)
                   .map((card) => (
                     <CoachSingleCard
-                      id={card._id}
-                      name={card.username}
-                      city={card.city}
-                      method={card.method}
-                      profession={card.profession}
-                      course={card.course}
-                      diplomas={card.education}
-                      price={card.price}
-                      imageUrl={card.profileImage}
+                    key={card?._id}
+                      id={card?._id}
+                      name={card?.username}
+                      city={card?.city}
+                      method={card?.method}
+                      profession={card?.profession}
+                      course={card?.course}
+                      diplomas={card?.education}
+                      price={card?.price}
+                      imageUrl={card?.profileImage}
                     />
                   ))}
             <button
