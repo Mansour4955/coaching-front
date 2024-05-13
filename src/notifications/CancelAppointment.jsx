@@ -4,7 +4,7 @@ import { URL } from "../data";
 import moment from "moment";
 import useGetImages from "../hooks/useGetImages";
 
-const CancelAppointment = ({ date, id, user }) => {
+const CancelAppointment = ({ date, id, user, message }) => {
   const [theUser, setTheUser] = useState(null);
   useEffect(() => {
     axios
@@ -37,6 +37,11 @@ const CancelAppointment = ({ date, id, user }) => {
           <p className="text-base font-semibold text-red-500">
             has canceled the appointment which was {moment(date).fromNow()}
           </p>
+          {message && (
+            <p className="text-base font-semibold text-red-500 overflow-hidden line-clamp-1">
+              Message: <span className="underline">{message}</span>
+            </p>
+          )}
         </div>
       </div>
     </div>

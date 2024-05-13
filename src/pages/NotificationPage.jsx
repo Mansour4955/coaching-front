@@ -27,44 +27,50 @@ const NotificationPage = () => {
           <div className="min-h-[60vh] w-full flex flex-col p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
             {isCoach
               ? theUser?.coachNotifications.length > 0 &&
-                [...theUser?.coachNotifications].reverse().map((notification, index) =>
-                  notification.action === "cancel" ? (
-                    <CancelAppointment
-                      key={index}
-                      id={index}
-                      date={notification?.date}
-                      user={notification?.user}
-                    />
-                  ) : notification.action === "follow" ? (
-                    <FollowNotification
-                      key={index}
-                      id={index}
-                      client={notification?.user}
-                    />
-                  ) : (
-                    ""
+                [...theUser?.coachNotifications]
+                  .reverse()
+                  .map((notification, index) =>
+                    notification.action === "cancel" ? (
+                      <CancelAppointment
+                        key={index}
+                        id={index}
+                        date={notification?.date}
+                        user={notification?.user}
+                        message={notification?.message}
+                      />
+                    ) : notification.action === "follow" ? (
+                      <FollowNotification
+                        key={index}
+                        id={index}
+                        client={notification?.user}
+                      />
+                    ) : (
+                      ""
+                    )
                   )
-                )
               : theUser?.clientNotifications.length > 0 &&
-                [...theUser?.clientNotifications].reverse().map((notification, index) =>
-                  notification.action === "cancel" ? (
-                    <CancelAppointment
-                      key={index}
-                      id={index}
-                      date={notification?.date}
-                      user={notification?.user}
-                    />
-                  ) : notification.action === "accept" ? (
-                    <AcceptAppointment
-                      key={index}
-                      date={notification?.date}
-                      id={index}
-                      coach={notification?.user}
-                    />
-                  ) : (
-                    ""
-                  )
-                )}
+                [...theUser?.clientNotifications]
+                  .reverse()
+                  .map((notification, index) =>
+                    notification.action === "cancel" ? (
+                      <CancelAppointment
+                        key={index}
+                        id={index}
+                        date={notification?.date}
+                        user={notification?.user}
+                        message={notification?.message}
+                      />
+                    ) : notification.action === "accept" ? (
+                      <AcceptAppointment
+                        key={index}
+                        date={notification?.date}
+                        id={index}
+                        coach={notification?.user}
+                      />
+                    ) : (
+                      ""
+                    )
+                  )}
           </div>
         </div>
       </div>
