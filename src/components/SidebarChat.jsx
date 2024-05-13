@@ -6,8 +6,11 @@ import { URL, conversations } from "../data";
 import { IoSearchOutline } from "react-icons/io5";
 import axios from "axios";
 import { useLocalStorage } from "../hooks/useLocalStorege";
+import useGetImages from "../hooks/useGetImages";
 const SidebarChat = ({ count }) => {
   const { getItem } = useLocalStorage("Authorization");
+  const { getItem: getAccountOwner } = useLocalStorage("userData");
+  const accountOwner = getAccountOwner();
   const token = getItem();
   const [filterByName, setFilterByName] = useState("");
   const [theChats, setTheChats] = useState([]);
@@ -35,13 +38,14 @@ const SidebarChat = ({ count }) => {
         console.error("Error getting chats ", error.response);
       });
   }, [count]);
+  const imageOfUser = useGetImages(accountOwner?.profileImage);
   return (
     <div className=" flex-col flex-1 min-h-[50vh]  border-r border-main_color mr-1">
       <div className="flex justify-between bg-main_color items-center mb-2 py-2 gap-1 pr-2">
         <img
           className=" w-[50px] h-[50px] min-w-[50px] min-h-[50px] rounded-full ml-1 "
           alt=""
-          src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+          src={imageOfUser[accountOwner?.profileImage]}
         />
         <div className="flex max-sm:hidden w-full">
           <input

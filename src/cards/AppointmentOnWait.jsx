@@ -4,7 +4,7 @@ import { URL } from "../data";
 import useGetImages from "../hooks/useGetImages";
 import moment from "moment";
 import { useLocalStorage } from "../hooks/useLocalStorege";
-const AppointmentOnWait = ({ date, id, coach }) => {
+const AppointmentOnWait = ({ date, id, coach, loadingApp, setLoadingApp }) => {
   const { getItem } = useLocalStorage("userData");
   const theAccountOwner = getItem();
   const [theCoach, setTheCoach] = useState(null);
@@ -31,7 +31,12 @@ const AppointmentOnWait = ({ date, id, coach }) => {
           },
         ],
       })
-      .then((response) => {})
+      .then((response) => {
+        setLoadingApp(true);
+        setTimeout(() => {
+          setLoadingApp(false);
+        }, 3000);
+      })
       .catch((error) => {
         console.log("Error fetching updating coach ", error.response);
       });
@@ -40,7 +45,12 @@ const AppointmentOnWait = ({ date, id, coach }) => {
       .put(
         `${URL}/api/users/${coach}?user=${theAccountOwner?._id}&date=${date}&field=appointmentOrders`
       )
-      .then((response) => {})
+      .then((response) => {
+        setLoadingApp(true);
+        setTimeout(() => {
+          setLoadingApp(false);
+        }, 3000);
+      })
       .catch((error) => {
         console.log("Error fetching updating coach ", error.response);
       });
@@ -49,7 +59,12 @@ const AppointmentOnWait = ({ date, id, coach }) => {
       .put(
         `${URL}/api/users/${theAccountOwner?._id}?user=${coach}&date=${date}&field=appointmentOnWait`
       )
-      .then((response) => {})
+      .then((response) => {
+        setLoadingApp(true);
+        setTimeout(() => {
+          setLoadingApp(false);
+        }, 3000);
+      })
       .catch((error) => {
         console.log("Error fetching updating coach ", error.response);
       });

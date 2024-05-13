@@ -8,7 +8,14 @@ import { useDispatch } from "react-redux";
 import { changeChat } from "../redux/changeChatConversation";
 import { useLocalStorage } from "../hooks/useLocalStorege";
 
-const AcceptedAppointmentFromCoach = ({ coach, style, date, id }) => {
+const AcceptedAppointmentFromCoach = ({
+  coach,
+  style,
+  date,
+  id,
+  loadingApp,
+  setLoadingApp,
+}) => {
   const [theCoach, setTheCoach] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,10 +39,18 @@ const AcceptedAppointmentFromCoach = ({ coach, style, date, id }) => {
       .then((response) => {
         dispatch(changeChat(response.data));
         navigate("/chat");
+        setLoadingApp(true);
+        setTimeout(() => {
+          setLoadingApp(false);
+        }, 3000);
       })
       .catch((error) => {
         console.log("Error creating chat ", error.response.data.status);
         navigate("/chat");
+        setLoadingApp(true);
+        setTimeout(() => {
+          setLoadingApp(false);
+        }, 3000);
       });
   };
   useEffect(() => {
@@ -47,7 +62,7 @@ const AcceptedAppointmentFromCoach = ({ coach, style, date, id }) => {
       .catch((error) => {
         console.log("Error fetching coach data ", error.response);
       });
-  }, []);
+  }, [loadingApp]);
   const imageOfCoach = useGetImages(theCoach?.profileImage);
   return (
     <div

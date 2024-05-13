@@ -8,7 +8,14 @@ import { useDispatch } from "react-redux";
 import { useLocalStorage } from "../hooks/useLocalStorege";
 import { changeChat } from "../redux/changeChatConversation";
 
-const AcceptedAppointment = ({ client, date, id, style }) => {
+const AcceptedAppointment = ({
+  client,
+  date,
+  id,
+  style,
+  loadingApp,
+  setLoadingApp,
+}) => {
   const { getItem } = useLocalStorage("Authorization");
   const { getItem: getCoachData } = useLocalStorage("userData");
   const coachData = getCoachData();
@@ -31,6 +38,10 @@ const AcceptedAppointment = ({ client, date, id, style }) => {
       .then((response) => {
         dispatch(changeChat(response.data));
         navigate("/chat");
+        setLoadingApp(true);
+        setTimeout(() => {
+          setLoadingApp(false);
+        }, 3000);
       })
       .catch((error) => {
         console.log("Error creating chat ", error.response.data.status);
@@ -42,11 +53,15 @@ const AcceptedAppointment = ({ client, date, id, style }) => {
       .get(`${URL}/api/users/${client}`)
       .then((response) => {
         setTheClient(response.data);
+        setLoadingApp(true);
+        setTimeout(() => {
+          setLoadingApp(false);
+        }, 3000);
       })
       .catch((error) => {
         console.log("Error fetching client data ", error.response);
       });
-  }, []);
+  }, [loadingApp]);
   const imageOfClient = useGetImages(theClient?.profileImage);
   return (
     <div

@@ -5,7 +5,14 @@ import useGetImages from "../hooks/useGetImages";
 import moment from "moment";
 import { useLocalStorage } from "../hooks/useLocalStorege";
 
-const AppointmentOrders = ({ client, date, id, message }) => {
+const AppointmentOrders = ({
+  client,
+  date,
+  id,
+  message,
+  loadingApp,
+  setLoadingApp,
+}) => {
   const { getItem } = useLocalStorage("userData");
   const coachData = getItem();
   const [theClient, setTheClient] = useState(null);
@@ -83,7 +90,12 @@ const AppointmentOrders = ({ client, date, id, message }) => {
           },
         ],
       })
-      .then((response) => {})
+      .then((response) => {
+        setLoadingApp(true);
+        setTimeout(() => {
+          setLoadingApp(false);
+        }, 3000);
+      })
       .catch((error) => {
         console.log("Error fetching updating client ", error.response);
       });
@@ -92,7 +104,12 @@ const AppointmentOrders = ({ client, date, id, message }) => {
       .put(
         `${URL}/api/users/${coachData?._id}?user=${client}&date=${date}&message=${message}&field=appointmentOrders`
       )
-      .then((response) => {})
+      .then((response) => {
+        setLoadingApp(true);
+        setTimeout(() => {
+          setLoadingApp(false);
+        }, 3000);
+      })
       .catch((error) => {
         console.log("Error fetching updating coach ", error.response);
       });
@@ -101,7 +118,12 @@ const AppointmentOrders = ({ client, date, id, message }) => {
       .put(
         `${URL}/api/users/${client}?user=${coachData?._id}&date=${date}&field=appointmentOnWait`
       )
-      .then((response) => {})
+      .then((response) => {
+        setLoadingApp(true);
+        setTimeout(() => {
+          setLoadingApp(false);
+        }, 3000);
+      })
       .catch((error) => {
         console.log("Error fetching updating coach ", error.response);
       });
@@ -115,7 +137,7 @@ const AppointmentOrders = ({ client, date, id, message }) => {
       .catch((error) => {
         console.log("Error fetching client data ", error.response);
       });
-  }, []);
+  }, [loadingApp]);
   const profileImage = useGetImages(theClient?.profileImage);
   return (
     <div className="flex gap-2 p-2 max-sm:flex-col max-sm:items-center border-t border-t-gray-100">
