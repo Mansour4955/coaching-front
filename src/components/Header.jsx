@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdHome } from "react-icons/md";
 import { HiMiniChatBubbleLeftRight } from "react-icons/hi2";
 import { FaCalendarAlt, FaChalkboardTeacher } from "react-icons/fa";
@@ -21,7 +21,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const { getItem: getUserData } = useLocalStorage("userData");
   const { getItem } = useLocalStorage("Authorization");
-  const user = getUserData();
+  const userId = getUserData();
   const navigate = useNavigate();
   const token = getItem();
   const isLoggedIn = token ? true : false;
@@ -31,6 +31,18 @@ const Header = () => {
   const [selectedMethod, setSelectedMethod] = useState("");
   const [filterByName, setFilterByName] = useState("");
   const [maxPrice, setMaxPrice] = useState(1000);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/users/${userId?._id}`)
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching user data ", error.response);
+      });
+  }, []);
   // const handleFilter = (e) => {
   //   e.preventDefault();
   //   navigate("/coachCards");
@@ -256,7 +268,7 @@ const Header = () => {
             <Link to="/myprofile" className="flex gap-2 items-center">
               <img
                 alt=""
-                src={imageOfUser[user.profileImage]}
+                src={imageOfUser[user?.profileImage]}
                 className="w-8 h-8 rounded-[100%]"
               />
               <p className="font-bold text-gray-500">

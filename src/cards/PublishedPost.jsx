@@ -33,7 +33,8 @@ const PublishedPost = ({
   const [theComments, setTheComments] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
   const [theValue, setTheValue] = useState(false);
-  const theUser = getItem();
+  const userId = getItem();
+  const [theUser,setTheUser]=useState(null)
   const imageData = useGetImages(postPhoto);
   const [showMore, setShowMore] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -43,7 +44,16 @@ const PublishedPost = ({
   const [showDeletePost, setShowDeletePost] = useState(false);
   const [showEditPost, setShowEditPost] = useState(false);
   const token = auth();
-
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/users/${userId?._id}`)
+      .then((response) => {
+        setTheUser(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching user data ", error.response);
+      });
+  }, []);
   const handleToggleLike = () => {
     axios
       .put(

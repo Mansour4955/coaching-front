@@ -26,11 +26,7 @@ const CommentCard = ({
 }) => {
   const imageOfUser = useGetImages(imageProfile);
   const [theUser, setTheUser] = useState({});
-  useEffect(() => {
-    console.log("theUser._id ", theUser._id);
-    console.log("theDataOfUser._id ", theDataOfUser._id);
-    console.log("user ", user._id);
-  }, []);
+
   useEffect(() => {
     axios
       .get(`${URL}/api/users/${user._id ? user._id : user}`)
@@ -44,13 +40,26 @@ const CommentCard = ({
 
   const { getItem } = useLocalStorage("Authorization");
   const { getItem: theUserData } = useLocalStorage("userData");
-  const theDataOfUser = theUserData();
+  const userId = theUserData();
+  const [theDataOfUser, setTheDataOfUser] = useState(null);
   const [reply, setReply] = useState(false);
   const [edit, setEdit] = useState(false);
   const [showDeleteCommentPopup, setShowDeleteCommentPopup] = useState(false);
 
   const [writeComment, setWriteComment] = useState("");
   const [editComment, setEditComment] = useState(comment);
+
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/users/${userId?._id}`)
+      .then((response) => {
+        setTheDataOfUser(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching user data ", error.response);
+      });
+  }, []);
+
   const handleSendReply = () => {
     const token = getItem();
     axios
@@ -71,7 +80,7 @@ const CommentCard = ({
         // console.log(level);
         // console.log(commentId);
         console.log("theUser._id ", theUser._id);
-        console.log("theDataOfUser._id ", theDataOfUser._id);
+        console.log("theDataOfUser._id ", theDataOfUser?._id);
         console.log("user ", user._id);
         setTheValueAgain(true);
         setTimeout(() => {
@@ -140,7 +149,7 @@ const CommentCard = ({
       </div>
       <p className={`${descAndDateStyle} text-gray-700 `}>{comment}</p>
       <div className="flex items-center gap-2 mt-1">
-        {theUser._id === theDataOfUser._id && (
+        {theUser._id === theDataOfUser?._id && (
           <div className="flex items-center gap-2 mt-1">
             <p
               onClick={() => setShowDeleteCommentPopup(!showDeleteCommentPopup)}

@@ -12,7 +12,7 @@ import useGetImages from "../hooks/useGetImages";
 const Home = () => {
   const { getItem: getUserData } = useLocalStorage("userData");
   const { getItem: auth } = useLocalStorage("Authorization");
-  const user = getUserData();
+  const userId = getUserData();
   const isLoggedIn = auth() ? true : false;
   const [showMoreCoachCards, setShowMoreCoachCards] = useState(false);
   const [domainPost, setDomainPost] = useState("");
@@ -24,8 +24,20 @@ const Home = () => {
   const [allPosts, setAllPosts] = useState([]);
   const [theValueAgain, setTheValueAgain] = useState(false);
   const [coachCards, setCoachCards] = useState([]);
+  const [user, setUser] = useState(null);
 
   const token = auth();
+
+  useEffect(() => {
+    axios
+      .get(`${URL}/api/users/${userId?._id}`)
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching user data ", error.response);
+      });
+  }, []);
   useEffect(() => {
     setTheValueAgain(true);
     setTimeout(() => {
@@ -111,13 +123,13 @@ const Home = () => {
             key={user?._id}
             id={user?._id}
             full_name={user?.username}
-            email={user.email}
-            course={user.course}
-            description={user.education}
-            followers={user.followers}
-            following={user.following}
+            email={user?.email}
+            course={user?.course}
+            description={user?.education}
+            followers={user?.followers}
+            following={user?.following}
             profilePhoto={user?.profileImage}
-            role={user.role}
+            role={user?.role}
           />
         </div>
       )}
@@ -246,17 +258,21 @@ const Home = () => {
         <div className=" flex flex-col rounded-lg p-4 bg-white h-fit">
           <div className="flex flex-col gap-2 items-center">
             {showMoreCoachCards
-              ? coachCards.filter(card=>card?._id !== user?._id).map((card) => (
-                  <CoachCard
-                    key={card?._id}
-                    id={card?._id}
-                    full_name={card?.username}
-                    description={card.education}
-                    profilePhoto={card?.profileImage}
-                    domaine={card?.course}
-                  />
-                )).reverse()
-              : coachCards.filter(card=>card?._id !== user?._id)
+              ? coachCards
+                  .filter((card) => card?._id !== user?._id)
+                  .map((card) => (
+                    <CoachCard
+                      key={card?._id}
+                      id={card?._id}
+                      full_name={card?.username}
+                      description={card.education}
+                      profilePhoto={card?.profileImage}
+                      domaine={card?.course}
+                    />
+                  ))
+                  .reverse()
+              : coachCards
+                  .filter((card) => card?._id !== user?._id)
                   .slice(0, 3)
                   .map((card) => (
                     <CoachCard
@@ -267,8 +283,8 @@ const Home = () => {
                       profilePhoto={card?.profileImage}
                       domaine={card?.course}
                     />
-                  )).reverse()
-                  }
+                  ))
+                  .reverse()}
             <button
               className="flex w-full items-center justify-center px-2 border border-main_color rounded-xl font-semibold text-main_color duration-300 hover:bg-main_color hover:text-white"
               onClick={() => setShowMoreCoachCards(!showMoreCoachCards)}
