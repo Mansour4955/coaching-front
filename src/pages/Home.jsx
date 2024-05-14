@@ -255,8 +255,8 @@ const Home = () => {
           isLoggedIn ? "w-[25%]" : "w-[30%]"
         } flex flex-col items-center gap-10 max-xl:w-[30%] max-lg:hidden`}
       >
-        <div className=" flex flex-col rounded-lg p-4 bg-white h-fit">
-          <div className="flex flex-col gap-2 items-center">
+        <div className=" flex flex-col rounded-lg p-4 bg-white h-fit w-full">
+          <div className="flex flex-col gap-2 items-center w-full">
             {showMoreCoachCards
               ? coachCards
                   .filter((card) => card?._id !== user?._id)
