@@ -30,7 +30,7 @@ const MyProfile = () => {
       imageData.append("image", imageProfile);
       axios
         .post(`${URL}/api/users/profile/profile-photo-upload`, imageData, {
-          headers: { "Authorization": token },
+          headers: { Authorization: token },
         })
         .then((response) => {
           setUser(response.data);
@@ -96,11 +96,6 @@ const MyProfile = () => {
                           className="hidden"
                           id="image"
                         />
-                        {/* {errorImageProfile && (
-                          <p className="text-red-600 text-sm">
-                            {errorImageProfile}
-                          </p>
-                        )} */}
                       </div>
                     </div>
                     {showImagePopup && (
@@ -306,11 +301,53 @@ const MyProfile = () => {
             <div className="bg-white p-4">
               <div className="bg-white flex flex-col gap-6 p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
                 <div className="flex flex-col gap-3">
-                  <img
-                    className="w-[160px] h-[160px] rounded-full mx-auto max-md:w-[140px] max-md:h-[140px]"
-                    alt={user?.profileImage}
-                    src={user?.profileImage}
-                  />
+                  <div className="flex justify-center flex-col items-center">
+                    <div className="relative w-fit">
+                      <img
+                        className="w-[160px] h-[160px] rounded-full mx-auto max-md:w-[140px] max-md:h-[140px]"
+                        alt="profileImage"
+                        src={imageOfUser[user?.profileImage]}
+                      />
+                      <div className="absolute flex flex-col gap-2 right-0 top-[80%]">
+                        <label
+                          className=" text-main_color cursor-pointer"
+                          htmlFor="image"
+                        >
+                          <MdEdit size={20} />
+                        </label>
+                        <input
+                          onChange={(e) => {
+                            setImageProfilet(e.target.files[0]);
+                            setShowImagePopup(true);
+                          }}
+                          type="file"
+                          className="hidden"
+                          id="image"
+                        />
+                      </div>
+                    </div>
+                    {showImagePopup && (
+                      <div className=" rounded-lg p-2 flex items-center justify-center flex-col z-20 bg-white">
+                        <p className="text-gray-600 font-medium">
+                          Are you sure you want to update your profile image!
+                        </p>
+                        <div className="flex justify-center gap-10 mt-2">
+                          <p
+                            onClick={handleUpdateImageProfile}
+                            className="px-2 py-0.5 border border-main_color bg-main_color active:bg-main_color active:text-white hover:bg-white hover:text-main_color text-white duration-100 font-medium cursor-pointer rounded-lg"
+                          >
+                            update
+                          </p>
+                          <p
+                            onClick={() => setShowImagePopup(false)}
+                            className="px-2 py-0.5 border border-gray-600 bg-gray-600 active:bg-gray-600 active:text-white hover:bg-white hover:text-gray-600 text-white duration-100 font-medium cursor-pointer rounded-lg"
+                          >
+                            Cancel
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                   <div className=" flex flex-col gap-3 ">
                     <div className="mx-auto flex flex-col justify-center items-center">
                       <div className="flex flex-col gap-2 items-center justify-center">
