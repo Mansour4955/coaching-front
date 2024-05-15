@@ -42,14 +42,14 @@ const CoachStatisticsCard = ({
         <div className="flex border-t border-t-gray-300 w-full justify-center py-2 items-center gap-3">
           <p className="text-gray-500">
             <span className="font-semibold text-sm text-black">
-              {followers?.length > 0 ? followers : 0}
+              {followers?.length > 0 ? followers?.length : 0}
             </span>{" "}
             followers
           </p>
           <span className="h-[20px] w-[2px] bg-gray-300"></span>
           <p className="text-gray-500">
             <span className="font-semibold text-sm text-black">
-              {following?.length > 0 ? following : 0}
+              {following?.length > 0 ? following?.length : 0}
             </span>{" "}
             following
           </p>

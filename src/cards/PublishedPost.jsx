@@ -24,6 +24,7 @@ const PublishedPost = ({
   theValueAgain,
   setTheValueAgain,
   idofuserofpost,
+  count
 }) => {
   const { getItem } = useLocalStorage("userData");
   const { getItem: auth } = useLocalStorage("Authorization");
@@ -53,7 +54,7 @@ const PublishedPost = ({
       .catch((error) => {
         console.log("Error fetching user data ", error.response);
       });
-  }, []);
+  }, [count]);
   const handleToggleLike = () => {
     axios
       .put(
@@ -130,7 +131,7 @@ const PublishedPost = ({
       clearInterval(internalId);
       setTheValue(false);
     };
-  }, [theComments, theValueAgain]);
+  }, [theComments, theValueAgain,count]);
   let theCoachProfile;
   if (idofuserofpost) {
     axios

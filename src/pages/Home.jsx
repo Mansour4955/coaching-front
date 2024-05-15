@@ -126,7 +126,7 @@ const Home = () => {
             email={user?.email}
             course={user?.course}
             description={user?.education}
-            followers={user?.followers}
+            followers={user?.follow}
             following={user?.following}
             profilePhoto={user?.profileImage}
             role={user?.role}
