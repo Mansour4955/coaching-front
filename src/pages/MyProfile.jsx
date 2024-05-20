@@ -169,10 +169,13 @@ const MyProfile = () => {
   let numberOfReviewers = user?.reviews.length;
   let totalStars = 0;
   user?.reviews.forEach((review) => {
-    totalStars += review.stars;
+    totalStars += parseInt(review.stars);
   });
   const averageStars = totalStars / numberOfReviewers;
   const resultStars = Math.round(averageStars);
+  console.log("numberOfReviewers ", numberOfReviewers);
+  console.log("totalStars ", totalStars);
+  console.log("resultStars ", resultStars);
   const imageOfUser = useGetImages(user?.profileImage);
   console.log(
     "imageOfUser[user?.profileImage] ",
