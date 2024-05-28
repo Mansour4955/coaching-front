@@ -24,7 +24,7 @@ const PublishedPost = ({
   theValueAgain,
   setTheValueAgain,
   idofuserofpost,
-  count
+  count,
 }) => {
   const { getItem } = useLocalStorage("userData");
   const { getItem: auth } = useLocalStorage("Authorization");
@@ -35,7 +35,7 @@ const PublishedPost = ({
   const [isLiked, setIsLiked] = useState(false);
   const [theValue, setTheValue] = useState(false);
   const userId = getItem();
-  const [theUser,setTheUser]=useState(null)
+  const [theUser, setTheUser] = useState(null);
   const imageData = useGetImages(postPhoto);
   const [showMore, setShowMore] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -111,10 +111,9 @@ const PublishedPost = ({
   };
   const imageOfUser = useGetImages(profilePhoto);
   const imageOfUserInEveryPostComments = useGetImages(theUser?.profileImage);
-  
+
   useEffect(() => {
     const internalId = setInterval(() => {
-      if (theValue || theValueAgain) {
         axios
           .get(`${URL}/api/comments?postId=${id}`)
           .then((response) => {
@@ -124,14 +123,15 @@ const PublishedPost = ({
           .catch((error) => {
             console.error("Error get comments of the post:", error.data);
           });
-      }
-    }, 0);
+    }, 1500);
 
     return () => {
       clearInterval(internalId);
       setTheValue(false);
     };
-  }, [theComments, theValueAgain,count]);
+  }, [theComments, theValueAgain, count]);
+  console.log("GET COMMENTS OF POST ", theComments);
+
   let theCoachProfile;
   if (idofuserofpost) {
     axios
@@ -142,10 +142,10 @@ const PublishedPost = ({
       .catch((error) => {
         console.log("Error fetching coach profile data ", error.response);
       });
-    }
-    
-    const imageOfUserWhoPublishPost = useGetImages(theCoachProfile?.profileImage);
-    const hide = "overflow-hidden line-clamp-2";
+  }
+
+  const imageOfUserWhoPublishPost = useGetImages(theCoachProfile?.profileImage);
+  const hide = "overflow-hidden line-clamp-2";
   return (
     <div className="bg-white flex flex-col p-4 gap-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
       <div className="flex justify-between">
@@ -170,7 +170,7 @@ const PublishedPost = ({
             </span>
           </div>
         </div>
-        {theUser?._id === idofuserofpost  && (
+        {theUser?._id === idofuserofpost && (
           <div className="relative">
             <span
               onClick={() => setPostPopup(true)}
@@ -269,12 +269,11 @@ const PublishedPost = ({
             <IoIosSend size={20} />
           </div>
         </div>
-        {showComments && theComments.length > 0 &&(
+        {showComments && theComments.length > 0 && (
           <div className="flex flex-col">
             <div className="flex flex-col p-2 border border-main_color relative">
               {showAllComments
-                ? 
-                  theComments?.map((comment) => (
+                ? theComments?.map((comment) => (
                     <div key={comment._id}>
                       <CommentCard
                         theValueAgain={theValueAgain}
