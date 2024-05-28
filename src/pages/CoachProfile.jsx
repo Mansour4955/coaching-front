@@ -217,7 +217,7 @@ const CoachProfile = () => {
                             onClick={handleFollow}
                             className="px-2 py-1 bg-main_color text-white font-medium rounded-lg text-sm capitalize cursor-pointer w-[100px] flex items-center justify-center hover:text-main_color hover:bg-white duration-200 border hover:border-main_color active:bg-main_color active:text-white max-md:text-xs  max-md:w-[90px]"
                           >
-                            Follow
+                            {user?.follow.includes(reviewer._id) ? "Followed" : "Follow"}
                           </p>
                           <p
                             onClick={() => setShowAppointment(!showAppointment)}
