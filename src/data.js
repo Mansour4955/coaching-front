@@ -1,4 +1,5 @@
-export const URL = "http://localhost:5000";
+// export const URL = "http://localhost:5000";
+export const URL = "https://coaching-back-black.vercel.app";
 export const courses = [
   { id: 1, course: "Domaine sportif" },
   { id: 2, course: "Psychologie" },
