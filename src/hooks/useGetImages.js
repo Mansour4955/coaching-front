@@ -6,7 +6,7 @@ function useGetImages(imageNames) {
   useEffect(() => {
     const fetchImage = async (imageName) => {
       try {
-        const response = await fetch(`http://localhost:5000/api/images/${imageName}`);
+        const response = await fetch(`https://coaching-a4r1.onrender.com/api/images/${imageName}`);
         if (!response.ok) {
           throw new Error('Failed to fetch image');
         }
