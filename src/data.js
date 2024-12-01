@@ -1,5 +1,5 @@
 // export const URL = "http://localhost:5000";
-export const URL = "https://coaching-a4r1.onrender.com";
+export const URL = "https://coaching-a4r1.onrender.com/";
 export const courses = [
   { id: 1, course: "Domaine sportif" },
   { id: 2, course: "Psychologie" },
